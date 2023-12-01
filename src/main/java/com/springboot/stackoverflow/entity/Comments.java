@@ -87,4 +87,16 @@ public class Comments {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    @Override
+    public String toString() {
+        return "Comments{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", comment='" + comment + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }
