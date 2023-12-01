@@ -43,7 +43,9 @@ public class Question {
     private List<Answer> answers;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(name="question_tag",joinColumns = @JoinColumn(name = "question_id"),inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    @JoinTable(name="question_tag",
+            joinColumns = @JoinColumn(name = "question_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private List<Tag> tags;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "question")

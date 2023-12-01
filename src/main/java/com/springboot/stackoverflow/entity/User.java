@@ -63,14 +63,12 @@ public class User {
     public User() {}
 
     public User(String userName, String email,
-                String password, Integer reputation,
-                String about, Date createdAt) {
+                String password) {
         this.userName = userName;
         this.email = email;
         this.password = password;
-        this.reputation = reputation;
-        this.about = about;
-        this.createdAt = createdAt;
+        this.reputation = 0;
+        this.about = "";
     }
 
     public Integer getId() {
