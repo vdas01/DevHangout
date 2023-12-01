@@ -11,10 +11,10 @@
 10. Following:- users can follow each
 
 ## Entities:-
-1. Questions
-2. Answers
-3. User
-4. Tags
-5. Badges
-6. Comments
-7. Followers
+1. Questions(vishal)
+2. Answers(aswmith)
+3. User(tarun)
+4. Tags(vishal)
+5. Badges(aswmith)
+6. Comments(gaurav)
+7. Followers(tarun)
