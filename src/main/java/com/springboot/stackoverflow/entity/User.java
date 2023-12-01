@@ -44,6 +44,19 @@ public class User {
     )
     private List<User> followers;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userName")
+    private List<Comment> commentList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "")
+    private List<Answer> answerList;
+
+    @ManyToMany
+    @JoinTable(name = "user_badge",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns =@JoinColumn(name ="badge_id")
+    )
+    private List<Badge> badgeUser;
+
     public User() {}
 
     public User(String userName, String email,
@@ -129,6 +142,30 @@ public class User {
         this.followers = followers;
     }
 
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
+
+    public List<Answer> getAnswerList() {
+        return answerList;
+    }
+
+    public void setAnswerList(List<Answer> answerList) {
+        this.answerList = answerList;
+    }
+
+    public List<Badge> getBadgeUser() {
+        return badgeUser;
+    }
+
+    public void setBadgeUser(List<Badge> badgeUser) {
+        this.badgeUser = badgeUser;
+    }
+
     public void addFollowers(User theUser) {
         if(followers == null) {
             followers = new ArrayList<>();
@@ -143,6 +180,30 @@ public class User {
         }
 
         followings.add(theUser);
+    }
+
+    public void addComment(Comment theComment) {
+        if(commentList == null) {
+            commentList = new ArrayList<>();
+        }
+
+        commentList.add(theComment);
+    }
+
+    public void addAnswer(Answer theAnswer) {
+        if(answerList == null) {
+            answerList = new ArrayList<>();
+        }
+
+        answerList.add(theAnswer);
+    }
+
+    public void addBadges(Badge theBadge) {
+        if(badgeUser == null) {
+            badgeUser = new ArrayList<>();
+        }
+
+        badgeUser.add(theBadge);
     }
 
     @Override
