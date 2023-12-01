@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "answers")
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +28,8 @@ public class Answer {
     @Column(name = "accepted")
     private boolean accepted = false;
 
-    public Answer(){
-    }
+    public Answer(){}
+
     public Answer(String content, Question question, User user) {
         this.content = content;
         this.question = question;
