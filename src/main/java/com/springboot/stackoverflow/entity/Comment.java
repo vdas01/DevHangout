@@ -31,6 +31,16 @@ public class Comment {
     @Column(name = "username")
     private String userName;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private Question question;
+    @ManyToOne
+    @JoinColumn(name = "answer_id")
+    private Answer answer;
+
     public Comment() {
     }
 
@@ -40,6 +50,30 @@ public class Comment {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.userName = userName;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
 
     public long getId() {
