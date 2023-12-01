@@ -13,6 +13,10 @@ public class Badge{
     private String name;
     @Column(name="description")
     private String description;
+    @ManyToMany
+    @JoinTable(name = "user_badge", joinColumns = @JoinColumn(name = "badge_id"),
+            inverseJoinColumns =@JoinColumn(name ="user_id"))
+    private User userBadge;
     public Badge() {
     }
     public Badge(String name, String description) {
