@@ -17,6 +17,9 @@ public class Badge{
     @JoinTable(name = "user_badge", joinColumns = @JoinColumn(name = "badge_id"),
             inverseJoinColumns =@JoinColumn(name ="user_id"))
     private User userBadge;
+
+    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "badge")
+    private User user;
     public Badge() {
     }
     public Badge(String name, String description) {
