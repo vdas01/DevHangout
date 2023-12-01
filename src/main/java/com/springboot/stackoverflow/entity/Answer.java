@@ -2,6 +2,8 @@ package com.springboot.stackoverflow.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Answer {
     @Id
@@ -10,21 +12,17 @@ public class Answer {
     private Long id;
     @Column(name = "content")
     private String content;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User userAnswer;
     @OneToMany
-    @JoinColumn(name="comment_id")
-    private Comment comment;
+    private List<Comment> comment;
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinColumn(name = "question_id", nullable = false)
+    @JoinColumn(name = "question_id")
     private Question question;
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "votes")
-    private int votes=0;
+    private int votes = 0;
 
     @Column(name = "accepted")
     private boolean accepted = false;
