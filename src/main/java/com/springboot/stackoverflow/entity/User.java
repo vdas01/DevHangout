@@ -55,7 +55,10 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns =@JoinColumn(name ="badge_id")
     )
-    private List<Badge> badgeUser;
+    private List<Badge> userBadges;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Question> userQuestions;
 
     public User() {}
 
@@ -158,12 +161,20 @@ public class User {
         this.answerList = answerList;
     }
 
-    public List<Badge> getBadgeUser() {
-        return badgeUser;
+    public List<Badge> getUserBadges() {
+        return userBadges;
     }
 
-    public void setBadgeUser(List<Badge> badgeUser) {
-        this.badgeUser = badgeUser;
+    public void setUserBadges(List<Badge> userBadges) {
+        this.userBadges = userBadges;
+    }
+
+    public List<Question> getUserQuestions() {
+        return userQuestions;
+    }
+
+    public void setUserQuestions(List<Question> userQuestions) {
+        this.userQuestions = userQuestions;
     }
 
     public void addFollowers(User theUser) {
@@ -199,11 +210,19 @@ public class User {
     }
 
     public void addBadges(Badge theBadge) {
-        if(badgeUser == null) {
-            badgeUser = new ArrayList<>();
+        if(userBadges == null) {
+            userBadges = new ArrayList<>();
         }
 
-        badgeUser.add(theBadge);
+        userBadges.add(theBadge);
+    }
+
+    public void addQuestion(Question theQuestion) {
+        if(userQuestions == null) {
+            userQuestions = new ArrayList<>();
+        }
+
+        userQuestions.add(theQuestion);
     }
 
     @Override
