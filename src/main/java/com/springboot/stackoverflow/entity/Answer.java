@@ -11,12 +11,19 @@ public class Answer {
     private Long id;
     @Column(name = "content")
     private String content;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @Column(name = "votes")
+    private int votes=0;
+
+    @Column(name = "accepted")
+    private boolean accepted = false;
+
     public Answer(){
     }
     public Answer(String content, Question question, User user) {
@@ -48,5 +55,18 @@ public class Answer {
     public void setUser(User user) {
         this.user = user;
     }
+    public int getVotes() {
+        return votes;
+    }
+    public void setVotes(int votes) {
+        this.votes = votes;
+    }
 
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
 }
