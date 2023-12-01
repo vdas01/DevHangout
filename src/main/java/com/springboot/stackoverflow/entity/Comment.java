@@ -7,7 +7,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Date;
 
 @Entity
-public class Comments {
+@Table(name = "comments")
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -29,10 +30,10 @@ public class Comments {
     @Column(name = "username")
     private String userName;
 
-    public Comments() {
+    public Comment() {
     }
 
-    public Comments(String email, String comment, Date createdAt, Date updatedAt, String userName) {
+    public Comment(String email, String comment, Date createdAt, Date updatedAt, String userName) {
         this.email = email;
         this.comment = comment;
         this.createdAt = createdAt;
