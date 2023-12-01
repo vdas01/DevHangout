@@ -11,9 +11,6 @@ public class Answer {
     @Column(name = "content")
     private String content;
     @ManyToOne
-    @JoinColumn(name = "question_id")
-    private Question question;
-    @ManyToOne
     @JoinColumn(name = "user_id")
     private User userAnswer;
     @OneToMany

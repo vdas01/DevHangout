@@ -3,6 +3,7 @@ package com.springboot.stackoverflow.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,8 +21,6 @@ public class Badge{
             inverseJoinColumns =@JoinColumn(name ="user_id"))
     private List<User> userBadge;
 
-    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "badge")
-    private User user;
     public Badge() {
     }
     public Badge(String name, String description) {
@@ -45,5 +44,31 @@ public class Badge{
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<User> getUserBadge() {
+        return userBadge;
+    }
+
+    public void setUserBadge(List<User> userBadge) {
+        this.userBadge = userBadge;
+    }
+
+    public void addUsers(User theUser) {
+        if(userBadge == null) {
+            userBadge = new ArrayList<>();
+        }
+
+        userBadge.add(theUser);
+    }
+
+    @Override
+    public String toString() {
+        return "Badge{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", userBadge=" + userBadge +
+                '}';
     }
 }
