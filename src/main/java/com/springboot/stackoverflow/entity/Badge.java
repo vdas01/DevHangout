@@ -13,6 +13,9 @@ public class Badge{
     private String name;
     @Column(name="description")
     private String description;
+
+    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "badge")
+    private User user;
     public Badge() {
     }
     public Badge(String name, String description) {

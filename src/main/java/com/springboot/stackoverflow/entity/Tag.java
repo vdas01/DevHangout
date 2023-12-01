@@ -25,18 +25,12 @@ public class Tag {
     @UpdateTimestamp
     private Date modifiedAt;
 
-    @Column(name = "votes")
-    private int votes;
-
-    @Column(name = "accepted")
-    private boolean accepted = false;
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(name="question_tag",joinColumns = @JoinColumn(name = "tag_id"),inverseJoinColumns = @JoinColumn(name = "question_id"))
     private List<Question> questions;
 
-    public Tag(String name, int votes) {
+    public Tag(String name) {
         this.name = name;
-        this.votes = votes;
     }
 
     public String getId() {

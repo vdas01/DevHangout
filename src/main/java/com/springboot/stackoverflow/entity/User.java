@@ -30,7 +30,7 @@ public class User {
 
     @ManyToMany()
     @JoinTable(
-            name = "followers",
+            name = "FollowRelation",
             joinColumns = @JoinColumn(name = "follower_id"), // field from current class
             inverseJoinColumns=@JoinColumn(name = "following_id") // field from other class
     )
@@ -38,7 +38,7 @@ public class User {
 
     @ManyToMany()
     @JoinTable(
-            name = "followers",
+            name = "FollowRelation",
             joinColumns = @JoinColumn(name = "following_id"), // field from current class
             inverseJoinColumns=@JoinColumn(name = "follower_id") // field from other class
     )
