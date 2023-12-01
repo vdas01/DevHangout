@@ -13,7 +13,7 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private String id;
+    private Integer id;
 
     @Column(name = "title")
     private String title;
@@ -49,7 +49,7 @@ public class Question {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "question")
     private List<Comment> comments;
 
-    @OneToOne(cascade = {CascadeType.REFRESH,CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH},mappedBy = "question")
+    @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
     private User user;
 
     public Question(){}
@@ -60,11 +60,11 @@ public class Question {
         this.votes = votes;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
