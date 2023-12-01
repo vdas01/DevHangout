@@ -3,7 +3,9 @@ package com.springboot.stackoverflow.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -25,6 +27,22 @@ public class User {
     @Column(name = "created_at")
     @CreationTimestamp
     private Date createdAt;
+
+    @ManyToMany()
+    @JoinTable(
+            name = "followers",
+            joinColumns = @JoinColumn(name = "follower_id"), // field from current class
+            inverseJoinColumns=@JoinColumn(name = "following_id") // field from other class
+    )
+    private List<User> followings;
+
+    @ManyToMany()
+    @JoinTable(
+            name = "followers",
+            joinColumns = @JoinColumn(name = "following_id"), // field from current class
+            inverseJoinColumns=@JoinColumn(name = "follower_id") // field from other class
+    )
+    private List<User> followers;
 
     public User() {}
 
@@ -93,6 +111,38 @@ public class User {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public List<User> getFollowings() {
+        return followings;
+    }
+
+    public void setFollowings(List<User> followings) {
+        this.followings = followings;
+    }
+
+    public List<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
+    }
+
+    public void addFollowers(User theUser) {
+        if(followers == null) {
+            followers = new ArrayList<>();
+        }
+
+        followers.add(theUser);
+    }
+
+    public void addFollowing(User theUser) {
+        if(followings == null) {
+            followings = new ArrayList<>();
+        }
+
+        followings.add(theUser);
     }
 
     @Override
