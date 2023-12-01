@@ -3,6 +3,8 @@ package com.springboot.stackoverflow.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Badge{
     @Id
@@ -16,7 +18,7 @@ public class Badge{
     @ManyToMany
     @JoinTable(name = "user_badge", joinColumns = @JoinColumn(name = "badge_id"),
             inverseJoinColumns =@JoinColumn(name ="user_id"))
-    private User userBadge;
+    private List<User> userBadge;
 
     @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "badge")
     private User user;
