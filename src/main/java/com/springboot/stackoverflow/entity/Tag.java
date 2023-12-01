@@ -65,22 +65,6 @@ public class Tag {
         this.modifiedAt = modifiedAt;
     }
 
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
-    }
-
-    public boolean isAccepted() {
-        return accepted;
-    }
-
-    public void setAccepted(boolean accepted) {
-        this.accepted = accepted;
-    }
-
     public List<Question> getQuestions() {
         return questions;
     }
