@@ -10,7 +10,10 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Long id;
+    private Integer id;
+
+    @Column(name = "author")
+    private String author;
     @Column(name = "content")
     private String content;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "answer")
@@ -35,10 +38,10 @@ public class Answer {
         this.question = question;
         this.user = user;
     }
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getContent() {
@@ -72,5 +75,21 @@ public class Answer {
 
     public void setAccepted(boolean accepted) {
         this.accepted = accepted;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public List<Comment> getComment() {
+        return comment;
+    }
+
+    public void setComment(List<Comment> comment) {
+        this.comment = comment;
     }
 }
