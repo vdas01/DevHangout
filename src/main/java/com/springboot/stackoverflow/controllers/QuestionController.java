@@ -2,13 +2,21 @@ package com.springboot.stackoverflow.controllers;
 
 import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.Tag;
+import com.springboot.stackoverflow.services.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class QuestionController {
+
+    QuestionService questionService;
+
+    public QuestionController(QuestionService questionService){
+        this.questionService = questionService;
+    }
 
     @GetMapping("/questions/ask")
     public String askQuestions(Model model){
@@ -19,10 +27,9 @@ public class QuestionController {
         return "AskQuestion";
     }
 
-    @GetMapping("/saveQuestion")
+    @PostMapping("/savequestion")
     public String saveQuestion(@ModelAttribute("question") Question newQuestion,@ModelAttribute("tag")Tag newTag){
-        System.out.println(newQuestion.getTitle());
-        System.out.println(newTag.getName());
+        questionService.saveQuestion(newQuestion,newTag);
         return "SaveQuestion";
     }
 }
