@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
           integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" th:href="@{css/questionPage.css}">
 </head>
 <body>
     <nav id="navbar">
@@ -20,18 +19,60 @@
         </svg>
         <div class="search">
             <input type="search" name="search_bar" id="search_bar">
-            <i class="fa-solid fa-magnifying-glass search_icon"></i>
+            <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
         </div>
         <span class="profile">
             <img src="" alt="" id="user_pic">
         </span>
         <ul class="items">
-            <li><a href=""><i class="fa-solid fa-question"></i></a></li>
-            <li><a href="">Recent achievement</a></li>
+            <li><a href=""><i class="fa-solid fa-question icons"></i></a></li>
+            <li><a href=""><i class="fa-solid fa-trophy icons"></i></a></li>
         </ul>
     </nav>
     <div id = "parent">
-        <div></div>
+        <div id="sidebar">
+            <div class="row">
+                <a href="" >
+                <i class="fa-solid fa-house side_icons"></i>
+                <small id="side_text">Home</small>
+                </a>
+            </div>
+
+            <div class="row">
+                <a href="" >
+                <i class="fa-solid fa-circle-question side_icons"></i>
+                <small id="side_text">Questions</small>
+            </a>
+            </div>
+
+            <div class="row">
+                <a href="" >
+                <i class="fa-solid fa-tag side_icons"></i>
+                <small id="side_text">Tags</small>
+            </a>
+            </div>
+            <br><br>
+            <div class="row">
+                <a href="">
+                <i class="fa-solid fa-bookmark side_icons"></i>
+                <small id="side_text">Saves</small>
+            </a>
+            </div>
+            <div class="row">
+                <a href="" >
+                <i class="fa-solid fa-user side_icons"></i>
+                <small id="side_text">Users</small>
+            </a>
+            </div>
+            <br>
+            <div class="row">
+                <a href="">
+                    <i class="fa-solid fa-message side_icons"></i>
+                     <small id="side_text">Discussions</small>
+                </a>
+            </div>
+            
+        </div>
         <div id = "body">
             <div id = "main-question">
                 <div id = "question">
@@ -39,9 +80,9 @@
                     <input type="submit" value="Ask Question">
                 </div>
                 <div id = "view-detail">
-                    Asked: <b><span th:text = "${#dates.format(question.createdAt, 'dd/MM/YYYY')}"></span></b>
-                    Modified: <b><span th:text = "${#dates.format(question.modifiedAt, 'dd/MM/YYYY')}"></span></b>
-                    Views: <b><span th:text = "${question.views}"></span></b>
+                    Asked: <b><span th:text = "${#dates.format(question.createdAt, 'dd/MM/YYYY')}" style="margin-right:0.5rem;"></span></b>
+                    Modified: <b><span th:text = "${#dates.format(question.modifiedAt, 'dd/MM/YYYY')}" style="margin-right:0.5rem;"></span></b>
+                    Views: <b><span th:text = "${question.views}" style="margin-right:0.5rem;"></span></b>
                 </div>
             </div>
             <div class = "question-detail">
@@ -67,7 +108,7 @@
                 <p style="font-size: x-large">Your Answer</p>
                 <form>
                     <textarea name = "answer" rows = "10" cols = "130"></textarea><br><br><br>
-                    <input type="submit" value="post Your Answer">
+                    <input type="submit" value="Post Answer">
                 </form>
 
             </div>

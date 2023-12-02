@@ -41,7 +41,6 @@
     font-size: 2rem;
     margin-bottom: 2.3vh;
 }
-<<<<<<< HEAD
 
 span {
     padding: 0px;
@@ -49,8 +48,6 @@ span {
     margin-right: 100px;
 }
 
-=======
->>>>>>> main
 /* -----------------navbar-------------- */
 
 .input_group{
@@ -82,4 +79,8 @@ span {
     position: absolute;
     top: 10px;
     left: 10px;
+}
+
+#sidebar{
+    
 }
