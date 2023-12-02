@@ -42,6 +42,7 @@ public class UserController {
         else
             return "redirect:/login?success";
     }
+
     @GetMapping("/userProfile")
     public String userProfile(Model model,Integer id){
         User user=userService.findUserByUserId(1);
