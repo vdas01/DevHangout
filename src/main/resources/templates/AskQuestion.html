@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Ask Question</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+          integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/AskQuestion.css">
+</head>
+<body>
+    <div class="container">
+        <nav id="navbar">
+            <svg aria-hidden="true" class="native svg-icon iconLogoGlyphMd" width="32" height="37" viewBox="0 0 32 37">
+                <path d="M26 33v-9h4v13H0V24h4v9h22Z" fill="#BCBBBB"></path><path d="m21.5 0-2.7 2 9.9 13.3 2.7-2L21.5
+            0ZM26 18.4 13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5ZM9.1 15.2l15 7 1.4-3-15-7-1.4 3Zm14 10.79.68-2.95-16.1-3.35L7
+            23l16.1 2.99ZM23 30H7v-3h16v3Z" fill="#F48024"></path><span>Stack<b>overflow</b></span></svg>
+                <div class="search">
+                     <input type="search" name="search_bar" id="search_bar">
+                     <i class="fa-solid fa-magnifying-glass search_icon"></i>
+                </div>
+                <span class="profile">
+                    <img src="" alt="" id="user_pic">
+                </span>
+                <ul class="items">
+                    <li><a href=""><i class="fa-solid fa-question"></i></a></li>
+                    <li><a href="">Recent achivements</a></li>
+                </ul>
+        </nav>
+    <div class="content">
+            <h3 id="heading">Ask a public question</h3>
+        <form th:action="@{/savequestion}" method="post" th:object="${question}">
+            <div class="input_group">
+                <h5>Title</h5>
+                <p>Be specific and imagine you’re asking a question to another person.</p>
+                <input type="text" name="title" id="title" th:field="*{title}">
+            </div>
+
+            <div class="input_group">
+                <h5>What are the details of your problem?</h5>
+                <p>Introduce the problem and expand on what you put in the title. Minimum 20 characters.</p>
+               <textarea name="content"  cols="30" rows="10" minlength="20" th:field="*{content}"></textarea>
+            </div>
+
+            <div class="input_group">
+                <h5>Tags</h5>
+                <p>Add up to 5 tags to describe what your question is about. Start typing to see suggestions.</p>
+                <input type="text" name="tags" id="tags" th:field="${tag.name}">
+            </div>
+
+            <input type="submit" value="Submit" class="buttons">
+        </form>
+    </div>
+    </div>
+</body>
+</html>
