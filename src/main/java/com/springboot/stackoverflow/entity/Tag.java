@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "tags")
 public class Tag {
 
     @Id
@@ -28,6 +29,8 @@ public class Tag {
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(name="question_tag",joinColumns = @JoinColumn(name = "tag_id"),inverseJoinColumns = @JoinColumn(name = "question_id"))
     private List<Question> questions;
+
+    public Tag(){};
 
     public Tag(String name) {
         this.name = name;

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "answers")
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,7 +13,7 @@ public class Answer {
     private Long id;
     @Column(name = "content")
     private String content;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "answer")
     private List<Comment> comment;
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "question_id")
