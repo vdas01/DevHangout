@@ -35,12 +35,13 @@
         <div id = "body">
             <div id = "main-question">
                 <div id = "question">
-                    <h1>Here comes the question form th db</h1>
+                    <h1 th:text = "${question.title}"></h1>
                     <input type="submit" value="Ask Question">
                 </div>
                 <div>
                     <span>Asked: Today</span>
                     <span>Modified: Today</span>
+                    <span th:text = "${question.views}"></span>
                 </div>
             </div>
             <div class = "question-detail">
@@ -48,27 +49,16 @@
                 <span class = "voting-button">
                     <i class="fa-solid fa-caret-up"></i>
                 </span>
-                    <span>0</span>
+                    <span th:text = "${question.votes}"></span>
                     <span class = "voting-button">
                     <i class="fa-solid fa-caret-down"></i>
                 </span>
                 </div>
                 <div id = "content-body">
                     <div id = "content">
-                        <p>
-                            I use this code(https://stackoverflow.com/a/67545792/22334744) to allow background widgets in the tkinter window to pass through clicks, but sometimes the program freezes in the middle of the execution of win32gui.SetWindowLong in that code. Adding time.sleep to delay the execution of that code slightly reduces the frequency of the error, but it still happens. No error codes were output.
-
-                            I use this code(https://stackoverflow.com/a/67545792/22334744) to allow background widgets in the tkinter window to pass through clicks, but sometimes the program freezes in the middle of the execution of win32gui.SetWindowLong in that code. Adding time.sleep to delay the execution of that code slightly reduces the frequency of the error, but it still happens. No error codes were output.
-
-                            I use this code(https://stackoverflow.com/a/67545792/22334744) to allow background widgets in the tkinter window to pass through clicks, but sometimes the program freezes in the middle of the execution of win32gui.SetWindowLong in that code. Adding time.sleep to delay the execution of that code slightly reduces the frequency of the error, but it still happens. No error codes were output.
-
-                            I use this code(https://stackoverflow.com/a/67545792/22334744) to allow background widgets in the tkinter window to pass through clicks, but sometimes the program freezes in the middle of the execution of win32gui.SetWindowLong in that code. Adding time.sleep to delay the execution of that code slightly reduces the frequency of the error, but it still happens. No error codes were output.
-
-                            I use this code(https://stackoverflow.com/a/67545792/22334744) to allow background widgets in the tkinter window to pass through clicks, but sometimes the program freezes in the middle of the execution of win32gui.SetWindowLong in that code. Adding time.sleep to delay the execution of that code slightly reduces the frequency of the error, but it still happens. No error codes were output.
-
-                            I use this code(https://stackoverflow.com/a/67545792/22334744) to allow background widgets in the tkinter window to pass through clicks, but sometimes the program freezes in the middle of the execution of win32gui.SetWindowLong in that code. Adding time.sleep to delay the execution of that code slightly reduces the frequency of the error, but it still happens. No error codes were output.
+                        <p th:text = "${question.content}">
                         </p>
-                        <span>tags1, tag2, tag3</span>
+                        <span th:each = "tag : &{question.tags}" th:text = "*{tag}"></span>
                     </div><br><br>
                     <a href="#">Add a comment</a>
                 </div>

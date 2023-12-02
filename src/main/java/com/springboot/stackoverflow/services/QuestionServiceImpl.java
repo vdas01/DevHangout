@@ -101,4 +101,12 @@ public class QuestionServiceImpl implements QuestionService{
     public void deleteQuestion(Integer questionId) {
         questionRepository.deleteById(questionId);
     }
+
+    @Override
+    public Question findQuestionById(Integer questionId) {
+        Optional<Question> byId = questionRepository.findById(questionId);
+        if(byId.isEmpty()) return null;
+
+        return byId.get();
+    }
 }
