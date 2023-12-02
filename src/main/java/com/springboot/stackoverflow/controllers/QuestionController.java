@@ -34,7 +34,7 @@ public class QuestionController {
         return "SaveQuestion";
     }
 
-    @PostMapping("/viewQuestion/{questionId}")
+    @GetMapping("/viewQuestion/{questionId}")
     public String viewQuestion(@PathVariable("questionId") Integer questionId, Model model) {
         Question question = questionService.findQuestionById(questionId);
         if(question == null) return "error";
