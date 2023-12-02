@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+}
+.container{
+    min-height: 100vh;
+    width: 100%;
+}
+#navbar{
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    gap:1vw;
+    padding: 1.5vh;
+    font-size: 1.2rem;
+    align-items: center;
+}
+.items{
+    display: flex;
+    gap: 1vw;
+}
+
+.content{
+    padding: 2vh 2vw;
+    background-color: rgb(231, 231, 231);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+#search_bar{
+    width: 20vw;
+    padding:1vh 2vw;
+    border-radius: 10px;
+
+}
+#heading{
+    font-size: 2rem;
+    margin-bottom: 2.3vh;
+}
+
+
+#userContainer{
+display:grid;
+grid-template-rows:22% 10% 68%;
+margin-top:2%;
+}
+#userName{
+grid-row:1;
+display:grid;
+grid-template-columns:20% 60% 20%
+}
+#profilePhoto{
+grid-column:1;
+padding-left:30%;
+margin-top:0;
+
+}
+#profileName{
+padding-top:3%;
+grid-column:2;
+}
+
+#editButtons a {
+    display: inline-block;
+    padding: 10px 20px; /* Adjust the padding to make the buttons larger */
+    margin-right: 20px; /* Add some spacing between buttons */
+    text-decoration: none;
+    border: 1px solid black; /* Add a border */
+    border-radius: 5px; /* Add rounded corners */
+    color: black; /* Set text color */
+    transition: background-color 0.3s, color 0.3s; /* Add a smooth transition effect */
+
+}
+
+#editButtons a:hover {
+    background-color: #4CAF50; /* Change background color on hover */
+    color: white; /* Change text color on hover */
+}
+#name{
+font-size:xx-large;
+}
+#memberSince{
+margin-top:10%;
+}
+#menu{
+grid-row:2;
+margin-top:3%;
+margin-left:5%;
+}
+ul#menuOptions li{
+display:inline-block;
+}
+#menuOptions li {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius:4px;
+}
+#stats{
+grid-column:1;
+margin:5%;
+}
+#about{
+grid-column:2;
+margin:5%;
+margin-top:0;
+
+}
+#userDetails{
+margin-top:5%;
+grid-row:3;
+display:grid;
+grid-template-columns:20% 80%;
+}
+#statsBox{
+border:1px solid black;
+border-radius:8px;
+min-height:80%;
+}
+#communiyBox{
+width:100%;
+border:1px solid black;
+border-radius:8px;
+min-height:40%;
+}
+#aboutBox{
+width:100%;
+border:1px solid black;
+border-radius:8px;
+min-height:70%;
+}
+#badgesBox{
+border:1px solid black;
+border-radius:8px;
+width:100%;
+min-height:70%;
+}
+#postsBox{
+border:1px solid black;
+border-radius:8px;
+width:100%;
+min-height:70%;
+}
