@@ -32,7 +32,7 @@ public class Tag {
             inverseJoinColumns = @JoinColumn(name = "question_id"))
     private List<Question> questions;
 
-    public Tag() {}
+    public Tag(){};
 
     public Tag(String name) {
         this.name = name;
