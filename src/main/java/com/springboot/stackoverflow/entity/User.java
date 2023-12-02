@@ -27,7 +27,6 @@ public class User {
     @Column(name = "created_at")
     @CreationTimestamp
     private Date createdAt;
-
     @ManyToMany()
     @JoinTable(
             name = "FollowRelation",

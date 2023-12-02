@@ -27,7 +27,7 @@
             <img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-icon-logo-png-transparent-svg-vector-bie-supply-14.png" width="50%" >
         </div>
         <div id="profileName">
-            FULL NAME ENTERED HERE
+            <span th:text="${name}">
             <br>
             <span id="memberSince">Member since today, Last seen this week, Visited 1 day, 1 consecutive
             </span>
@@ -50,6 +50,7 @@
         <div id="stats">
             Stats
             <div id="statsBox">
+                Reputation:<span th:text="${reputation}"></span>
             </div>
             Communities
             <div id="communiyBox">
@@ -60,15 +61,18 @@
         <div id="about">
             About
             <div id="aboutBox">
-                Nothing Here
+                <span th:if="${!about.isEmpty()}" th:text="${about}"></span>
+                <span th:if="${about.isEmpty()}">Click here to enter About</span>
             </div>
             Badges
             <div id="badgesBox">
-                No badges earned
+                <span th:if="${!badges.isEmpty()}" th:text="${badges}"></span>
+                <span th:if="${badges.isEmpty()}">No badges earned</span>
             </div>
             Posts
             <div id="postsBox">
-                No posts available
+                <span th:if="${!post.isEmpty()}" th:text="${post}"></span>
+                <span th:if="${post.isEmpty()}">No Questions Asked</span>
             </div>
         </div>
     </div>
