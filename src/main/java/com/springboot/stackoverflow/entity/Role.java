@@ -3,6 +3,8 @@ package com.springboot.stackoverflow.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -14,7 +16,7 @@ public class Role {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "username")
-    private User username;
+    private List<User> username;
     @Column(name = "role")
     private String role;
 }
