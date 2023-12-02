@@ -60,6 +60,8 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Question> userQuestions;
 
+    @ManyToMany(mappedBy = "tags")
+    private Role role;
     public User() {}
 
     public User(String userName, String email,
