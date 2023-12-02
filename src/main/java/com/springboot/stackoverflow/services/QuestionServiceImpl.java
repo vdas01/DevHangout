@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class QuestionServiceImpl implements QuestionService{
@@ -56,5 +57,20 @@ public class QuestionServiceImpl implements QuestionService{
         }
 
         questionRepository.save(newQuestion);
+    }
+
+    @Override
+    public Question editQuestion(Integer questionId) {
+        Optional<Question> questionRetrieved = questionRepository.findById(questionId);
+        Question tempQuestion = null;
+        if(questionRetrieved.isPresent()){
+                tempQuestion  = questionRetrieved.get();
+        }
+        return tempQuestion;
+    }
+
+    @Override
+    public void deleteQuestion(Integer questionId) {
+        questionRepository.deleteById(questionId);
     }
 }
