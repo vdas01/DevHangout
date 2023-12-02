@@ -42,15 +42,11 @@
     margin-bottom: 2.3vh;
 }
 
-
 span {
     padding: 0px;
     margin-left: -10px;
     margin-right: 100px;
 }
-
-
->>>>>>> main
 /* -----------------navbar-------------- */
 
 .input_group{
@@ -82,4 +78,8 @@ span {
     position: absolute;
     top: 10px;
     left: 10px;
+}
+
+#sidebar{
+    
 }
