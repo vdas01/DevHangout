@@ -27,7 +27,6 @@ public class User {
     @Column(name = "created_at")
     @CreationTimestamp
     private Date createdAt;
-
     @ManyToMany()
     @JoinTable(
             name = "FollowRelation",
@@ -60,6 +59,8 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Question> userQuestions;
 
+    @ManyToMany(mappedBy = "username")
+    private List<Role> role;
     public User() {}
 
     public User(String userName, String email,

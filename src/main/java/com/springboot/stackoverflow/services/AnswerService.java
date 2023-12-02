@@ -8,7 +8,7 @@ public interface AnswerService {
 
     Answer editAnswer(Integer answerId);
 
-    void updateAnswer(Answer updatedAnswer,Integer answerId);
+    void updateAnswer(String updatedAnswer,Integer answerId);
 
     void deleteAnswer(Integer answerId);
 }

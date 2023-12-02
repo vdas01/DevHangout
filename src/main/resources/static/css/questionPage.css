@@ -123,7 +123,7 @@ input[type = "submit"] {
     margin-bottom: 30px;
 }
 
-#content {
+.question-content {
     font-size: 2rem;
 }
 
@@ -138,4 +138,43 @@ input[type = "submit"] {
 
 #view-detail {
     font-size: medium;
+}
+
+.answer-action {
+    text-decoration: none;
+    color: rgb(0,0,0,0.5);
+    cursor: pointer;
+    font-size: medium;
+    padding-right: 30px;
+}
+
+#sidebar{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    font-size:1.4rem;
+}
+
+.side_icons{
+    margin-left:11vw;
+    margin-bottom:0.8rem;
+    margin-right: 0.5rem;
+}
+
+.row{
+    cursor: pointer;
+    display: flex;
+}
+
+.row a{
+    color: black;
+    text-decoration: none;
+}
+
+.row a:hover{
+    color: red;
+}
+
+.icons{
+    color: black;
 }

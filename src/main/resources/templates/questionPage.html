@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
           integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" th:href="@{css/questionPage.css}">
 </head>
 <body>
     <nav id="navbar">
@@ -20,18 +19,60 @@
         </svg>
         <div class="search">
             <input type="search" name="search_bar" id="search_bar">
-            <i class="fa-solid fa-magnifying-glass search_icon"></i>
+            <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
         </div>
         <span class="profile">
             <img src="" alt="" id="user_pic">
         </span>
         <ul class="items">
-            <li><a href=""><i class="fa-solid fa-question"></i></a></li>
-            <li><a href="">Recent achievement</a></li>
+            <li><a href=""><i class="fa-solid fa-question icons"></i></a></li>
+            <li><a href=""><i class="fa-solid fa-trophy icons"></i></a></li>
         </ul>
     </nav>
     <div id = "parent">
-        <div></div>
+        <div id="sidebar">
+            <div class="row">
+                <a href="" >
+                <i class="fa-solid fa-house side_icons"></i>
+                <small class="side_text">Home</small>
+                </a>
+            </div>
+
+            <div class="row">
+                <a href="" >
+                <i class="fa-solid fa-circle-question side_icons"></i>
+                <small class="side_text">Questions</small>
+            </a>
+            </div>
+
+            <div class="row">
+                <a href="" >
+                <i class="fa-solid fa-tag side_icons"></i>
+                <small class="side_text">Tags</small>
+            </a>
+            </div>
+            <br><br>
+            <div class="row">
+                <a href="">
+                <i class="fa-solid fa-bookmark side_icons"></i>
+                <small class="side_text">Saves</small>
+            </a>
+            </div>
+            <div class="row">
+                <a href="" >
+                <i class="fa-solid fa-user side_icons"></i>
+                <small class="side_text">Users</small>
+            </a>
+            </div>
+            <br>
+            <div class="row">
+                <a href="">
+                    <i class="fa-solid fa-message side_icons"></i>
+                     <small class="side_text">Discussions</small>
+                </a>
+            </div>
+            
+        </div>
         <div id = "body">
             <div id = "main-question">
                 <div id = "question">
@@ -41,9 +82,11 @@
                     </form>
                 </div>
                 <div id = "view-detail">
-                    Asked: <b><span th:text = "${#dates.format(question.createdAt, 'dd/MM/YYYY')}"></span></b>
-                    Modified: <b><span th:text = "${#dates.format(question.modifiedAt, 'dd/MM/YYYY')}"></span></b>
-                    Views: <b><span th:text = "${question.views}"></span></b>
+                    Asked: <b><span th:text = "${#dates.format(question.createdAt, 'dd/MM/YYYY')}"
+                                    style="margin-right:0.5rem;"></span></b>
+                    Modified: <b><span th:text = "${#dates.format(question.modifiedAt, 'dd/MM/YYYY')}"
+                                       style="margin-right:0.5rem;"></span></b>
+                    Views: <b><span th:text = "${question.views}" style="margin-right:0.5rem;"></span></b>
                 </div>
             </div>
             <div class = "question-detail">
@@ -57,20 +100,50 @@
                     </span>
                 </div>
 
-                <div class = "content-body">
-                    <div id = "content">
-                        <p th:text = "${question.content}">
-                        </p>
-                        <span th:each = "tag : ${question.tags}" th:text = "*{tag.name}" class = "tags"></span>
-                    </div><br><br>
-                    <a href="#">Add a comment</a>
+                <div th:if = "${isEdited != null}">
+                    <div class = "content-body">
+                        <div class = "question-content">
+                            <form th:action = "@{/updateQuestion/{questionId}
+                            (questionId = ${question.id})}" method="GET">
+                                <textarea th:text="${question.content}" name="editedContent"
+                                          th:value = "${question.content}" rows="10" cols="110"></textarea>
+                                <br>
+                                <input type="submit" value="Update">
+                            </form>
+
+                            <span th:each = "tag : ${question.tags}" th:text = "*{tag.name}" class = "tags"></span>
+                        </div><br><br>
+
+                    </div>
+                </div>
+
+                <div th:unless = "${isEdited != null}">
+                    <div class = "content-body">
+                        <div class = "question-content">
+                            <p th:text = "${question.content}"></p>
+
+                            <span th:each = "tag : ${question.tags}" th:text = "*{tag.name}" class = "tags"></span>
+                        </div><br><br>
+                        <a th:href = "@{/editQuestion/{questionId} (questionId = ${question.id})}"
+                           class = "answer-action">
+                            Edit
+                        </a>
+
+                        <a th:href = "@{/deleteQuestion/{questionId} (questionId = ${question.id})}"
+                           class = "answer-action">
+                            Delete
+                        </a>
+                        <a href="#" class = "answer-action">comment</a>
+                    </div>
                 </div>
             </div>
+
             <div>
                 <span th:text = "${question.answers.size()}"></span>Answer
                 <div th:each = "answer: ${question.answers}">
-                    <div class = "question-detail">
-                        <div class = "voting">
+                    <div th:if="${editAnswer != null && answer.id == editAnswer.id}">
+                        <div class = "question-detail">
+                            <div class = "voting">
                             <span class = "voting-button">
                                 <i class="fa-solid fa-caret-up"></i>
                             </span>
@@ -78,13 +151,54 @@
                                 <span class = "voting-button">
                                 <i class="fa-solid fa-caret-down"></i>
                             </span>
+                            </div>
+
+                            <form th:action = "@{/updateAnswer/{questionId}/{answerId}
+                             (questionId = ${question.id}, answerId = *{answer.id})}" method="GET">
+                                <textarea th:text="*{answer.content}" name="editedContent"
+                                          th:value = "*{answer.content}" rows="10" cols="110"></textarea>
+                                <br>
+                                <input type="submit" value="Update">
+                            </form>
                         </div>
-                        <div th:text = "*{answer.content}" class = "content-body"></div>
+                    </div>
+
+                    <div th:unless = "${editAnswer != null && answer.id == editAnswer.id}">
+                        <div class = "question-detail">
+                            <div class = "voting">
+                            <span class = "voting-button">
+                                <i class="fa-solid fa-caret-up"></i>
+                            </span>
+                                <span th:text = "${question.votes}"></span>
+                                <span class = "voting-button">
+                                <i class="fa-solid fa-caret-down"></i>
+                            </span>
+                            </div>
+
+                            <div class = "content-body">
+                                <div th:text = "*{answer.content}"></div><br><br>
+
+                                <a th:href = "@{/editAnswer/{questionId}/{answerId} (questionId = ${question.id},
+                                answerId = *{answer.id})}" class = "answer-action">
+                                    Edit
+                                </a>
+
+                                <a th:href = "@{/deleteAnswer/{questionId}/{answerId} (questionId = ${question.id},
+                                answerId = *{answer.id})}" class = "answer-action">
+                                    Delete
+                                </a>
+
+                                <a href = "#" class = "answer-action">
+                                    Comment
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div>
                 <p style="font-size: x-large">Your Answer</p>
+
                 <form th:action = "@{/addAnswer{questionId} (questionId = ${question.id})}" method="GET">
                     <textarea name = "content" rows = "10" cols = "130"></textarea><br><br><br>
                     <input type="submit" value="post Your Answer">

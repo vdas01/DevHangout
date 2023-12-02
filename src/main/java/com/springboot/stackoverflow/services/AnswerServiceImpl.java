@@ -43,9 +43,10 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
-    public void updateAnswer(Answer updatedAnswer, Integer answerId) {
-        updatedAnswer.setId(answerId);
-        answerRepository.save(updatedAnswer);
+    public void updateAnswer(String updatedAnswer, Integer answerId) {
+        Answer answer = answerRepository.findById(answerId).get();
+        answer.setContent(updatedAnswer);
+        answerRepository.save(answer);
     }
 
     @Override

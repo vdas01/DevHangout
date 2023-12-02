@@ -71,30 +71,11 @@ public class QuestionServiceImpl implements QuestionService{
 
 
     @Override
-    public void updateQuestion(Integer questionId, Question updatedQuestion,String updatedTags) {
-        updatedQuestion.setId(questionId);
-        Map<String,Tag> tempTags = new HashMap<>();
-        List<Tag> allTags = tagService.findAllTags();
+    public void updateQuestion(Integer questionId, String editedContent) {
+        Question updatedQuestion = questionRepository.findById(questionId).get();
+        updatedQuestion.setContent(editedContent);
 
-        for(Tag tag:allTags){
-            String name = tag.getName();
-            tempTags.put(name,tag);
-        }
-
-        String[] tagsArray = updatedTags.split(",");
-
-        for(String tempTag: tagsArray){
-            if(tempTags.containsKey(tempTag)){
-                updatedQuestion.addTags(tempTags.get(tempTag));
-            }
-            else {
-                tempTag = tempTag.trim();
-                Tag tag = new Tag(tempTag);
-                updatedQuestion.addTags(tag);
-            }
-        }
-
-       questionRepository.save(updatedQuestion);
+        questionRepository.save(updatedQuestion);
     }
 
     @Override
