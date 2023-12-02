@@ -31,4 +31,25 @@ public class AnswerServiceImpl implements AnswerService{
             answerRepository.save(answer);
         }
     }
+
+    @Override
+    public Answer editAnswer(Integer answerId) {
+        Optional<Answer> retrievedAnswerById = answerRepository.findById(answerId);
+        Answer tempAnswer = null;
+        if(retrievedAnswerById.isPresent()){
+            tempAnswer = retrievedAnswerById.get();
+        }
+        return tempAnswer;
+    }
+
+    @Override
+    public void updateAnswer(Answer updatedAnswer, Integer answerId) {
+        updatedAnswer.setId(answerId);
+        answerRepository.save(updatedAnswer);
+    }
+
+    @Override
+    public void deleteAnswer(Integer answerId) {
+            answerRepository.deleteById(answerId);
+    }
 }

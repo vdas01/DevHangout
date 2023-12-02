@@ -39,7 +39,15 @@ public class QuestionController {
             Question question = questionService.editQuestion(questionId);
             model.addAttribute("question",question);
             //edit question page;
-        return "EditQuestion";
+        return "UpdateQuestion";
+    }
+
+    @PostMapping("/updateQuestion{questionId}")
+    public String processUpdatedQuestion(@PathVariable("questionId") Integer questionId,@ModelAttribute("question") Question question
+                ,@ModelAttribute("tag")String updatedTags){
+            questionService.updateQuestion(questionId,question,updatedTags);
+            //go to updated page of that indidvidual question
+        return "redirect:/";
     }
 
     @GetMapping("/deleteQuestion{questionId}")

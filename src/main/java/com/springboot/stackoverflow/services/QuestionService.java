@@ -9,5 +9,7 @@ public interface QuestionService {
 
     Question editQuestion(Integer questionId);
 
+    void updateQuestion(Integer questionId,Question question,String updatedTags);
+
     void deleteQuestion(Integer questionId);
 }
