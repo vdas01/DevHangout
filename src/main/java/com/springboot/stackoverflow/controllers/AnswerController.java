@@ -1,55 +1,57 @@
 package com.springboot.stackoverflow.controllers;
 
 import com.springboot.stackoverflow.entity.Answer;
+import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.services.AnswerService;
+import com.springboot.stackoverflow.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AnswerController {
 
     AnswerService answerService;
+    QuestionService questionService;
 
     @Autowired
-    public AnswerController(AnswerService answerService) {
+    public AnswerController(AnswerService answerService, QuestionService questionService) {
         this.answerService = answerService;
+        this.questionService = questionService;
     }
 
-    @PostMapping("/addAnswer{questionId}")
+    @GetMapping("/addAnswer{questionId}")
     public String processAddAnswer(@PathVariable(name = "questionId")Integer questionId,
-            @ModelAttribute("answer") Answer answer){
-        answerService.addAnswer(questionId,answer);
-        //add question link
-        return "redirect:/";
+            @RequestParam("content") String content){
+        answerService.addAnswer(questionId,content);
+
+        return "redirect:/viewQuestion/{questionId}";
     }
 
-    @GetMapping("/editAnswer{answerId}")
-    public String processEditAnswer(@PathVariable(name = "answerId")Integer answerId, Model model){
+    @GetMapping("/editAnswer/{questionId}/{answerId}")
+    public String processEditAnswer(@PathVariable(name = "answerId")Integer answerId,
+                                    @PathVariable(name = "questionId") Integer questionId, Model model){
         Answer tempAnswer = answerService.editAnswer(answerId);
-        model.addAttribute("answer",tempAnswer);
+        Question question = questionService.findQuestionById(questionId);
+        model.addAttribute("question", question);
+        model.addAttribute("editAnswer", tempAnswer);
 
-        //edit answer page
-        return "redirect::/";
+        return "questionPage";
     }
 
-    @PostMapping("/updateAnswer{answerId}")
-    public String processUpdatedAnswer(@ModelAttribute("answer")Answer answer,@PathVariable(name = "answerId")Integer answerId){
-            answerService.updateAnswer(answer,answerId);
+    @GetMapping("/updateAnswer/{questionId}/{answerId}")
+    public String processUpdatedAnswer(@ModelAttribute("editedContent")String editedContent,
+                                       @PathVariable(name = "answerId")Integer answerId){
+        answerService.updateAnswer(editedContent, answerId);
 
-            //redirect again to that same page
-        return "redirect:/";
+        return "redirect:/viewQuestion/{questionId}";
     }
 
-    @GetMapping("/deleteAnswer{answerId}")
+    @GetMapping("/deleteAnswer/{questionId}/{answerId}")
     public String processDeleteAnswer(@PathVariable Integer answerId){
-            answerService.deleteAnswer(answerId);
+        answerService.deleteAnswer(answerId);
 
-            //redirect to homepage
-                return "redirect:/";
+        return "redirect:/viewQuestion/{questionId}";
     }
 }
