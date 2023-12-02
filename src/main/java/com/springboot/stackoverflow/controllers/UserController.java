@@ -1,5 +1,6 @@
 package com.springboot.stackoverflow.controllers;
 
+import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,18 @@ public class UserController {
             return "redirect:/login?success";
     }
     @GetMapping("/userProfile")
-    public String userProfile(){
+    public String userProfile(Model model,Integer id){
+        User user=userService.findUserByUserId(1);
+        System.out.println(user);
+        model.addAttribute("name",user.getUserName());
+        model.addAttribute("about",user.getAbout());
+
+            model.addAttribute("post", user.getUserQuestions());
+
+        model.addAttribute("reputation",user.getReputation());
+        if(user.getUserBadges()!=null) {
+            model.addAttribute("badges",user.getUserBadges());
+        }
         return "UserProfile";
     }
 }
