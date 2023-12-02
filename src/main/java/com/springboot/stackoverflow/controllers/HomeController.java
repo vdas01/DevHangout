@@ -22,8 +22,8 @@ public class HomeController {
 
     @GetMapping("/")
     public String showHome(Model model){
-//        List<Question> questionList =questionController.findAllQuestions();
-//        model.addAttribute("questionsList",questionList);
+        List<Question> questionList =questionController.findAllQuestions();
+        model.addAttribute("questionsList",questionList);
         return "home";
     }
 }
