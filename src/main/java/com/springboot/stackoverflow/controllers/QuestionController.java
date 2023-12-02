@@ -34,6 +34,16 @@ public class QuestionController {
         return "SaveQuestion";
     }
 
+    @PostMapping("/viewQuestion/{questionId}")
+    public String viewQuestion(@PathVariable("questionId") Integer questionId, Model model) {
+        Question question = questionService.findQuestionById(questionId);
+        if(question == null) return "error";
+
+        model.addAttribute("question", question);
+
+        return "questionPage";
+    }
+
     @GetMapping("/editQuestion{questionId}")
     public String processEditQuestion(@PathVariable("questionId")Integer questionId,Model model){
             Question question = questionService.editQuestion(questionId);
