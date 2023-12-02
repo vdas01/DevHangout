@@ -5,10 +5,7 @@ import com.springboot.stackoverflow.services.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AnswerController {
@@ -20,12 +17,12 @@ public class AnswerController {
         this.answerService = answerService;
     }
 
-    @PostMapping("/addAnswer{questionId}")
+    @GetMapping("/addAnswer{questionId}")
     public String processAddAnswer(@PathVariable(name = "questionId")Integer questionId,
-            @ModelAttribute("answer") Answer answer){
-        answerService.addAnswer(questionId,answer);
+            @RequestParam("content") String content){
+        answerService.addAnswer(questionId,content);
         //add question link
-        return "redirect:/";
+        return "redirect:/viewQuestion/{answerId}";
     }
 
     @GetMapping("/editAnswer{answerId}")
@@ -34,7 +31,7 @@ public class AnswerController {
         model.addAttribute("answer",tempAnswer);
 
         //edit answer page
-        return "redirect::/";
+        return "redirect:/viewQuestion/{answerId}";
     }
 
     @PostMapping("/updateAnswer{answerId}")

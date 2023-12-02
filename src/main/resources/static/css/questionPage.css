@@ -99,7 +99,7 @@
     margin-top: 10px;
 }
 
-#voting {
+.voting {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -117,14 +117,14 @@ input[type = "submit"] {
     padding: 5px;
 }
 
-#content-body {
+.content-body {
     padding-left: 50px;
     padding-top: 30px;
     margin-bottom: 30px;
 }
 
 #content {
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 .tags {

@@ -36,7 +36,9 @@
             <div id = "main-question">
                 <div id = "question">
                     <h1 th:text = "${question.title}"></h1>
-                    <input type="submit" value="Ask Question">
+                    <form th:action = "@{/questions/ask}">
+                        <input type="submit" value="Ask Question">
+                    </form>
                 </div>
                 <div id = "view-detail">
                     Asked: <b><span th:text = "${#dates.format(question.createdAt, 'dd/MM/YYYY')}"></span></b>
@@ -45,16 +47,17 @@
                 </div>
             </div>
             <div class = "question-detail">
-                <div id = "voting">
-                <span class = "voting-button">
-                    <i class="fa-solid fa-caret-up"></i>
-                </span>
-                    <span th:text = "${question.votes}"></span>
+                <div class = "voting">
                     <span class = "voting-button">
-                    <i class="fa-solid fa-caret-down"></i>
-                </span>
+                        <i class="fa-solid fa-caret-up"></i>
+                    </span>
+                        <span th:text = "${question.votes}"></span>
+                        <span class = "voting-button">
+                        <i class="fa-solid fa-caret-down"></i>
+                    </span>
                 </div>
-                <div id = "content-body">
+
+                <div class = "content-body">
                     <div id = "content">
                         <p th:text = "${question.content}">
                         </p>
@@ -64,9 +67,26 @@
                 </div>
             </div>
             <div>
+                <span th:text = "${question.answers.size()}"></span>Answer
+                <div th:each = "answer: ${question.answers}">
+                    <div class = "question-detail">
+                        <div class = "voting">
+                            <span class = "voting-button">
+                                <i class="fa-solid fa-caret-up"></i>
+                            </span>
+                                <span th:text = "${question.votes}"></span>
+                                <span class = "voting-button">
+                                <i class="fa-solid fa-caret-down"></i>
+                            </span>
+                        </div>
+                        <div th:text = "*{answer.content}" class = "content-body"></div>
+                    </div>
+                </div>
+            </div>
+            <div>
                 <p style="font-size: x-large">Your Answer</p>
-                <form>
-                    <textarea name = "answer" rows = "10" cols = "130"></textarea><br><br><br>
+                <form th:action = "@{/addAnswer{questionId} (questionId = ${question.id})}" method="GET">
+                    <textarea name = "content" rows = "10" cols = "130"></textarea><br><br><br>
                     <input type="submit" value="post Your Answer">
                 </form>
 

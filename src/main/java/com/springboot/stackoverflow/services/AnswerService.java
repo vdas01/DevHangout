@@ -4,7 +4,7 @@ import com.springboot.stackoverflow.entity.Answer;
 
 public interface AnswerService {
 
-    void addAnswer(Integer questionId, Answer answer);
+    void addAnswer(Integer questionId, String content);
 
     Answer editAnswer(Integer answerId);
 

@@ -22,11 +22,11 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
-    public void addAnswer(Integer questionId, Answer answer) {
+    public void addAnswer(Integer questionId, String content) {
         Optional<Question> questionRetrievedByID = questionRepository.findById(questionId);
         if(questionRetrievedByID.isPresent()){
             Question question = questionRetrievedByID.get();
-            answer.setQuestion(question);
+            Answer answer = new Answer(content, question, null);
             answer.setAuthor("user");
             answerRepository.save(answer);
         }
