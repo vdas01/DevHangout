@@ -1,5 +1,6 @@
 package com.springboot.stackoverflow.controllers;
 
+import com.springboot.stackoverflow.entity.Comment;
 import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.Tag;
 import com.springboot.stackoverflow.services.QuestionService;
@@ -40,7 +41,7 @@ public class QuestionController {
     public String viewQuestion(@PathVariable("questionId") Integer questionId, Model model) {
         Question question = questionService.findQuestionById(questionId);
         if(question == null) return "error";
-
+        model.addAttribute("comments",new Comment());
         model.addAttribute("question", question);
 
         return "questionPage";
