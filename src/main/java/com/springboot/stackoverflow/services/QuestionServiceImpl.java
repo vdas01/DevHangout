@@ -109,4 +109,9 @@ public class QuestionServiceImpl implements QuestionService{
 
         return byId.get();
     }
+
+    @Override
+    public List<Question> findQuestionsList() {
+        return questionRepository.findAll();
+    }
 }
