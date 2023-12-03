@@ -5,6 +5,7 @@
     text-decoration: none;
     list-style-type: none;
 }
+
 .container{
     min-height: 100vh;
     width: 100%;
@@ -17,6 +18,10 @@
     padding: 1.5vh;
     font-size: 1.2rem;
     align-items: center;
+    position: fixed;
+    z-index: 2;
+    background-color: white;
+    width: 100vw;
 }
 .items{
     display: flex;
@@ -29,25 +34,28 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 #search_bar{
     width: 20vw;
     padding:1vh 2vw;
     border-radius: 10px;
-
 }
 #heading{
     font-size: 2rem;
     margin-bottom: 2.3vh;
 }
 
-
-span {
+#title {
     padding: 0px;
     margin-left: -10px;
     margin-right: 100px;
 }
+
+.icons{
+    color: black;
+}
+
+/*<-------- navbar ------------>*/
 
 header {
     background-color: #f8f8f8;
@@ -134,3 +142,43 @@ article {
     border-radius: 12%;
 }
 
+#parent {
+    display: grid;
+    grid-template-columns: 20% 58% 20%;
+    padding-top: 60px;
+}
+
+#body {
+    border-left: 2px solid black;
+    overflow-y: scroll;
+    height: 92vh;
+}
+
+
+/*-----------Side Bar starts here -----------------*/
+
+#sidebar{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    font-size:1.4rem;
+}
+
+.side_icons{
+    margin-bottom:0.8rem;
+    margin-right: 0.5rem;
+}
+
+.row{
+    cursor: pointer;
+    display: flex;
+}
+
+.row a{
+    color: black;
+    text-decoration: none;
+}
+
+.row a:hover{
+    color: red;
+}
