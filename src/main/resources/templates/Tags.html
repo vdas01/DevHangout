@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tags</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/Tags.css">
+</head>
+<body>
+        <nav id="navbar">
+            <svg aria-hidden="true" class="native svg-icon iconLogoGlyphMd" width="32" height="37" viewBox="0 0 32 37">
+                <path d="M26 33v-9h4v13H0V24h4v9h22Z" fill="#BCBBBB"></path><path d="m21.5 0-2.7 2 9.9 13.3 2.7-2L21.5
+            0ZM26 18.4 13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5ZM9.1 15.2l15 7 1.4-3-15-7-1.4 3Zm14 10.79.68-2.95-16.1-3.35L7
+            23l16.1 2.99ZM23 30H7v-3h16v3Z" fill="#F48024"></path><span>Stack<b>overflow</b></span></svg>
+                <div class="search">
+                     <input type="search" name="search_bar" id="search_bar">
+                     <i class="fa-solid fa-magnifying-glass search_icon"></i>
+                </div>
+                <ul class="items">
+                    <li><span class="profile">
+                    <img src="" alt="" id="user_pic">
+                </span></li>
+                    <li><a href=""><i class="fa-solid fa-question"></i></a></li>
+                    <li><a href="">Recent achivements</a></li>
+                </ul>
+        </nav>
+        <div id = "parent">
+            <div id="sidebar">
+                <div class="row">
+                    <a href="/" >
+                    <i class="fa-solid fa-house side_icons"></i>
+                    <small class="side_text">Home</small>
+                    </a>
+                </div>
+    
+                <div class="row">
+                    <a href="/" >
+                    <i class="fa-solid fa-circle-question side_icons"></i>
+                    <small class="side_text">Questions</small>
+                </a>
+                </div>
+    
+                <div class="row">
+                    <a href="/tags" >
+                    <i class="fa-solid fa-tag side_icons"></i>
+                    <small class="side_text">Tags</small>
+                </a>
+                </div>
+                <br><br>
+                <div class="row">
+                    <a href="/users/saves">
+                    <i class="fa-solid fa-bookmark side_icons"></i>
+                    <small class="side_text">Saves</small>
+                </a>
+                </div>
+                <div class="row">
+                    <a href="/users" >
+                    <i class="fa-solid fa-user side_icons"></i>
+                    <small class="side_text">Users</small>
+                </a>
+                </div>
+                <br>
+                <div class="row">
+                    <a href="/discussions">
+                        <i class="fa-solid fa-message side_icons"></i>
+                         <small class="side_text">Discussions</small>
+                    </a>
+                </div>
+                
+            </div>
+            <div id = "body">
+                <div class="heading">
+                    <h4>Tags</h4>
+                    <p>A tag is a keyword or label that categorizes your question with other, similar questions. Using <br>
+                        the right tags makes it easier for others to find and answer your question.
+                    </p>
+                </div>
+                <div class="filters">
+                    <div class="search_box">
+                        <input type="text" name="search" id="search" placeholder="Filter by tag name">
+                        <a th:href="@{|/tags?page=${currentPage}&limit=8&sortField=popular&sortDir=${reverseSortDir}&search=${search}|}" style="color: black;"><i class="fa-solid fa-magnifying-glass filter_search_icon"></i></a>
+                    </div>
+                    <ul class="sort_items">
+                        <li class="sort_item"><a th:href="@{|/tags?page=${currentPage}&limit=8&sortField=popular&sortDir=${reverseSortDir}&search=${search}|}"
+                        >Popular</a></li>
+                        <li class="sort_item"><a th:href="@{|/tags?page=${currentPage}&limit=8&sortField=popular&sortDir=${reverseSortDir}&search=${search}|}"
+                        >Name</a></li>
+                        <li class="sort_item"><a th:href="@{|/tags?page=${currentPage}&limit=8&sortField=popular&sortDir=${reverseSortDir}&search=${search}|}"
+                        >new</a></li>
+                    </ul>    
+                </div>
+                <div class="tag_container">
+                    <!-- for each -->
+                    <div class="tag_box" th:each="tag : ${tags}">
+                        <div class="tag">
+                            <p id="tag_title" th:text="${tag.name}"></p>
+                        </div>
+                        <div class="stats">
+                            <p id="tag_question" th:text="${tag.questions.size() > 1 ? tag.questions.size() +
+                            ' questions' : tag.questions.size() + ' question'}">
+                            </p>
+                            <p id="tag_date" th:text="'Created at ' + ${tag.createdAt}" ></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pagination" th:if="${totalPages > 1}">
+                    <li th:if="${currentPage != 1}" class="page_item"><a  class="page_link"  th:href="@{|/tags?page=${currentPage}&limit=8&sortField=popular&sortDir=${reverseSortDir}&search=${search}|}"
+                    >Previous</a></li>
+
+                    <li th:classappend="${currentPage == i ? 'active' : ''}" th:each="i : ${#numbers.sequence(1,totalPages)}"
+                        class="page_item"><a class="page_link" th:href="@{|/tags?page=${i}&limit=8&sortField=popular&sortDir=${reverseSortDir}&search=${search}|}"
+                    >
+                        <span th:text="${i}"></span></a></li>
+                    <li th:if="${currentPage < totalPages}" class="page_item">
+                        <a  class="page_link" th:href="@{|/tags?page=${currentPage}&limit=8&sortField=popular&sortDir=${reverseSortDir}&search=${search}|}"
+                        >Next</a>
+                    </li>
+                </div>
+
+
+             </div>
+             <div></div>
+        </div>
+</body>
+</html>
