@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class UserController {
@@ -43,19 +44,11 @@ public class UserController {
             return "redirect:/login?success";
     }
 
-    @GetMapping("/userProfile")
-    public String userProfile(Model model,Integer id){
-        User user=userService.findUserByUserId(1);
-        System.out.println(user);
-        model.addAttribute("name",user.getUserName());
-        model.addAttribute("about",user.getAbout());
+    @GetMapping("/userProfile/{userId}")
+    public String userProfile(Model model,@PathVariable("userId") Integer userId){
+        User user = userService.findUserByUserId(userId);
+        model.addAttribute("user", user);
 
-            model.addAttribute("post", user.getUserQuestions());
-
-        model.addAttribute("reputation",user.getReputation());
-        if(user.getUserBadges()!=null) {
-            model.addAttribute("badges",user.getUserBadges());
-        }
         return "UserProfile";
     }
 }
