@@ -10,6 +10,7 @@
     min-height: 100vh;
     width: 100%;
 }
+
 #navbar{
     border: 2px solid black;
     display: flex;
@@ -18,7 +19,12 @@
     padding: 1.5vh;
     font-size: 1.2rem;
     align-items: center;
+    position: fixed;
+    z-index: 2;
+    background-color: white;
+    width: 100vw;
 }
+
 .items{
     display: flex;
     gap: 1vw;
@@ -31,11 +37,13 @@
     flex-direction: column;
     align-items: center;
 }
+
 #search_bar{
     width: 20vw;
     padding:1vh 2vw;
     border-radius: 10px;
 }
+
 #heading{
     font-size: 2rem;
     margin-bottom: 2.3vh;
@@ -47,6 +55,10 @@
     margin-right: 100px;
 }
 
+.icons{
+    color: black;
+}
+
 /*<-------- navbar ------------>*/
 
 #body {
@@ -55,6 +67,8 @@
     border-left: 2px solid rgba(0, 0, 0, 0.54);
     padding-left: 10px;
     padding-top: 40px;
+    overflow-y: scroll;
+    height: 92vh;
 }
 
 #main-question {
@@ -92,6 +106,7 @@
 #parent {
     display: grid;
     grid-template-columns: 20% 58% 20%;
+    padding-top: 60px;
 }
 
 #ask-question {
@@ -148,6 +163,8 @@ input[type = "submit"] {
     padding-right: 30px;
 }
 
+/*-----------Side Bar starts here -----------------*/
+
 #sidebar{
     display: flex;
     flex-direction: column;
@@ -156,7 +173,6 @@ input[type = "submit"] {
 }
 
 .side_icons{
-    margin-left:11vw;
     margin-bottom:0.8rem;
     margin-right: 0.5rem;
 }
@@ -173,8 +189,4 @@ input[type = "submit"] {
 
 .row a:hover{
     color: red;
-}
-
-.icons{
-    color: black;
 }

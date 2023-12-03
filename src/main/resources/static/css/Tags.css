@@ -5,6 +5,7 @@
     text-decoration: none;
     list-style-type: none;
 }
+
 .container{
     min-height: 100vh;
     width: 100%;
@@ -17,6 +18,10 @@
     padding: 1.5vh;
     font-size: 1.2rem;
     align-items: center;
+    position: fixed;
+    z-index: 2;
+    background-color: white;
+    width: 100vw;
 }
 .items{
     display: flex;
@@ -29,25 +34,28 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 #search_bar{
     width: 20vw;
     padding:1vh 2vw;
     border-radius: 10px;
-
 }
 #heading{
     font-size: 2rem;
     margin-bottom: 2.3vh;
 }
 
-span {
+#title {
     padding: 0px;
     margin-left: -10px;
     margin-right: 100px;
 }
-/* ---navbar----- */
+
+.icons{
+    color: black;
+}
+
+/*<-------- navbar ------------>*/
 
 /* --------- middle box---------------------- */
 #body {
@@ -58,6 +66,8 @@ span {
 #parent {
     display: grid;
     grid-template-columns: 20% 58% 20%;
+    min-height: 100vh;
+    padding-top: 60px;
 }
 .heading{
     padding: 2vh 1vw;
@@ -140,6 +150,9 @@ span {
     padding: 0;
     justify-content: center;
     margin-top: 3rem;
+    position: fixed;
+    bottom: 30px;
+    right: 25%;
 }
 
 .pagination a {
@@ -159,9 +172,10 @@ color:black;
     color: #ddd;
     cursor: not-allowed;
 }
-.active a{
-   background-color:black;
-  color:white;
+.active span, .active {
+  background-color: rgb(231, 112, 13);
+  color: white;
+  font-style: bold;
 }
 
 .sort_box a{
