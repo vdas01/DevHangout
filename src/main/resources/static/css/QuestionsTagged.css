@@ -10,6 +10,7 @@
     min-height: 100vh;
     width: 100%;
 }
+
 #navbar{
     border: 2px solid black;
     display: flex;
@@ -23,6 +24,7 @@
     background-color: white;
     width: 100vw;
 }
+
 .items{
     display: flex;
     gap: 1vw;
@@ -35,11 +37,13 @@
     flex-direction: column;
     align-items: center;
 }
+
 #search_bar{
     width: 20vw;
     padding:1vh 2vw;
     border-radius: 10px;
 }
+
 #heading{
     font-size: 2rem;
     margin-bottom: 2.3vh;
@@ -53,6 +57,15 @@
 
 .icons{
     color: black;
+}
+
+#login-logout {
+    position: fixed;
+    right: 50px;
+}
+
+#login-logout a {
+    padding: 0px 20px;
 }
 
 /*<-------- navbar ------------>*/
@@ -197,11 +210,34 @@ margin-right:0.8vw;
 
 
 /* --------sidebar---------- */
+
 #sidebar{
     display: flex;
     flex-direction: column;
     padding: 1rem;
     font-size:1.4rem;
+    padding-top: 20px;
+    padding-right: 0px;
+}
+
+#sidebar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 20px;
+}
+
+.side-text {
+    color: rgb(0,0,0,0.5);
+}
+
+.active-bar {
+    background-color: rgb(0,0,0,0.1);
+    border-radius: 10px 0px 0px 10px;
+}
+
+.active-question {
+    color: black;
 }
 
 .side_icons{
@@ -212,19 +248,26 @@ margin-right:0.8vw;
 .row{
     cursor: pointer;
     display: flex;
+    font-size: 20px;
 }
 
 .row a{
-    color: black;
+    color: rgb(0,0,0,0.5);
     text-decoration: none;
+    padding: 10px 10px 0px 10px;
 }
 
-.row a:hover{
-    color: red;
-}
-
-.icons{
+.active-bar a {
     color: black;
+}
+
+.row:hover{
+    background-color: rgb(0,0,0,0.07);
+    border-radius: 10px 0px 0px 10px;
+}
+
+.add_image{
+    margin-top:2vh;
 }
 /* --------sidebar---------- */
 

@@ -6,10 +6,12 @@ import java.util.List;
 
 public interface UserService {
     String processUser(String userName, String email, String password, String confirmPassword);
-    User findUserByUserId(int userId);
+    User findUserByUserId(Integer userId);
 
     List<User> findAllUsers();
 
     User findUserByUserName(String name);
+
+    User findByEmail(String email);
 
 }

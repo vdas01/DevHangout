@@ -46,7 +46,8 @@ public class Question {
     //in answers there should be private Question question; with joinColumn("foreign_key")
     private List<Answer> answers;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}
+                , fetch = FetchType.EAGER)
     @JoinTable(name="question_tag",
             joinColumns = @JoinColumn(name = "question_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
@@ -57,6 +58,14 @@ public class Question {
 
     @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
     private User user;
+
+    @ManyToMany()
+    @JoinTable(
+            name = "saved_question_user",
+            joinColumns = @JoinColumn(name = "saved_question_id"), // field from current class
+            inverseJoinColumns=@JoinColumn(name = "saved_user_id") // field from other class
+    )
+    private List<User> savedUsers;
 
     public Question(){}
     public Question(String title, String content, int views, int votes) {
@@ -170,6 +179,14 @@ public class Question {
         this.photo = photo;
     }
 
+    public List<User> getSavedUsers() {
+        return savedUsers;
+    }
+
+    public void setSavedUsers(List<User> savedUsers) {
+        this.savedUsers = savedUsers;
+    }
+
     public void addTags(Tag tag){
         if(tags == null)
             tags = new ArrayList<>();
@@ -182,4 +199,17 @@ public class Question {
         comments.add(comment);
         comment.setQuestion(this);
     }
+
+    public void addSavedUser(User user){
+        if(savedUsers == null)
+            savedUsers = new ArrayList<>();
+        savedUsers.add(user);
+    }
+
+    public void removedSavedUser(User user){
+        if(savedUsers.contains(user)){
+            savedUsers.remove(user);
+        }
+    }
+
 }

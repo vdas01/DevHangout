@@ -22,9 +22,13 @@ public class Answer {
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "question_id")
     private Question question;
+
+    @Column(name = "photo")
+    private String photo;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
 
     @Column(name = "votes")
     private int votes = 0;
@@ -94,11 +98,19 @@ public class Answer {
         this.comment = comment;
     }
 
-    public void addComment(Comment comments){
-        if(comment==null){
-            comment=new ArrayList<>();
+    public void addComment(Comment comments) {
+        if (comment == null) {
+            comment = new ArrayList<>();
         }
         comment.add(comments);
         comments.setAnswer(this);
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

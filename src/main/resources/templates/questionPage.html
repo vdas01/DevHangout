@@ -100,6 +100,7 @@
                     <form th:action = "@{/questions/ask}">
                         <input type="submit" value="Ask Question">
                     </form>
+                  
                 </div>
                 <div id = "view-detail">
                     Asked: <b><span th:text = "${#dates.format(question.createdAt, 'dd/MM/YYYY')}"
@@ -107,6 +108,8 @@
                     Modified: <b><span th:text = "${#dates.format(question.modifiedAt, 'dd/MM/YYYY')}"
                                        style="margin-right:0.5rem;"></span></b>
                     Views: <b><span th:text = "${question.views}" style="margin-right:0.5rem;"></span></b>
+                    <a  th:unless="${add}"  th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}" class="bookmark"><i class="fa-solid fa-bookmark bookmark-icon"></i></a>
+                     <a  th:if="${add}"    th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}" class="bookmark"><i class="fa-regular fa-bookmark bookmark-icon"></i></a>
                 </div>
             </div>
             <div class = "question-detail">
@@ -140,7 +143,8 @@
                     <div class = "content-body">
                         <div class = "question-content">
                             <p th:text = "${question.content}"></p>
-                            <img th:if="${question.photo != null}" th:src="@{'/css/image/' + ${question.photo}}" height="100px" width="100px">
+                            <img th:if="${question.photo != null}" th:src="@{'/css/image/' + ${question.photo}}" height="400px" width="400px" class="show_img">
+                            <br>
                             <span th:each = "tag : ${question.tags}" th:text = "*{tag.name}" class = "tags"></span>
                         </div><br><br>
                         <a th:href = "@{/editQuestion/{questionId} (questionId = ${question.id})}"
@@ -206,6 +210,7 @@
                                 <textarea th:text="*{answer.content}" name="editedContent"
                                           th:value = "*{answer.content}" rows="10" cols="110"></textarea>
                                 <br>
+                                <input type="file" name="imageName" accept="image/**" class="add_image">
                                 <input type="submit" value="Update">
                             </form>
                         </div>
@@ -225,6 +230,8 @@
 
                             <div class = "content-body">
                                 <div th:text = "*{answer.content}"></div><br><br>
+                                <img th:if="${answer.photo != null}" th:src="@{'/css/image/' + ${answer.photo}}" height="200px" width="200px" class="show_img">
+                                <br>
 
                                 <a th:href = "@{/editAnswer/{questionId}/{answerId} (questionId = ${question.id},
                                 answerId = *{answer.id})}" class = "answer-action">
@@ -282,9 +289,10 @@
             <div>
                 <p style="font-size: x-large">Your Answer</p>
 
-                <form th:action = "@{/addAnswer{questionId} (questionId = ${question.id})}" method="GET">
-                    <textarea name = "content" rows = "10" cols = "130"></textarea><br><br><br>
-                    <input type="submit" value="post Your Answer">
+                <form th:action = "@{/addAnswer{questionId} (questionId = ${question.id})}" method="post" enctype="multipart/form-data">
+                    <textarea name = "content" rows = "10" cols = "130" ></textarea><br><br><br>
+                    <input type="file" name="imageName" accept="image/**" class="add_image">
+                    <input type="submit" value="Post Answer">
                 </form>
 
             </div>

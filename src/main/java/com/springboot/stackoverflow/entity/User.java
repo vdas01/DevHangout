@@ -28,10 +28,11 @@ public class User {
     @CreationTimestamp
     private Date createdAt;
     @Column(name="country")
-    private String country;
+    private String country = "NA";
     @Column(name="title")
     private String title;
-
+    @Column(name = "is_active")
+    private boolean isActive = true;
     @ManyToMany()
     @JoinTable(
             name = "FollowRelation",
@@ -39,6 +40,14 @@ public class User {
             inverseJoinColumns=@JoinColumn(name = "following_id") // field from other class
     )
     private List<User> followings;
+
+    @ManyToMany()
+    @JoinTable(
+            name = "saved_question_user",
+            joinColumns = @JoinColumn(name = "saved_user_id"), // field from current class
+            inverseJoinColumns=@JoinColumn(name = "saved_question_id") // field from other class
+    )
+    private List<Question> savedQuestions;
 
 
     @ManyToMany()
@@ -65,7 +74,10 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Question> userQuestions;
 
-    @ManyToMany(mappedBy = "username")
+    @ManyToMany()
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> role;
     public User() {}
 
@@ -76,6 +88,38 @@ public class User {
         this.password = password;
         this.reputation = 0;
         this.about = "";
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public List<Role> getRole() {
+        return role;
+    }
+
+    public void setRole(List<Role> role) {
+        this.role = role;
     }
 
     public Integer getId() {
@@ -182,6 +226,15 @@ public class User {
         this.userQuestions = userQuestions;
     }
 
+
+    public List<Question> getSavedQuestions() {
+        return savedQuestions;
+    }
+
+    public void setSavedQuestions(List<Question> savedQuestions) {
+        this.savedQuestions = savedQuestions;
+    }
+
     public void addFollowers(User theUser) {
         if(followers == null) {
             followers = new ArrayList<>();
@@ -228,6 +281,14 @@ public class User {
         }
 
         userQuestions.add(theQuestion);
+    }
+
+    public void addRole(Role theRole) {
+        if(role == null) {
+            role = new ArrayList<>();
+        }
+
+        role.add(theRole);
     }
 
     @Override

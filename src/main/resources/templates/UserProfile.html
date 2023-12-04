@@ -113,7 +113,9 @@
                 </div>
 
                 <div id="editButtons">
-                    <a href="#"><i class="fa-solid fa-pen pen"></i>Edit Profile</a>
+                    <span th:if = "${#strings.equals(#authentication.principal.username, user.email)}">
+                        <a href="#"><i class="fa-solid fa-pen pen"></i>Edit Profile</a>
+                    </span>
                     <a href="#">Network Profile</a>
                 </div>
             </div>

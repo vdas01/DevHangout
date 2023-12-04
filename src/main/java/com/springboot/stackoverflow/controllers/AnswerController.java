@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+
 
 @Controller
 public class AnswerController {
@@ -21,10 +25,13 @@ public class AnswerController {
         this.questionService = questionService;
     }
 
-    @GetMapping("/addAnswer{questionId}")
-    public String processAddAnswer(@PathVariable(name = "questionId")Integer questionId,
-            @RequestParam("content") String content){
-        answerService.addAnswer(questionId,content);
+    @PostMapping("/addAnswer{questionId}")
+    public String processAddAnswer(@RequestParam("imageName") MultipartFile file,
+                                   @PathVariable(name = "questionId")Integer questionId,
+                                   @RequestParam("content") String content) throws IOException {
+
+
+        answerService.addAnswer(questionId,content,file);
 
         return "redirect:/viewQuestion/{questionId}";
     }
