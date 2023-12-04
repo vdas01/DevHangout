@@ -5,6 +5,8 @@ import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.repository.RoleRepository;
 import com.springboot.stackoverflow.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -61,8 +63,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByUserId(int userId) {
-        return userRepository.findUserById(userId);
+    public User findUserByUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName());
+        return userRepository.findUserById(user.getId());
     }
 
     @Override

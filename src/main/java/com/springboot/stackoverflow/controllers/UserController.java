@@ -3,11 +3,12 @@ package com.springboot.stackoverflow.controllers;
 import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.security.Principal;
 import java.util.List;
@@ -49,8 +50,7 @@ public class UserController {
 
     @GetMapping("/userProfile")
     public String userProfile(Model model) {
-        Integer userId = 2;
-        User user = userService.findUserByUserId(userId);
+        User user = userService.findUserByUserId();
         model.addAttribute("user", user);
 
         return "UserProfile";

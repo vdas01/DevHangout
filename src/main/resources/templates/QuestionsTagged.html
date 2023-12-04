@@ -9,74 +9,91 @@
     <link rel="stylesheet" href="/css/QuestionsTagged.css">
 </head>
 <body>
-<nav id="navbar">
-    <svg aria-hidden="true" class="native svg-icon iconLogoGlyphMd" width="32" height="37" viewBox="0 0 32 37">
-        <path d="M26 33v-9h4v13H0V24h4v9h22Z" fill="#BCBBBB"></path><path d="m21.5 0-2.7 2 9.9 13.3 2.7-2L21.5
-                    0ZM26 18.4 13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5ZM9.1 15.2l15 7 1.4-3-15-7-1.4 3Zm14
-                    10.79.68-2.95-16.1-3.35L7
-                    23l16.1 2.99ZM23 30H7v-3h16v3Z" fill="#F48024"></path><span id="title">
-                    Stack<b>overflow</b>
+    <nav id="navbar">
+        <svg aria-hidden="true" class="native svg-icon iconLogoGlyphMd" width="32" height="37" viewBox="0 0 32 37">
+            <path d="M26 33v-9h4v13H0V24h4v9h22Z" fill="#BCBBBB"></path><path d="m21.5 0-2.7 2 9.9 13.3 2.7-2L21.5
+                        0ZM26 18.4 13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5ZM9.1 15.2l15 7 1.4-3-15-7-1.4 3Zm14
+                        10.79.68-2.95-16.1-3.35L7
+                        23l16.1 2.99ZM23 30H7v-3h16v3Z" fill="#F48024"></path><span id="title">
+                        Stack<b>overflow</b>
+                    </span>
+        </svg>
+        <div class="search">
+            <input type="search" name="search_bar" id="search_bar">
+            <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
+        </div>
+        <span class="profile">
+                    <img src="" alt="" id="user_pic">
                 </span>
-    </svg>
-    <div class="search">
-        <input type="search" name="search_bar" id="search_bar">
-        <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
-    </div>
-    <span class="profile">
-                <img src="" alt="" id="user_pic">
+        <ul class="items">
+            <li>
+                <a th:href="@{/userProfile}">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="19" width="17" viewBox="0 0 448 512">
+                        <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <svg aria-hidden="true" class="svg-icon iconAchievements" width="21" height="21" viewBox="0 0 18 18">
+                        <path d="M15 2V1H3v1H0v4c0 1.6 1.4 3 3 3v1c.4 1.5 3 2.6 5 3v2H5s-1 1.5-1 2h10c0-.4-1-2-1-2h-3v-2c2-.4 4.6-1.5 5-3V9c1.6-.2 3-1.4 3-3V2h-3ZM3 7c-.5 0-1-.5-1-1V4h1v3Zm8.4 2.5L9 8 6.6 9.4l1-2.7L5 5h3l1-2.7L10 5h2.8l-2.3 1.8 1 2.7h-.1ZM16 6c0 .5-.5 1-1 1V4h1v2Z"></path>
+                    </svg>
+                </a>
+            </li>
+            <li><a href=""><i class="fa-solid fa-circle-question icons"></i></a></li>
+        </ul>
+        <span id = "login-logout">
+                <a th:href="@{/login}">Login</a>
+                <a th:href="@{/signup}">signup</a>
             </span>
-    <ul class="items">
-        <li><a href=""><i class="fa-solid fa-question icons"></i></a></li>
-        <li><a href=""><i class="fa-solid fa-trophy icons"></i></a></li>
-    </ul>
-    <li><a th:href="@{/login}">Login</a>
-    <li><a th:href="@{/signup}">signup</a></li>
-</nav>
+    </nav>
 
 <div id = "parent">
-    <div id="sidebar">
-        <div class="row">
-            <a href="/" >
-                <i class="fa-solid fa-house side_icons"></i>
-                <small class="side_text">Home</small>
-            </a>
-        </div>
+    <div id = "sidebar-container">
+        <div id="sidebar">
+            <div class="row">
+                <a href="/" >
+                    <i class="fa-solid fa-house side_icons"></i>
+                    <small class="side-text">Home</small>
+                </a>
+            </div>
 
-        <div class="row">
-            <a href="/" >
-                <i class="fa-solid fa-circle-question side_icons"></i>
-                <small class="side_text">Questions</small>
-            </a>
-        </div>
+            <div class="row active-bar">
+                <a href="/" >
+                    <i class="fa-solid fa-circle-question side_icons"></i>
+                    <small class="side-text active-question">Questions</small>
+                </a>
+            </div>
 
-        <div class="row">
-            <a href="/tags" >
-                <i class="fa-solid fa-tag side_icons"></i>
-                <small class="side_text">Tags</small>
-            </a>
+            <div class="row">
+                <a href="/tags" >
+                    <i class="fa-solid fa-tag side_icons"></i>
+                    <small class="side-text">Tags</small>
+                </a>
+            </div>
+            <br><br>
+            <div class="row">
+                <a href="/users/saves">
+                    <i class="fa-solid fa-bookmark side_icons"></i>
+                    <small class="side-text">Saves</small>
+                </a>
+            </div>
+            <div class="row">
+                <a href="/users">
+                    <i class="fa-solid fa-user side_icons"></i>
+                    <small class="side-text">Users</small>
+                </a>
+            </div>
+            <br>
+            <div class="row">
+                <a href="/discussions">
+                    <i class="fa-solid fa-message side_icons"></i>
+                    <small class="side-text">Discussions</small>
+                </a>
+            </div>
         </div>
-        <br><br>
-        <div class="row">
-            <a href="/users/saves">
-                <i class="fa-solid fa-bookmark side_icons"></i>
-                <small class="side_text">Saves</small>
-            </a>
-        </div>
-        <div class="row">
-            <a href="/users" >
-                <i class="fa-solid fa-user side_icons"></i>
-                <small class="side_text">Users</small>
-            </a>
-        </div>
-        <br>
-        <div class="row">
-            <a href="/discussions">
-                <i class="fa-solid fa-message side_icons"></i>
-                <small class="side_text">Discussions</small>
-            </a>
-        </div>
-
     </div>
+
     <div id = "body">
         <div class="heading">
             <h4>Questions Tagged</h4>

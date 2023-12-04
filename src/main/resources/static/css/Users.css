@@ -197,11 +197,34 @@ margin-right:0.8vw;
 
 
 /* --------sidebar---------- */
+
 #sidebar{
     display: flex;
     flex-direction: column;
     padding: 1rem;
     font-size:1.4rem;
+    padding-top: 20px;
+    padding-right: 0px;
+}
+
+#sidebar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 20px;
+}
+
+.side-text {
+    color: rgb(0,0,0,0.5);
+}
+
+.active-bar {
+    background-color: rgb(0,0,0,0.1);
+    border-radius: 10px 0px 0px 10px;
+}
+
+.active-user {
+    color: black;
 }
 
 .side_icons{
@@ -212,20 +235,34 @@ margin-right:0.8vw;
 .row{
     cursor: pointer;
     display: flex;
+    font-size: 20px;
 }
 
 .row a{
-    color: black;
+    color: rgb(0,0,0,0.5);
     text-decoration: none;
+    padding: 10px 10px 0px 10px;
 }
 
-.row a:hover{
-    color: red;
+.active-bar a {
+    color: black;
 }
+
+.row:hover{
+    background-color: rgb(0,0,0,0.07);
+    border-radius: 10px 0px 0px 10px;
+}
+
+.add_image{
+    margin-top:2vh;
+}
+
+/* --------sidebar---------- */
 
 .icons{
     color: black;
 }
+
 .user_container{
     display: grid;
     grid-template-columns: repeat(4,23%);
@@ -239,26 +276,26 @@ margin-right:0.8vw;
     /* border-right:1px solid rgb(182, 182, 182); */
     margin-bottom:2vh;
 }
-#user_profile{
+.user_profile{
     width: 3vw;
     height: 3vw;
     border-radius: 100%;
     border: 1px solid blue;
 }
-#user_info{
+.user_info{
     display:flex;
     flex-direction: column;
     align-items: flex-start;
 }
-#user_title{
+.user_title{
     font-size:1.3rem;
     margin-bottom: 2px;
     cursor: pointer;
 }
-#user_title:hover{
+.user_title:hover{
     color:black;
 }
-#user_country{
+.user_country{
     color: rgb(92, 92, 92);
     margin-bottom: 2px;
 }
