@@ -1,11 +1,7 @@
 package com.springboot.stackoverflow.services;
 
-import com.springboot.stackoverflow.entity.Question;
-import com.springboot.stackoverflow.entity.Tag;
-import com.springboot.stackoverflow.entity.User;
-import com.springboot.stackoverflow.repository.QuestionRepository;
-import com.springboot.stackoverflow.repository.TagRepository;
-import com.springboot.stackoverflow.repository.UserRepository;
+import com.springboot.stackoverflow.entity.*;
+import com.springboot.stackoverflow.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,18 +24,22 @@ import java.util.Optional;
 public class QuestionServiceImpl implements QuestionService{
    TagService tagService;
    TagRepository tagRepository;
-
    QuestionRepository questionRepository;
    UserRepository userRepository;
+   AnswerRepository answerRepository;
+   VoteRepository voteRepository;
     public QuestionServiceImpl(){}
 
     @Autowired
-    public QuestionServiceImpl(TagService tagService,QuestionRepository questionRepository,TagRepository tagRepository
-                                , UserRepository userRepository) {
+    public QuestionServiceImpl(TagService tagService,QuestionRepository questionRepository,
+                               TagRepository tagRepository, UserRepository userRepository,
+                               AnswerRepository answerRepository, VoteRepository voteRepository) {
         this.tagService = tagService;
         this.questionRepository = questionRepository;
         this.tagRepository = tagRepository;
         this.userRepository = userRepository;
+        this.answerRepository = answerRepository;
+        this.voteRepository = voteRepository;
     }
 
     @Override
@@ -132,5 +132,138 @@ public class QuestionServiceImpl implements QuestionService{
     @Override
     public List<Question> findQuestionsList() {
         return questionRepository.findAll();
+    }
+
+    @Override
+    public void votingSystem(Integer vote, String type, Integer questionId, Integer answerId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName());
+
+        if(type.equals("question")) {
+            if(vote.equals(1)) {
+                for(Vote tempVote: user.getUserVote()) {
+                    System.out.println("here");
+                    if(tempVote.getQuestionId().equals(questionId)) {
+                        if(tempVote.getDirection().equals(1)) {
+                            return;
+                        }
+                        else if(tempVote.getDirection().equals(-1)) {
+                            Question question = questionRepository.findById(questionId).get();
+                            question.setVotes(question.getVotes()+1);
+                            user.getUserVote().remove(tempVote);
+
+                            voteRepository.delete(tempVote);
+                            questionRepository.save(question);
+                            userRepository.save(user);
+                            return;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
+
+                Vote theVote = new Vote(answerId, questionId, vote);
+                Question question = questionRepository.findById(questionId).get();
+                question.setVotes(question.getVotes()+1);
+                questionRepository.save(question);
+
+                user.addVote(theVote);
+                userRepository.save(user);
+            }
+            else if(vote.equals(-1)) {
+                for(Vote tempVote: user.getUserVote()) {
+                    if(tempVote.getQuestionId().equals(questionId)) {
+                        if(tempVote.getDirection().equals(-1)) {
+                            return;
+                        }
+                        else if(tempVote.getDirection().equals(1)) {
+                            System.out.println("here2");
+                            Question question = questionRepository.findById(questionId).get();
+                            question.setVotes(question.getVotes()-1);
+                            user.getUserVote().remove(tempVote);
+
+                            voteRepository.delete(tempVote);
+                            questionRepository.save(question);
+                            userRepository.save(user);
+                            return;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
+
+                Vote theVote = new Vote(answerId, questionId, vote);
+                Question question = questionRepository.findById(questionId).get();
+                question.setVotes(question.getVotes()-1);
+                questionRepository.save(question);
+
+                user.addVote(theVote);
+                userRepository.save(user);
+            }
+        }
+        else if(type.equals("answer")) {
+            if(vote.equals(1)) {
+                for(Vote tempVote: user.getUserVote()) {
+                    if(tempVote.getAnswerId().equals(answerId)) {
+                        if(tempVote.getDirection().equals(1)) {
+                            return;
+                        }
+                        else if(tempVote.getDirection().equals(-1)) {
+                            Answer answer = answerRepository.findById(answerId).get();
+                            answer.setVotes(answer.getVotes()+1);
+                            user.getUserVote().remove(tempVote);
+
+                            voteRepository.delete(tempVote);
+                            answerRepository.save(answer);
+                            userRepository.save(user);
+                            return;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
+
+                Vote theVote = new Vote(answerId, null, vote);
+                Answer answer = answerRepository.findById(answerId).get();
+                answer.setVotes(answer.getVotes()+1);
+                answerRepository.save(answer);
+
+                user.addVote(theVote);
+                userRepository.save(user);
+            }
+            else if(vote.equals(-1)) {
+                for(Vote tempVote: user.getUserVote()) {
+                    if(tempVote.getAnswerId().equals(answerId)) {
+                        if(tempVote.getDirection().equals(-1)) {
+                            return;
+                        }
+                        else if(tempVote.getDirection().equals(1)) {
+                            Answer answer = answerRepository.findById(answerId).get();
+                            answer.setVotes(answer.getVotes()-1);
+                            user.getUserVote().remove(tempVote);
+
+                            voteRepository.delete(tempVote);
+                            answerRepository.save(answer);
+                            userRepository.save(user);
+                            return;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
+
+                Vote theVote = new Vote(answerId, null, vote);
+                Answer answer = answerRepository.findById(answerId).get();
+                answer.setVotes(answer.getVotes()-1);
+                answerRepository.save(answer);
+
+                user.addVote(theVote);
+                userRepository.save(user);
+            }
+        }
     }
 }

@@ -20,4 +20,5 @@ public interface QuestionService {
     Question findQuestionById(Integer questionId);
 
     List<Question> findQuestionsList();
+    void votingSystem(Integer vote, String type, Integer questionId, Integer answerId);
 }
