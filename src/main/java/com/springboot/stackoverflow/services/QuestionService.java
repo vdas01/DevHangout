@@ -21,9 +21,9 @@ public interface QuestionService {
 
     List<Question> findQuestionsList();
 
+    void saveCommentList(Question question);
     void bookmarkQuestion(int questionId);
 
     void removeBookmarkQuestion(int questionId);
-
 
 }

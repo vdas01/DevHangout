@@ -192,6 +192,13 @@ public class Question {
             tags = new ArrayList<>();
         tags.add(tag);
     }
+    public void addComment(Comment comment){
+        if(comments==null){
+            comments=new ArrayList<>();
+        }
+        comments.add(comment);
+        comment.setQuestion(this);
+    }
 
     public void addSavedUser(User user){
         if(savedUsers == null)

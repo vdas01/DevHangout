@@ -1,5 +1,6 @@
 package com.springboot.stackoverflow.controllers;
 
+import com.springboot.stackoverflow.entity.Comment;
 import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.Tag;
 import com.springboot.stackoverflow.entity.User;

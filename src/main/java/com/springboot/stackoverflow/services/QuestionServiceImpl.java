@@ -135,6 +135,11 @@ public class QuestionServiceImpl implements QuestionService{
         return questionRepository.findAll();
     }
 
+    @Override
+    public void saveCommentList(Question question) {
+        questionRepository.save(question);
+    }
+
 
 
     @Override

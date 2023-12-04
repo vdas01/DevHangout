@@ -151,6 +151,15 @@ input[type = "submit"] {
     font-size: 2rem;
 }
 
+.comment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width:80%;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
 .tags {
     background-color: lightblue;
 
