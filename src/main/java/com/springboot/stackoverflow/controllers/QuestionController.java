@@ -3,6 +3,7 @@ package com.springboot.stackoverflow.controllers;
 import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.Tag;
 import com.springboot.stackoverflow.services.QuestionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ public class QuestionController {
 
     QuestionService questionService;
 
+    @Autowired
     public QuestionController(QuestionService questionService){
         this.questionService = questionService;
     }

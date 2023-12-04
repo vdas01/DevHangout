@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @Controller
 public class UserController {
     private UserService userService;
@@ -50,5 +52,12 @@ public class UserController {
         model.addAttribute("user", user);
 
         return "UserProfile";
+    }
+
+    @GetMapping("/users")
+    public String showAllUsers(){
+        List<User> user = null;
+        user = userService.findAllUsers();
+        return "Users";
     }
 }
