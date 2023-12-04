@@ -41,17 +41,9 @@ public class QuestionController {
     public String processSaveQuestion(@RequestParam("imageName") MultipartFile file,
                                       @ModelAttribute("question") Question newQuestion,
                                       @ModelAttribute("tag")Tag newTag) throws IOException {
-        System.out.println(file.getOriginalFilename());
 
-        if(!file.isEmpty()){
-            newQuestion.setPhoto(file.getOriginalFilename());
-            File file1 = new ClassPathResource("static/css/image").getFile();
 
-            Path path = Paths.get(file1.getAbsolutePath() + File.separator + file.getOriginalFilename());//create a path
-            Files.copy(file.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
-        }
-
-        questionService.saveQuestion(newQuestion,newTag);
+        questionService.saveQuestion(newQuestion,newTag,file);
 
         return "redirect:/";
     }

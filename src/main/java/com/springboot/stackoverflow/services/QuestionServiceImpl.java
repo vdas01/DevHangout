@@ -9,8 +9,16 @@ import com.springboot.stackoverflow.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,10 +43,9 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     @Override
-    public void saveQuestion(Question newQuestion, Tag newTag) {
+    public void saveQuestion(Question newQuestion, Tag newTag, MultipartFile file) throws IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName());
-
         newQuestion.setViews(0);
         newQuestion.setVotes(0);
         newQuestion.setAuthor(user.getUserName());
@@ -62,6 +69,15 @@ public class QuestionServiceImpl implements QuestionService{
                 Tag tag = new Tag(tempTag);
                 newQuestion.addTags(tag);
             }
+        }
+
+
+        if(!file.isEmpty()){
+            newQuestion.setPhoto(file.getOriginalFilename());
+            File file1 = new ClassPathResource("static/css/image").getFile();
+
+            Path path = Paths.get(file1.getAbsolutePath() + File.separator + file.getOriginalFilename());//create a path
+            Files.copy(file.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
         }
 
         questionRepository.save(newQuestion);

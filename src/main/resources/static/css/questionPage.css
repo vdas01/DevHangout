@@ -242,3 +242,7 @@ input[type = "submit"] {
     background-color: rgb(0,0,0,0.07);
     border-radius: 10px 0px 0px 10px;
 }
+
+.add_image{
+    margin-top:2vh;
+}
