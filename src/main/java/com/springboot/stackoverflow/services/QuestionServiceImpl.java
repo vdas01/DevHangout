@@ -114,4 +114,5 @@ public class QuestionServiceImpl implements QuestionService{
     public void saveCommentList(Question question) {
         questionRepository.save(question);
     }
+
 }

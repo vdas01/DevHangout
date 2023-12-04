@@ -157,13 +157,30 @@
                         <form th:if="${addComment != null}" th:action = "@{/saveComment}" method="Post">
                             Comment:
                             <textarea name="saveContent"
-                                      th:field = "${comments.comment}" rows="10" cols="110"></textarea>
+                                      th:field = "${comments.comment}" rows="10" cols="110" required></textarea>
                             <input type="hidden" th:name="questionId" th:value="${question.id}">
                             <br>
                             <input type="submit" value="Comment">
                         </form>
+                        <br><br>
                         <div th:each = "comments : ${question.comments}" class="comment">
-                            <span th:text = "*{comments.comment}"></span>
+                            <span th:text = "*{comments.comment}"  ></span><br>
+                            <a th:unless="${editComment != null and editComment eq comments.id}" th:href = "@{/editComment/{commentId} (commentId = ${comments.id})}"
+                               class = "answer-action">
+                                Edit
+                            </a>
+                            <a th:href = "@{/deleteComment/{commentId} (commentId = ${comments.id})}"
+                               class = "answer-action">
+                                Delete
+                            </a><br>
+                            <form th:if="${editComment != null and editComment eq comments.id}" th:action =
+                                    "@{/updateComment/{commentId} (commentId = ${comments.id})}" method="Post">
+                                <textarea name="updateContent"
+                                          th:field = "${comments.comment}" rows="10" cols="110"></textarea>
+                                <input type="hidden" th:name="questionId" th:value="${question.id}">
+                                <br>
+                                <input type="submit" value="Edit">
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -219,9 +236,44 @@
                                     Delete
                                 </a>
 
-                                <a href = "#" class = "answer-action">
-                                    Comment
-                                </a>
+                                <a th:unless="*{addAnswerComment != null and addAnswerComment eq answer.id}"
+                                   th:href="@{/addAnswerComment/{questionId}/{answerID}
+                                   (questionId = ${question.id},answerID=*{answer.id})}"
+                                   class = "answer-action">comment</a>
+                                <form th:if="*{addAnswerComment != null and addAnswerComment eq answer.id}"
+                                      th:action = "@{/saveAnswerComment}" method="Post">
+                                    Comment:
+                                    <textarea name="saveContent"
+                                              th:field = "${comments.comment}" rows="10" cols="110" required></textarea>
+                                    <input type="hidden" th:name="questionId" th:value="${question.id}">
+                                    <input type="hidden" th:name="answerId" th:value="*{answer.id}">
+                                    <br>
+                                    <input type="submit" value="Comment">
+                                </form>
+                                <br><br>
+                                <div th:each = "comments : *{answer.comment}" class="comment">
+                                    <span th:text = "*{comments.comment}"  ></span><br>
+                                    <a th:unless="${editAnswerComment != null and editAnswerComment eq comments.id}"
+                                       th:href = "@{/editAnswerComment/{commentId}/{questionId}
+                                        (commentId = ${comments.id},questionId = ${question.id})}"
+                                       class = "answer-action">
+                                        Edit
+                                    </a>
+                                    <a th:href = "@{/deleteComment/{commentId} (commentId = ${comments.id})}"
+                                       class = "answer-action">
+                                        Delete
+                                    </a><br>
+                                    <form th:if="${editAnswerComment != null and editAnswerComment eq comments.id}"
+                                          th:action ="@{/updateAnswerComment/{commentId} (commentId = ${comments.id})}"
+                                          method="Post">
+                                <textarea name="updateContent"
+                                          th:field = "${comments.comment}" rows="10" cols="110"></textarea>
+                                        <input type="hidden" th:name="questionId" th:value="${question.id}">
+                                        <input type="hidden" th:name="answerId" th:value="*{answer.id}">
+                                        <br>
+                                        <input type="submit" value="Edit">
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

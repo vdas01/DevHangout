@@ -2,6 +2,7 @@ package com.springboot.stackoverflow.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -91,5 +92,13 @@ public class Answer {
 
     public void setComment(List<Comment> comment) {
         this.comment = comment;
+    }
+
+    public void addComment(Comment comments){
+        if(comment==null){
+            comment=new ArrayList<>();
+        }
+        comment.add(comments);
+        comments.setAnswer(this);
     }
 }

@@ -11,4 +11,8 @@ public interface AnswerService {
     void updateAnswer(String updatedAnswer,Integer answerId);
 
     void deleteAnswer(Integer answerId);
+
+    Answer findQuestionById(int questionId);
+
+    void saveCommentList(Answer answer);
 }
