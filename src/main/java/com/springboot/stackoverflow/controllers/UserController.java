@@ -60,6 +60,7 @@ public class UserController {
     public String showAllUsers() {
         List<User> user = null;
         user = userService.findAllUsers();
+
         return "Users";
 
     }
@@ -69,6 +70,7 @@ public class UserController {
         String name = principal.getName();
         User user = userService.findUserByUserName(name);
         model.addAttribute("user", user);
+
         return "editProfile";
 
     }
