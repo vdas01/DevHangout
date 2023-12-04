@@ -6,6 +6,11 @@
     list-style-type: none;
 }
 
+.container{
+    min-height: 100vh;
+    width: 100%;
+}
+
 #navbar{
     border: 2px solid black;
     display: flex;
@@ -44,6 +49,12 @@
     margin-bottom: 2.3vh;
 }
 
+#title {
+    padding: 0px;
+    margin-left: -10px;
+    margin-right: 100px;
+}
+
 .icons{
     color: black;
 }
@@ -77,23 +88,24 @@
 }
 
 #profileName{
+    padding-top: 20px;
     grid-column:2;
 }
 
 #editButtons a {
     display: inline-block;
-    padding: 10px 20px; /* Adjust the padding to make the buttons larger */
-    margin-right: 20px; /* Add some spacing between buttons */
+    padding: 8px 10px;
+    margin-right: 20px;
     text-decoration: none;
-    border: 1px solid black; /* Add a border */
-    border-radius: 5px; /* Add rounded corners */
-    color: black; /* Set text color */
-    transition: background-color 0.3s, color 0.3s; /* Add a smooth transition effect */
+    border: 1px solid black;
+    border-radius: 5px;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: small;
 }
 
 #editButtons a:hover {
-    background-color: #4CAF50; /* Change background color on hover */
-    color: white; /* Change text color on hover */
+    background-color: rgb(0,0,0,0.1);
 }
 
 #name{
@@ -139,7 +151,7 @@ ul#menuOptions li{
     margin-top:5%;
     grid-row:3;
     display:grid;
-    grid-template-columns:20% 78%;
+    grid-template-columns: 25% 75%;
 }
 
 #statsBox{
@@ -148,6 +160,7 @@ ul#menuOptions li{
     font-size: 1.2rem;
     border:1px solid black;
     border-radius:8px;
+    width: 110%;
 }
 
 .contentBox{
@@ -160,7 +173,7 @@ ul#menuOptions li{
     text-align: center;
 }
 #userName {
-    font-size: xxx-large;
+    font-size: xx-large;
 }
 
 #memberSince {
@@ -181,6 +194,28 @@ ul#menuOptions li{
     height: 100px;
 }
 
+::-webkit-scrollbar {
+    width: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(0,0,0,0.1);
+    border-radius: 1px;
+}
+
+.pen {
+    padding-right: 5px;
+}
+
+#login-logout {
+    position: fixed;
+    right: 50px;
+}
+
+#login-logout a {
+    padding: 0px 20px;
+}
+
 /*-----------Side Bar starts here -----------------*/
 
 #sidebar{
@@ -189,6 +224,27 @@ ul#menuOptions li{
     padding: 1rem;
     font-size:1.4rem;
     padding-top: 20px;
+    padding-right: 0px;
+}
+
+#sidebar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 20px;
+}
+
+.side-text {
+    color: rgb(0,0,0,0.5);
+}
+
+.active-bar {
+    background-color: rgb(0,0,0,0.1);
+    border-radius: 10px 0px 0px 10px;
+}
+
+.active {
+    color: black;
 }
 
 .side_icons{
@@ -199,13 +255,20 @@ ul#menuOptions li{
 .row{
     cursor: pointer;
     display: flex;
+    font-size: 20px;
 }
 
 .row a{
-    color: black;
+    color: rgb(0,0,0,0.5);
     text-decoration: none;
+    padding: 10px 10px 0px 10px;
 }
 
-.row a:hover{
-    color: red;
+.active-bar a {
+    color: black;
+}
+
+.row:hover{
+    background-color: rgb(0,0,0,0.07);
+    border-radius: 10px 0px 0px 10px;
 }

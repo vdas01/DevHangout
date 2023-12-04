@@ -28,19 +28,16 @@ public class TagServiceImpl implements TagService{
 
     @Override
     public Page<Tag> customTags(Integer pageNo, Integer pageSize, String sortField, String sortDir, String search) {
-            pageNo = pageNo == null ?  1 : pageNo;
-            pageSize = pageSize == null ? 4 : pageSize;
+        pageNo = pageNo == null ?  1 : pageNo;
+        pageSize = pageSize == null ? 4 : pageSize;
 
-            Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        search =  search == "" ? null : search;
+        if(search != null && search.equals("null"))
+            search = null;
 
-           search =  search == "" ? null : search;
-           if(search != null && search.equals("null"))
-               search = null;
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        Page<Tag> page = tagRepository.searchTags(search, sortField, sortDir, pageable);
 
-
-
-            Page<Tag> page = null;
-           page = tagRepository.searchTags(search,sortField,sortDir,pageable);
-           return page;
+        return page;
     }
 }
