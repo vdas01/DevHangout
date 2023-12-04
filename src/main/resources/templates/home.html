@@ -118,21 +118,19 @@
                         <a th:href="@{/viewQuestion/{questionId} (questionId=${questions.id})}">
                             <h2 th:text="*{questions.title}"></h2>
                         </a>
-                        <div class="row-container">
 
+                        <div class="row-container">
                             <p class="views" th:text="'Views : ' + *{questions.views}"></p>
                             <p class="votes" th:text="'Votes : ' + *{questions.votes}"></p>
                             <p class="answers_count" th:text="'Answers : ' + *{questions.answers.size()}"></p>
-                            <!--                <p class="answered" th:text="*{questions.answer.size()}"></p>-->
-                            <a th:href="@{/userProfile}">
-                                aa
-                                <!--                <p class="user" th:text="${questions.user}"></p>-->
-                                <!--                <p class="userFollower" th:text="${question.user.follower.size()}"></p>-->
+                            <a th:href="@{'/userProfile?userId=' + ${questions.user.id}}">
+                                <span th:text = "'Author: ' + *{questions.user.userName}"></span>
                             </a>
                         </div>
                         <div class="row-container">
                             <p class="tags">
-                                <span class="tag" th:each="tag, tagStatus : ${questions.tags}" th:text="${tag.name}+' '" >
+                                <span class="tag" th:each="tag, tagStatus : ${questions.tags}"
+                                      th:text="${tag.name}+' '" >
                                 </span>
                             </p>
                         </div>

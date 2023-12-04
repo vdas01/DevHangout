@@ -59,6 +59,15 @@
     color: black;
 }
 
+#login-logout {
+    position: fixed;
+    right: 50px;
+}
+
+#login-logout a {
+    padding: 0px 20px;
+}
+
 /*<-------- navbar ------------>*/
 
 #body {
@@ -177,13 +186,13 @@ input[type = "submit"] {
     border-radius: 1px;
 }
 
-#login-logout {
-    position: fixed;
-    right: 50px;
-}
-
-#login-logout a {
-    padding: 0px 20px;
+.bookmark i{
+    color: black;
+    font-size: 2rem;
+    /* margin-right:6vw; */
+    margin-left: 2vw;
+    /* margin-top: 2vh; */
+    /* float: right; */
 }
 
 /*-----------Side Bar starts here -----------------*/

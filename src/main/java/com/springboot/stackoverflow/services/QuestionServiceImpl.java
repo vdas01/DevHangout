@@ -2,9 +2,13 @@ package com.springboot.stackoverflow.services;
 
 import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.Tag;
+import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.repository.QuestionRepository;
 import com.springboot.stackoverflow.repository.TagRepository;
+import com.springboot.stackoverflow.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,23 +30,26 @@ public class QuestionServiceImpl implements QuestionService{
    TagRepository tagRepository;
 
    QuestionRepository questionRepository;
-
+   UserRepository userRepository;
     public QuestionServiceImpl(){}
 
     @Autowired
-    public QuestionServiceImpl(TagService tagService,QuestionRepository questionRepository,TagRepository tagRepository) {
+    public QuestionServiceImpl(TagService tagService,QuestionRepository questionRepository,TagRepository tagRepository
+                                , UserRepository userRepository) {
         this.tagService = tagService;
         this.questionRepository = questionRepository;
         this.tagRepository = tagRepository;
+        this.userRepository = userRepository;
     }
-
-
 
     @Override
     public void saveQuestion(Question newQuestion, Tag newTag, MultipartFile file) throws IOException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName());
         newQuestion.setViews(0);
         newQuestion.setVotes(0);
-        newQuestion.setAuthor("user");
+        newQuestion.setAuthor(user.getUserName());
+        newQuestion.setUser(user);
 
         Map<String,Tag> tempTags = new HashMap<>();
         List<Tag> allTags = tagService.findAllTags();
@@ -103,6 +110,8 @@ public class QuestionServiceImpl implements QuestionService{
             Question question = questionRetrievedById.get();
              tags = question.getTags();
         }
+        questionRepository.deleteById(questionId);
+        System.out.println(tags);
         if(tags != null){
             for(Tag tempTag : tags){
                if(tempTag.getQuestions().isEmpty()){
@@ -110,8 +119,6 @@ public class QuestionServiceImpl implements QuestionService{
                }
             }
         }
-
-        questionRepository.deleteById(questionId);
     }
 
     @Override

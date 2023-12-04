@@ -46,7 +46,8 @@ public class Question {
     //in answers there should be private Question question; with joinColumn("foreign_key")
     private List<Answer> answers;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}
+                , fetch = FetchType.EAGER)
     @JoinTable(name="question_tag",
             joinColumns = @JoinColumn(name = "question_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
