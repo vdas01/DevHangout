@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/editProfile.css">
+</head>
+<body>
+
+
+<div id="container">
+    <span id="header"> <b>Edit Your Profile</b></span>
+    <hr>
+    Public Information
+    <br><br>
+
+    <div id="editForm">
+        <b>Profile Image</b>
+        <br><span id="profilePhoto">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2048px-Facebook_icon.svg.png" width="8%" >
+            <br>
+            <span id="imageEdit">
+           <a href="#">Edit Image</a>
+       </span>
+
+        </span>
+
+        <form id="form">
+            Display Name
+            <br><input type="text" th:value="${user.getUserName()}">
+            <br>Location
+            <br><input type="text" th:value="${user.getCountry}">
+            <br>Title
+            <br><input type="text" th:value="${user.getTitle}">
+            <br>About me
+            <br><textarea id="textBox" rows="10"><span th:text="${user.getAbout}"></textarea>
+            <br><input type="submit" ><a href="userProfile.html" >Cancel</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

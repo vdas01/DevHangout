@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -38,16 +39,17 @@ public class UserController {
                               @ModelAttribute("confirm-password") String confirmPassword) {
         String response = userService.processUser(userName, email, password, confirmPassword);
 
-        if(response.equals("errorPassword"))
+        if (response.equals("errorPassword"))
             return "redirect:/signup?errorPassword";
-        else if(response.equals("error"))
+        else if (response.equals("error"))
             return "redirect:/signup?error";
         else
             return "redirect:/login?success";
     }
 
-    @GetMapping("/userProfile/{userId}")
-    public String userProfile(Model model,@PathVariable("userId") Integer userId){
+    @GetMapping("/userProfile")
+    public String userProfile(Model model) {
+        Integer userId = 2;
         User user = userService.findUserByUserId(userId);
         model.addAttribute("user", user);
 
@@ -55,9 +57,19 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String showAllUsers(){
+    public String showAllUsers() {
         List<User> user = null;
         user = userService.findAllUsers();
         return "Users";
+
+    }
+
+    @GetMapping("/editProfile")
+    public String editProfile(Principal principal, Model model) {
+        String name = principal.getName();
+        User user = userService.findUserByUserName(name);
+        model.addAttribute("user", user);
+        return "editProfile";
+
     }
 }
