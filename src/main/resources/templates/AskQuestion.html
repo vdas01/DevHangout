@@ -55,19 +55,19 @@
                 <div class="input_group">
                     <h5>Title</h5>
                     <p>Be specific and imagine you’re asking a question to another person.</p>
-                    <input type="text" name="title" class="title" th:field="*{title}">
+                    <input type="text" name="title" class="title" th:field="*{title}" required>
                 </div>
 
                 <div class="input_group">
                     <h5>What are the details of your problem?</h5>
                     <p>Introduce the problem and expand on what you put in the title. Minimum 20 characters.</p>
-                   <textarea name="content"  cols="30" rows="10" minlength="20" th:field="*{content}"></textarea>
+                   <textarea name="content"  cols="30" rows="10" minlength="20" th:field="*{content}" required></textarea>
                 </div>
 
                 <div class="input_group">
                     <h5>Tags</h5>
                     <p>Add up to 5 tags to  describe what your question is about. Start typing to see suggestions.</p>
-                    <input type="text" name="tags" id="tags" th:field="${tag.name}">
+                    <input type="text" name="tags" id="tags" th:field="${tag.name}" >
                 </div>
                 <input type="file" name="imageName" accept="image/**" id="add_image"> <br>
                 <input type="submit" value="Submit" class="buttons">

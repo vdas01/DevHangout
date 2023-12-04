@@ -223,7 +223,7 @@
                 <p style="font-size: x-large">Your Answer</p>
 
                 <form th:action = "@{/addAnswer{questionId} (questionId = ${question.id})}" method="post" enctype="multipart/form-data">
-                    <textarea name = "content" rows = "10" cols = "130"></textarea><br><br><br>
+                    <textarea name = "content" rows = "10" cols = "130" ></textarea><br><br><br>
                     <input type="file" name="imageName" accept="image/**" class="add_image">
                     <input type="submit" value="Post Answer">
                 </form>
