@@ -44,9 +44,9 @@
             <li><a href=""><i class="fa-solid fa-circle-question icons"></i></a></li>
         </ul>
         <span id = "login-logout">
-                <a th:href="@{/login}">Login</a>
-                <a th:href="@{/signup}">signup</a>
-            </span>
+            <a th:href="@{/login}">Login</a>
+            <a th:href="@{/signup}">signup</a>
+        </span>
     </nav>
     
     <div id = "parent">
@@ -115,13 +115,14 @@
                     <li class="sort_item"><a href="/tag">new</a></li>
                 </ul>
             </div>
-            <div class="user_container">
+            <div class="user_container" th:each = "user: ${users}">
                 <div class="user">
                     <img src="./avatar.png" alt="profile" class="user_profile">
                     <div class="user_info">
-                        <a class="user_title" href="#">Tarun</a>
-                        <p class="user_country">India</p>
-                        <p class="user_reputation">826</p>
+                        <a class="user_title" th:text = "*{user.userName}"
+                           th:href="@{'/userProfile?userId=' + *{user.id}}"></a>
+                        <p class="user_country" th:text = "*{user.country}"></p>
+                        <p class="user_reputation" th:text = "*{user.reputation}"></p>
                     </div>
                 </div>
             </div>

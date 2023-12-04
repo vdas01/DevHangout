@@ -63,10 +63,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByUserId() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByEmail(authentication.getName());
-        return userRepository.findUserById(user.getId());
+    public User findUserByUserId(Integer userId) {
+        if(userId == null)
+        {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            User user = userRepository.findByEmail(authentication.getName());
+
+            return userRepository.findUserById(user.getId());
+        }
+        else {
+            return userRepository.findUserById(userId);
+        }
+
     }
 
     @Override

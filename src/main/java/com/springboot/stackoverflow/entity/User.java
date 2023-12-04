@@ -28,7 +28,7 @@ public class User {
     @CreationTimestamp
     private Date createdAt;
     @Column(name="country")
-    private String country;
+    private String country = "NA";
     @Column(name="title")
     private String title;
     @Column(name = "is_active")

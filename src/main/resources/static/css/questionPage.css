@@ -59,6 +59,15 @@
     color: black;
 }
 
+#login-logout {
+    position: fixed;
+    right: 50px;
+}
+
+#login-logout a {
+    padding: 0px 20px;
+}
+
 /*<-------- navbar ------------>*/
 
 #body {
@@ -175,15 +184,6 @@ input[type = "submit"] {
 ::-webkit-scrollbar-thumb {
     background: rgb(0,0,0,0.1);
     border-radius: 1px;
-}
-
-#login-logout {
-    position: fixed;
-    right: 50px;
-}
-
-#login-logout a {
-    padding: 0px 20px;
 }
 
 /*-----------Side Bar starts here -----------------*/

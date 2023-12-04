@@ -10,6 +10,7 @@
     min-height: 100vh;
     width: 100%;
 }
+
 #navbar{
     border: 2px solid black;
     display: flex;
@@ -23,6 +24,7 @@
     background-color: white;
     width: 100vw;
 }
+
 .items{
     display: flex;
     gap: 1vw;
@@ -35,11 +37,13 @@
     flex-direction: column;
     align-items: center;
 }
+
 #search_bar{
     width: 20vw;
     padding:1vh 2vw;
     border-radius: 10px;
 }
+
 #heading{
     font-size: 2rem;
     margin-bottom: 2.3vh;
@@ -53,6 +57,15 @@
 
 .icons{
     color: black;
+}
+
+#login-logout {
+    position: fixed;
+    right: 50px;
+}
+
+#login-logout a {
+    padding: 0px 20px;
 }
 
 /*<-------- navbar ------------>*/
@@ -258,10 +271,6 @@ margin-right:0.8vw;
 }
 
 /* --------sidebar---------- */
-
-.icons{
-    color: black;
-}
 
 .user_container{
     display: grid;
