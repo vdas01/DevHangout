@@ -123,7 +123,8 @@
                     <div class = "content-body">
                         <div class = "question-content">
                             <p th:text = "${question.content}"></p>
-                            <img th:if="${question.photo != null}" th:src="@{'/css/image/' + ${question.photo}}" height="100px" width="100px">
+                            <img th:if="${question.photo != null}" th:src="@{'/css/image/' + ${question.photo}}" height="200px" width="200px">
+                            <br>
                             <span th:each = "tag : ${question.tags}" th:text = "*{tag.name}" class = "tags"></span>
                         </div><br><br>
                         <a th:href = "@{/editQuestion/{questionId} (questionId = ${question.id})}"
@@ -160,6 +161,7 @@
                                 <textarea th:text="*{answer.content}" name="editedContent"
                                           th:value = "*{answer.content}" rows="10" cols="110"></textarea>
                                 <br>
+
                                 <input type="submit" value="Update">
                             </form>
                         </div>
@@ -179,6 +181,7 @@
 
                             <div class = "content-body">
                                 <div th:text = "*{answer.content}"></div><br><br>
+                                <input type="file" name="imageName" accept="image/**">
 
                                 <a th:href = "@{/editAnswer/{questionId}/{answerId} (questionId = ${question.id},
                                 answerId = *{answer.id})}" class = "answer-action">
