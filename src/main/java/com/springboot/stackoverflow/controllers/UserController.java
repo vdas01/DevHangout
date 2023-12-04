@@ -44,8 +44,9 @@ public class UserController {
             return "redirect:/login?success";
     }
 
-    @GetMapping("/userProfile/{userId}")
-    public String userProfile(Model model,@PathVariable("userId") Integer userId){
+    @GetMapping("/userProfile")
+    public String userProfile(Model model){
+        Integer userId = 2;
         User user = userService.findUserByUserId(userId);
         model.addAttribute("user", user);
 
