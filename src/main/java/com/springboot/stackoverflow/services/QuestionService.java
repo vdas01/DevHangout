@@ -20,4 +20,10 @@ public interface QuestionService {
     Question findQuestionById(Integer questionId);
 
     List<Question> findQuestionsList();
+
+    void bookmarkQuestion(int questionId);
+
+    void removeBookmarkQuestion(int questionId);
+
+
 }

@@ -13,6 +13,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.text.html.Option;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -132,5 +133,33 @@ public class QuestionServiceImpl implements QuestionService{
     @Override
     public List<Question> findQuestionsList() {
         return questionRepository.findAll();
+    }
+
+
+
+    @Override
+    public void bookmarkQuestion(int questionId) {
+        Optional<Question> retrievedQuestionById = questionRepository.findById(questionId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName());
+        if(retrievedQuestionById.isPresent()){
+            Question question = retrievedQuestionById.get();
+            question.addSavedUser(user);
+            questionRepository.save(question);
+        }
+    }
+
+
+
+    @Override
+    public void removeBookmarkQuestion(int questionId) {
+        Optional<Question> retrievedQuestionById = questionRepository.findById(questionId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName());
+        if(retrievedQuestionById.isPresent()){
+            Question question = retrievedQuestionById.get();
+            question.removedSavedUser(user);
+            questionRepository.save(question);
+        }
     }
 }

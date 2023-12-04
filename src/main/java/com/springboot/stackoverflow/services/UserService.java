@@ -12,4 +12,6 @@ public interface UserService {
 
     User findUserByUserName(String name);
 
+    User findByEmail(String email);
+
 }
