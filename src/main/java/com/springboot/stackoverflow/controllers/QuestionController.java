@@ -3,10 +3,19 @@ package com.springboot.stackoverflow.controllers;
 import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.Tag;
 import com.springboot.stackoverflow.services.QuestionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Controller
@@ -14,6 +23,7 @@ public class QuestionController {
 
     QuestionService questionService;
 
+    @Autowired
     public QuestionController(QuestionService questionService){
         this.questionService = questionService;
     }
@@ -28,8 +38,19 @@ public class QuestionController {
     }
 
     @PostMapping("/saveQuestion")
-    public String processSaveQuestion(@ModelAttribute("question") Question newQuestion,
-                                      @ModelAttribute("tag")Tag newTag){
+    public String processSaveQuestion(@RequestParam("imageName") MultipartFile file,
+                                      @ModelAttribute("question") Question newQuestion,
+                                      @ModelAttribute("tag")Tag newTag) throws IOException {
+        System.out.println(file.getOriginalFilename());
+
+        if(!file.isEmpty()){
+            newQuestion.setPhoto(file.getOriginalFilename());
+            File file1 = new ClassPathResource("static/css/image").getFile();
+
+            Path path = Paths.get(file1.getAbsolutePath() + File.separator + file.getOriginalFilename());//create a path
+            Files.copy(file.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
+        }
+
         questionService.saveQuestion(newQuestion,newTag);
 
         return "redirect:/";
@@ -41,6 +62,7 @@ public class QuestionController {
 
         if(question == null) return "error";
         model.addAttribute("question", question);
+
 
         return "questionPage";
     }

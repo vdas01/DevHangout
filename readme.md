@@ -18,3 +18,24 @@
 5. Badges(aswmith)
 6. Comments(gaurav)
 7. Followers(tarun)
+
+## Urls:-
+1. AskQuestion (/questions/ask) 
+2. home (/)
+3. login(/login)
+4. questionPage (/viewQuestion/{questionId})
+5. QuestionsTagged (questions/tagged/{tagId})
+6. signup ()
+7. Tags (/tags)
+8. UserProfile
+9. Users  (/users)
+
+## Features left:-
+1. Image upload
+2. Save question and answer
+3. Upvote
+4. Auth using goggle and github
+5. Follow each other
+6. Badges
+7. Reputation
+8. Accepted
