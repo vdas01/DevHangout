@@ -133,7 +133,16 @@
                            class = "answer-action">
                             Delete
                         </a>
-                        <a href="#" class = "answer-action">comment</a>
+                        <a th:unless="${addComment != null}" th:href="@{/addComment/{questionId} (questionId = ${question.id})}"
+                           class = "answer-action">comment</a>
+                        <form th:if="${addComment != null}" th:action = "@{/saveComment}" method="GET">
+                            Comment:
+                            <textarea name="saveContent"
+                                      th:field = "${comments.comment}" rows="10" cols="110"></textarea>
+                            <input type="hidden" th:name="questionId" th:value="${question.id}">
+                            <br>
+                            <input type="submit" value="Comment">
+                        </form>
                     </div>
                 </div>
             </div>

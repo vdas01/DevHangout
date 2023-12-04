@@ -41,9 +41,7 @@ public class QuestionController {
         Question question = questionService.findQuestionById(questionId);
 
         if(question == null) return "error";
-
         model.addAttribute("question", question);
-        model.addAttribute("comments",new Comment());
 
         return "questionPage";
     }
