@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
@@ -49,17 +50,22 @@ public class UserController {
     }
 
     @GetMapping("/userProfile")
-    public String userProfile(Model model) {
-        User user = userService.findUserByUserId();
+    public String userProfile(Model model, @RequestParam(value = "userId", required = false) Integer userId) {
+        User user = userService.findUserByUserId(userId);
         model.addAttribute("user", user);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getName());
+        System.out.println(user.getEmail());
+        System.out.println(user.getEmail().equals(authentication.getName()));
 
         return "UserProfile";
     }
 
     @GetMapping("/users")
-    public String showAllUsers() {
-        List<User> user = null;
-        user = userService.findAllUsers();
+    public String showAllUsers(Model model) {
+        List<User> users = null;
+        users = userService.findAllUsers();
+        model.addAttribute("users", users);
 
         return "Users";
 

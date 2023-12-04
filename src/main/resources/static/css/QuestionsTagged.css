@@ -59,6 +59,15 @@
     color: black;
 }
 
+#login-logout {
+    position: fixed;
+    right: 50px;
+}
+
+#login-logout a {
+    padding: 0px 20px;
+}
+
 /*<-------- navbar ------------>*/
 
 /* --------- middle box---------------------- */
