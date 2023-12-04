@@ -21,9 +21,13 @@ public class Answer {
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "question_id")
     private Question question;
+
+    @Column(name = "photo")
+    private String photo;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
 
     @Column(name = "votes")
     private int votes = 0;
@@ -91,5 +95,13 @@ public class Answer {
 
     public void setComment(List<Comment> comment) {
         this.comment = comment;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

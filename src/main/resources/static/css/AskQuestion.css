@@ -97,6 +97,14 @@
     left: 10px;
 }
 
-#sidebar{
-    
+.buttons{
+    padding:1vh 2vw;
+    background-color:black;
+    color:gold;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:4vh;
+}
+#add_image{
+    margin-top:2vh;
 }
