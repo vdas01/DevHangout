@@ -2,9 +2,13 @@ package com.springboot.stackoverflow.controllers;
 
 import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.Tag;
+import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.services.QuestionService;
+import com.springboot.stackoverflow.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +21,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class QuestionController {
 
     QuestionService questionService;
 
+    UserService userService;
+
     @Autowired
-    public QuestionController(QuestionService questionService){
+    public QuestionController(QuestionService questionService,UserService userService){
         this.questionService = questionService;
+        this.userService = userService;
     }
 
     @GetMapping("/questions/ask")
@@ -55,7 +63,18 @@ public class QuestionController {
         if(question == null) return "error";
         model.addAttribute("question", question);
 
-
+        String add = "true";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findByEmail(authentication.getName());
+        List<Question> questionList = user.getSavedQuestions();
+        for(Question tempQuestion : questionList){
+            if(tempQuestion.getId() == questionId){
+                add = "false";
+                break;
+            }
+        }
+        model.addAttribute("add",add);
+        System.out.println("Question page:- " + add);
         return "questionPage";
     }
 
@@ -85,5 +104,16 @@ public class QuestionController {
 
     public List<Question> findAllQuestions() {
         return questionService.findQuestionsList();
+    }
+
+    @GetMapping("/question/bookmark/{questionId}/add/{add}")
+    public String processBookmarkQuestion(@PathVariable(value = "questionId")int questionId,@PathVariable(value = "add")String add){
+        if(add.equals("true")){
+            questionService.bookmarkQuestion(questionId);
+        }
+        else{
+            questionService.removeBookmarkQuestion(questionId);
+        }
+        return "redirect:/viewQuestion/{questionId}";
     }
 }
