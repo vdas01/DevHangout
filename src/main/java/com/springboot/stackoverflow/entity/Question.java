@@ -25,6 +25,9 @@ public class Question {
     @Column(name = "content",columnDefinition = "TEXT")
     private  String content;
 
+    @Column(name = "photo")
+    private String photo = null;
+
     @Column(name = "views")
     private int views;
 
@@ -159,9 +162,18 @@ public class Question {
         this.user = user;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     public void addTags(Tag tag){
         if(tags == null)
             tags = new ArrayList<>();
         tags.add(tag);
     }
+
 }

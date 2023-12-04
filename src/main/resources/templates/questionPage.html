@@ -123,7 +123,7 @@
                     <div class = "content-body">
                         <div class = "question-content">
                             <p th:text = "${question.content}"></p>
-
+                            <img th:if="${question.photo != null}" th:src="@{'/css/image/' + ${question.photo}}" height="100px" width="100px">
                             <span th:each = "tag : ${question.tags}" th:text = "*{tag.name}" class = "tags"></span>
                         </div><br><br>
                         <a th:href = "@{/editQuestion/{questionId} (questionId = ${question.id})}"

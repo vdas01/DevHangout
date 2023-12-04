@@ -36,7 +36,7 @@
 
         <div class="content">
                 <h3 id="heading">Ask a public question</h3>
-            <form th:action="@{/saveQuestion}" method="post" th:object="${question}">
+            <form th:action="@{/saveQuestion}" method="post" th:object="${question}"  enctype="multipart/form-data">
                 <div class="input_group">
                     <h5>Title</h5>
                     <p>Be specific and imagine you’re asking a question to another person.</p>
@@ -54,7 +54,7 @@
                     <p>Add up to 5 tags to  describe what your question is about. Start typing to see suggestions.</p>
                     <input type="text" name="tags" id="tags" th:field="${tag.name}">
                 </div>
-
+                <input type="file" name="imageName" accept="image/**">
                 <input type="submit" value="Submit" class="buttons">
             </form>
         </div>
