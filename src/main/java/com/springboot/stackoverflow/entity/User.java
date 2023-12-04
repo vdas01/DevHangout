@@ -27,6 +27,11 @@ public class User {
     @Column(name = "created_at")
     @CreationTimestamp
     private Date createdAt;
+    @Column(name="country")
+    private String country;
+    @Column(name="title")
+    private String title;
+
     @ManyToMany()
     @JoinTable(
             name = "FollowRelation",
@@ -34,6 +39,7 @@ public class User {
             inverseJoinColumns=@JoinColumn(name = "following_id") // field from other class
     )
     private List<User> followings;
+
 
     @ManyToMany()
     @JoinTable(
