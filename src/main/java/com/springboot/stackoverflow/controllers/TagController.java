@@ -24,19 +24,13 @@ public class TagController {
 
     @GetMapping("/tags")
     public String processAllTags(
-            @RequestParam(value = "page",required = false)Integer pageNo,
-            @RequestParam(value = "limit",required = false)Integer pageSize,
-            @RequestParam(value = "sortField",required = false)String sortField,
-            @RequestParam(value = "sortDir",required = false)String sortDir,
+            @RequestParam(value = "page", defaultValue = "1")Integer pageNo,
+            @RequestParam(value = "limit",defaultValue = "8")Integer pageSize,
+            @RequestParam(value = "sortField",defaultValue = "popular")String sortField,
+            @RequestParam(value = "sortDir",defaultValue = "asc")String sortDir,
             @RequestParam(value = "search",required = false)String search,
             Model model){
-        sortField = sortField == null ? "popular" : sortField;
-        sortDir = sortDir == null ? "asc" : sortDir;
-        pageNo = pageNo == null ?  1 : pageNo;
-        pageSize = pageSize == null ? 8 : pageSize;
-
-
-        Page<Tag> page = tagService.customTags(pageNo,pageSize,sortField,sortDir,search);
+        Page<Tag> page = tagService.customTags(pageNo, pageSize, sortField, sortDir, search);
 
         List<Tag> tags = page.getContent();
         model.addAttribute("currentPage", pageNo);

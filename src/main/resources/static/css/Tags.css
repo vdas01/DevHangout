@@ -1,3 +1,5 @@
+/*<-------- navbar ------------>*/
+
 *{
     margin: 0;
     padding: 0;
@@ -54,8 +56,6 @@
 .icons{
     color: black;
 }
-
-/*<-------- navbar ------------>*/
 
 /* --------- middle box---------------------- */
 #body {
@@ -144,6 +144,15 @@
     color: wheat;
 }
 
+#login-logout {
+    position: fixed;
+    right: 50px;
+}
+
+#login-logout a {
+    padding: 0px 20px;
+}
+
 /* --------- pagination---------------------- */
 .pagination {
     display: flex;
@@ -200,6 +209,28 @@ margin-right:0.8vw;
     flex-direction: column;
     padding: 1rem;
     font-size:1.4rem;
+    padding-top: 20px;
+    padding-right: 0px;
+}
+
+#sidebar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 20px;
+}
+
+.side-text {
+    color: rgb(0,0,0,0.5);
+}
+
+.active-bar {
+    background-color: rgb(0,0,0,0.1);
+    border-radius: 10px 0px 0px 10px;
+}
+
+.active-tag {
+    color: black;
 }
 
 .side_icons{
@@ -210,19 +241,20 @@ margin-right:0.8vw;
 .row{
     cursor: pointer;
     display: flex;
+    font-size: 20px;
 }
 
 .row a{
-    color: black;
+    color: rgb(0,0,0,0.5);
     text-decoration: none;
+    padding: 10px 10px 0px 10px;
 }
 
-.row a:hover{
-    color: red;
-}
-
-.icons{
+.active-bar a {
     color: black;
 }
-/* --------sidebar---------- */
 
+.row:hover{
+    background-color: rgb(0,0,0,0.07);
+    border-radius: 10px 0px 0px 10px;
+}

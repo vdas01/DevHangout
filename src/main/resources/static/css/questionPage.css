@@ -176,6 +176,24 @@ input[type = "submit"] {
     padding-right: 30px;
 }
 
+::-webkit-scrollbar {
+    width: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(0,0,0,0.1);
+    border-radius: 1px;
+}
+
+#login-logout {
+    position: fixed;
+    right: 50px;
+}
+
+#login-logout a {
+    padding: 0px 20px;
+}
+
 /*-----------Side Bar starts here -----------------*/
 
 #sidebar{
@@ -183,6 +201,28 @@ input[type = "submit"] {
     flex-direction: column;
     padding: 1rem;
     font-size:1.4rem;
+    padding-top: 20px;
+    padding-right: 0px;
+}
+
+#sidebar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 20px;
+}
+
+.side-text {
+    color: rgb(0,0,0,0.5);
+}
+
+.active-bar {
+    background-color: rgb(0,0,0,0.1);
+    border-radius: 10px 0px 0px 10px;
+}
+
+.active {
+    color: black;
 }
 
 .side_icons{
@@ -193,13 +233,20 @@ input[type = "submit"] {
 .row{
     cursor: pointer;
     display: flex;
+    font-size: 20px;
 }
 
 .row a{
-    color: black;
+    color: rgb(0,0,0,0.5);
     text-decoration: none;
+    padding: 10px 10px 0px 10px;
 }
 
-.row a:hover{
-    color: red;
+.active-bar a {
+    color: black;
+}
+
+.row:hover{
+    background-color: rgb(0,0,0,0.07);
+    border-radius: 10px 0px 0px 10px;
 }
