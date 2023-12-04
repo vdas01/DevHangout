@@ -144,11 +144,16 @@ input[type = "submit"] {
 
 .tags {
     background-color: lightblue;
-    color: darkblue;
+
     font-size: medium;
     margin-right: 20px;
     padding: 8px;
     border-radius: 5px;
+    cursor:pointer;
+    color:black
+}
+.tags:hover{
+         background-color:rgb(4, 95, 126);
 }
 
 #view-detail {

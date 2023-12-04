@@ -80,6 +80,20 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public void deleteQuestion(Integer questionId) {
+        Optional<Question> questionRetrievedById = questionRepository.findById(questionId);
+        List<Tag> tags = null;
+        if(questionRetrievedById.isPresent()){
+            Question question = questionRetrievedById.get();
+             tags = question.getTags();
+        }
+        if(tags != null){
+            for(Tag tempTag : tags){
+               if(tempTag.getQuestions().isEmpty()){
+                   tagRepository.deleteById(tempTag.getId());
+               }
+            }
+        }
+
         questionRepository.deleteById(questionId);
     }
 

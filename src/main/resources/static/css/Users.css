@@ -1,5 +1,3 @@
-/*<-------- navbar ------------>*/
-
 *{
     margin: 0;
     padding: 0;
@@ -57,6 +55,8 @@
     color: black;
 }
 
+/*<-------- navbar ------------>*/
+
 /* --------- middle box---------------------- */
 #body {
     border-left: 2px solid rgba(0, 0, 0, 0.54);
@@ -81,6 +81,8 @@
     justify-content: space-between;
     padding: 2vh 1vw;
     align-items: center;
+    border-bottom: 1px solid rgb(161, 159, 159);
+    
 }
 .sort_items{
     display: flex;
@@ -96,7 +98,7 @@
     color: black;
 }
 .sort_item:hover{
-    background-color: rgb(226, 226, 226);   
+    background-color: rgb(226, 226, 226);
 }
 .search_box{
   position: relative;
@@ -142,15 +144,6 @@
 #tag_title:hover{
     background-color:rgb(4, 95, 126);
     color: wheat;
-}
-
-#login-logout {
-    position: fixed;
-    right: 50px;
-}
-
-#login-logout a {
-    padding: 0px 20px;
 }
 
 /* --------- pagination---------------------- */
@@ -209,28 +202,6 @@ margin-right:0.8vw;
     flex-direction: column;
     padding: 1rem;
     font-size:1.4rem;
-    padding-top: 20px;
-    padding-right: 0px;
-}
-
-#sidebar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding-top: 20px;
-}
-
-.side-text {
-    color: rgb(0,0,0,0.5);
-}
-
-.active-bar {
-    background-color: rgb(0,0,0,0.1);
-    border-radius: 10px 0px 0px 10px;
-}
-
-.active-tag {
-    color: black;
 }
 
 .side_icons{
@@ -241,20 +212,53 @@ margin-right:0.8vw;
 .row{
     cursor: pointer;
     display: flex;
-    font-size: 20px;
 }
 
 .row a{
-    color: rgb(0,0,0,0.5);
+    color: black;
     text-decoration: none;
-    padding: 10px 10px 0px 10px;
 }
 
-.active-bar a {
+.row a:hover{
+    color: red;
+}
+
+.icons{
     color: black;
 }
-
-.row:hover{
-    background-color: rgb(0,0,0,0.07);
-    border-radius: 10px 0px 0px 10px;
+.user_container{
+    display: grid;
+    grid-template-columns: repeat(4,23%);
+    gap: 2%;
+    margin-top: 2vh;
+}
+.user{
+    display: flex;
+    gap: 1vw;
+    padding:1vh 2vw;
+    /* border-right:1px solid rgb(182, 182, 182); */
+    margin-bottom:2vh;
+}
+#user_profile{
+    width: 3vw;
+    height: 3vw;
+    border-radius: 100%;
+    border: 1px solid blue;
+}
+#user_info{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+#user_title{
+    font-size:1.3rem;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+#user_title:hover{
+    color:black;
+}
+#user_country{
+    color: rgb(92, 92, 92);
+    margin-bottom: 2px;
 }

@@ -93,7 +93,6 @@
                 </div>
             </div>
         </div>
-
         <div id = "body">
             <div class="heading">
                 <h4>Tags</h4>
@@ -102,10 +101,14 @@
                 </p>
             </div>
             <div class="filters">
-                <div class="search_box">
+                <form th:action="@{/tags}" class="search_box">
+                    <input type="hidden" name="page" th:value="${currentPage}">
+                    <input type="hidden" name="limit" th:value="8">
+                    <input type="hidden" name="sortField" th:value="${sortField}">
+                    <input type="hidden" name="sortDir" th:value="${reverseSortDir}">
                     <input type="text" name="search" id="search" placeholder="Filter by tag name">
-                    <a th:href="@{|/tags?page=${currentPage}&limit=8&sortField=popular&sortDir=${reverseSortDir}&search=${search}|}" style="color: black;"><i class="fa-solid fa-magnifying-glass filter_search_icon"></i></a>
-                </div>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass filter_search_icon"></i></button>
+                </form>
                 <ul class="sort_items">
                     <li class="sort_item"><a th:href="@{|/tags?page=${currentPage}&limit=8&sortField=popular&sortDir=${reverseSortDir}&search=${search}|}"
                     >Popular</a></li>
@@ -119,7 +122,8 @@
                 <!-- for each -->
                 <div class="tag_box" th:each="tag : ${tags}">
                     <div class="tag">
-                        <p id="tag_title" th:text="${tag.name}"></p>
+
+                        <a id="tag_title" th:text="${tag.name}" th:href="@{'questions/tagged/' + ${tag.id}}"></a>
                     </div>
                     <div class="stats">
                         <p id="tag_question" th:text="${tag.questions.size() > 1 ? tag.questions.size() +

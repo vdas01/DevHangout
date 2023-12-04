@@ -119,8 +119,10 @@
                             <h2 th:text="*{questions.title}"></h2>
                         </a>
                         <div class="row-container">
-                            <p class="views" th:text="'views : ' + *{questions.views}"></p>
-                            <p class="votes" th:text="'votes : ' + *{questions.votes}"></p>
+
+                            <p class="views" th:text="'Views : ' + *{questions.views}"></p>
+                            <p class="votes" th:text="'Votes : ' + *{questions.votes}"></p>
+                            <p class="answers_count" th:text="'Answers : ' + *{questions.answers.size()}"></p>
                             <!--                <p class="answered" th:text="*{questions.answer.size()}"></p>-->
                             <a th:href="@{/userProfile}">
                                 aa
