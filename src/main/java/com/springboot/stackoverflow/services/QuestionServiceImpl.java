@@ -109,4 +109,9 @@ public class QuestionServiceImpl implements QuestionService{
     public List<Question> findQuestionsList() {
         return questionRepository.findAll();
     }
+
+    @Override
+    public void saveCommentList(Question question) {
+        questionRepository.save(question);
+    }
 }

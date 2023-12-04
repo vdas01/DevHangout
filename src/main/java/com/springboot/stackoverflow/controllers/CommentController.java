@@ -31,10 +31,13 @@ public class CommentController {
         return "questionPage";
     }
 
-    @GetMapping("/saveComment")
+    @PostMapping("/saveComment")
     public String saveComment(@ModelAttribute("comments") Comment comments,@RequestParam("questionId") int questionId){
-
-        commentService.saveComment(comments, questionId);
+        Question question = questionService.findQuestionById(questionId);
+        question.getComments().add(comments);
+        commentService.saveComment(comments,questionId);
+        questionService.saveCommentList(question);
+        System.out.println(question.getComments());
         return "redirect:/viewQuestion/"+questionId;
     }
 }

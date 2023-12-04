@@ -12,19 +12,20 @@ public class CommentServiceImpl implements CommentService{
 
     private final CommentRepository commentRepository;
     private final QuestionRepository questionRepository;
+    private final QuestionService questionService;
 
     @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository, QuestionRepository questionRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository, QuestionRepository questionRepository, QuestionService questionService) {
         this.commentRepository = commentRepository;
         this.questionRepository = questionRepository;
+        this.questionService = questionService;
     }
 
     @Override
     public void saveComment(Comment comments, int questionId) {
-        Question question = questionRepository.findById(questionId).orElse(null);
         comments.setUserName("Tarun");
         comments.setEmail("tarun@mail.com");
-        comments.setQuestion(question);
         commentRepository.save(comments);
+
     }
 }

@@ -137,7 +137,7 @@
                         </a>
                         <a th:unless="${addComment != null}" th:href="@{/addComment/{questionId} (questionId = ${question.id})}"
                            class = "answer-action">comment</a>
-                        <form th:if="${addComment != null}" th:action = "@{/saveComment}" method="GET">
+                        <form th:if="${addComment != null}" th:action = "@{/saveComment}" method="Post">
                             Comment:
                             <textarea name="saveContent"
                                       th:field = "${comments.comment}" rows="10" cols="110"></textarea>
@@ -145,6 +145,9 @@
                             <br>
                             <input type="submit" value="Comment">
                         </form>
+                        <div th:each = "comments : ${question.comments}" class="comment">
+                            <span th:text = "*{comments.comment}"></span>
+                        </div>
                     </div>
                 </div>
             </div>
