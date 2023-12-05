@@ -1,5 +1,4 @@
 package com.springboot.stackoverflow.controllers;
-
 import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
@@ -72,12 +72,17 @@ public class UserController {
     }
 
     @GetMapping("/editProfile")
-    public String editProfile(Principal principal, Model model) {
-        String name = principal.getName();
-        User user = userService.findUserByUserName(name);
+    public String editProfile(Model model) {
+        User user=userService.editUser();
         model.addAttribute("user", user);
-
         return "editProfile";
-
+    }
+    @PostMapping("/updateProfile")
+    public String updateProfile( @RequestParam String userName,
+                                 @RequestParam String country,@RequestParam String title,
+                                 @RequestParam String about){
+        userService.updateUser(userName, country, title, about);
+        return "redirect:/userProfile";
     }
 }
+

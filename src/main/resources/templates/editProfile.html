@@ -25,16 +25,16 @@
 
         </span>
 
-        <form id="form">
+        <form id="form" th:action="@{/updateProfile}" method="post">
             Display Name
-            <br><input type="text" th:value="${user.getUserName()}">
+            <br><input type="text" name="userName" th:value="${user.getUserName()}">
             <br>Location
-            <br><input type="text" th:value="${user.getCountry}">
+            <br><input type="text" name="country" th:value="${user.getCountry}">
             <br>Title
-            <br><input type="text" th:value="${user.getTitle}">
+            <br><input type="text" name="title" th:value="${user.getTitle}">
             <br>About me
-            <br><textarea id="textBox" rows="10"><span th:text="${user.getAbout}"></textarea>
-            <br><input type="submit" ><a href="userProfile.html" >Cancel</a>
+            <br><textarea id="textBox" rows="10" th:text="${user.getAbout}" name="about"></textarea>
+            <br><input type="submit" ><a href="userProfile.html">Cancel</a>
         </form>
     </div>
 </div>

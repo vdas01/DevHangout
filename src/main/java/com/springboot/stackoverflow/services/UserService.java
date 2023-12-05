@@ -13,5 +13,10 @@ public interface UserService {
     User findUserByUserName(String name);
 
     User findByEmail(String email);
+    void updateUser(String userName, String country, String title, String about);
+
+    User editUser();
 
 }
+
+
