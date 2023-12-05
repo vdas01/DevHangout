@@ -1,5 +1,68 @@
-#container {
-    margin: 3%;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.container{
+    min-height: 100vh;
+    width: 100%;
+}
+
+#navbar{
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    gap:1vw;
+    padding: 1.5vh;
+    font-size: 1.2rem;
+    align-items: center;
+    position: fixed;
+    z-index: 2;
+    background-color: white;
+    width: 100vw;
+}
+
+.items{
+    display: flex;
+    gap: 1vw;
+}
+
+.content{
+    padding: 2vh 2vw;
+    background-color: rgb(231, 231, 231);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#search_bar{
+    width: 20vw;
+    padding:1vh 2vw;
+    border-radius: 10px;
+}
+
+#heading{
+    font-size: 2rem;
+    margin-bottom: 2.3vh;
+}
+
+#title {
+    padding: 0px;
+    margin-left: -10px;
+    margin-right: 100px;
+}
+
+.icons{
+    color: black;
+}
+
+/*-----------nav bar ends here -------------------*/
+
+#userContainer {
+    margin-top: 3%;
     padding: 3%;
 }
 
@@ -40,7 +103,7 @@ textarea {
     margin-bottom: 10px;
 }
 
-input[type="submit"] {
+.submit-form {
     background-color: #3498db;
     color: #ffffff;
     padding: 10px 20px;
@@ -64,4 +127,85 @@ a:hover {
 }
 #form{
 margin-top: 2%;
+}
+
+/*-----------Side Bar starts here -----------------*/
+
+#sidebar{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    font-size:1.4rem;
+    padding-top: 50px;
+    padding-right: 0px;
+}
+
+#sidebar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 20px;
+}
+
+.side-text {
+    color: rgb(0,0,0,0.5);
+}
+
+.active-bar {
+    background-color: rgb(0,0,0,0.1);
+    border-radius: 10px 0px 0px 10px;
+}
+
+.active {
+    color: black;
+}
+
+.side_icons{
+    margin-bottom:0.8rem;
+    margin-right: 0.5rem;
+}
+
+.row{
+    cursor: pointer;
+    display: flex;
+    font-size: 20px;
+}
+
+.row a{
+    color: rgb(0,0,0,0.5);
+    text-decoration: none;
+    padding: 10px 10px 0px 10px;
+}
+
+.active-bar a {
+    color: black;
+}
+
+.row:hover{
+    background-color: rgb(0,0,0,0.07);
+    border-radius: 10px 0px 0px 10px;
+}
+
+#parent {
+    display: grid;
+    grid-template-columns: 20% 68% 10%;
+    padding-top: 20px;
+}
+
+::-webkit-scrollbar {
+    width: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(0,0,0,0.1);
+    border-radius: 1px;
+}
+
+
+#userContainer{
+    display:grid;
+    overflow-y: scroll;
+    height: 92vh;
+    border-left: 2px solid black;
+    padding: 30px;
 }
