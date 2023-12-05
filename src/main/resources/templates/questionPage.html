@@ -126,17 +126,22 @@
             <div class = "question-detail">
                 <div class = "voting" th:if = "${isEdited != null}"></div>
                 <div class = "voting" th:unless = "${isEdited != null}">
+                    <th:block th:unless="${#authentication.principal.username eq question.user.email}">
                         <a th:href="@{'/processVote?vote=1&type=question&questionId=' + ${question.id}}">
                             <span class = "voting-button">
                                 <i class="fa-solid fa-caret-up"></i>
                             </span>
                         </a>
+                    </th:block>
                         <span th:text = "${question.votes}" class = "voting-count"></span>
+                    <span>Votes</span>
+                    <th:block th:unless="${#authentication.principal.username eq question.user.email}">
                         <a th:href="@{'/processVote?vote=-1&type=question&questionId=' + ${question.id}}">
                             <span class = "voting-button">
                                 <i class="fa-solid fa-caret-down"></i>
                             </span>
                         </a>
+                    </th:block>
                 </div>
 
                 <div th:if = "${isEdited != null}">
@@ -244,23 +249,30 @@
                     <div th:unless = "${editAnswer != null && question.acceptedAnswer.id == editAnswer.id}">
                         <div class = "question-detail">
                             <div class = "voting">
+                                <th:block th:unless="${#authentication.principal.username eq answer.user.email}">
                                 <a th:href="@{'/processVote?vote=1&type=answer&questionId=' + ${question.id} +
                                 '&answerId=' + ${question.acceptedAnswer.id}}">
                                     <span class = "voting-button">
                                         <i class="fa-solid fa-caret-up"></i>
                                     </span>
                                 </a>
+                                </th:block>
                                 <span th:text = "${question.acceptedAnswer.votes}" class = "voting-count"></span>
+                                <span>Votes</span>
+                                <th:block th:unless="${#authentication.principal.username eq answer.user.email}">
                                 <a th:href="@{'/processVote?vote=-1&type=answer&questionId=' + ${question.id} +
                                 '&answerId=' + ${question.acceptedAnswer.id}}">
                                     <span class = "voting-button">
                                         <i class="fa-solid fa-caret-down"></i>
                                     </span>
                                 </a>
+                                </th:block>
+                                <th:block th:if="${#authentication.principal.username eq question.user.email}">
                                 <a th:href="@{'/acceptAnswer?questionId=' + ${question.id} +
                                 '&answerId=' + ${question.acceptedAnswer.id}}" class = "accepted-answer">
                                     <i class="fa-solid fa-circle-check"></i>
                                 </a>
+                                </th:block>
                             </div>
 
                             <div class = "content-body">
@@ -357,23 +369,30 @@
                     <div th:unless = "${editAnswer != null && answer.id == editAnswer.id}">
                         <div class = "question-detail">
                             <div class = "voting">
+                                <th:block th:unless="${#authentication.principal.username eq answer.user.email}">
                                 <a th:href="@{'/processVote?vote=1&type=answer&questionId=' + ${question.id} +
                                 '&answerId=' + ${answer.id}}">
                                     <span class = "voting-button">
                                         <i class="fa-solid fa-caret-up"></i>
                                     </span>
                                 </a>
+                                </th:block>
                                 <span th:text = "${answer.votes}" class = "voting-count"></span>
+                                <span>Votes</span>
+                                <th:block th:unless="${#authentication.principal.username eq answer.user.email}">
                                 <a th:href="@{'/processVote?vote=-1&type=answer&questionId=' + ${question.id} +
                                 '&answerId=' + ${answer.id}}">
                                     <span class = "voting-button">
                                         <i class="fa-solid fa-caret-down"></i>
                                     </span>
                                 </a>
+                                </th:block>
+                                <th:block th:if="${#authentication.principal.username eq question.user.email}">
                                 <a th:href="@{'/acceptAnswer?questionId=' + ${question.id} +
                                 '&answerId=' + ${answer.id}}" class = "accepted-answer">
                                     <i class="fa-regular fa-circle-check"></i>
                                 </a>
+                                </th:block>
                             </div>
 
                             <div class = "content-body">

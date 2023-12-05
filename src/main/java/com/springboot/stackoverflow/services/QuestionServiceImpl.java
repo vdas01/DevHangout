@@ -169,7 +169,7 @@ public class QuestionServiceImpl implements QuestionService{
     public void acceptAnswer(Integer questionId, Integer answerId) {
         Question question = questionRepository.findById(questionId).get();
         Answer answer = answerRepository.findById(answerId).get();
-        if(question.getAcceptedAnswer().equals(answer)) {
+        if(question.getAcceptedAnswer() != null && question.getAcceptedAnswer().equals(answer)) {
             question.setAcceptedAnswer(null);
         }
         else
@@ -187,7 +187,7 @@ public class QuestionServiceImpl implements QuestionService{
             if (vote.equals(1)) {
                 for (Vote tempVote : user.getUserVote()) {
                     System.out.println("here");
-                    if (tempVote.getQuestionId().equals(questionId)) {
+                    if (tempVote.getQuestionId() != null && tempVote.getQuestionId().equals(questionId)) {
                         if (tempVote.getDirection().equals(1)) {
                             return;
                         } else if (tempVote.getDirection().equals(-1)) {
@@ -214,7 +214,7 @@ public class QuestionServiceImpl implements QuestionService{
                 userRepository.save(user);
             } else if (vote.equals(-1)) {
                 for (Vote tempVote : user.getUserVote()) {
-                    if (tempVote.getQuestionId().equals(questionId)) {
+                    if (tempVote.getQuestionId() != null && tempVote.getQuestionId().equals(questionId)) {
                         if (tempVote.getDirection().equals(-1)) {
                             return;
                         } else if (tempVote.getDirection().equals(1)) {
@@ -244,7 +244,7 @@ public class QuestionServiceImpl implements QuestionService{
         } else if (type.equals("answer")) {
             if (vote.equals(1)) {
                 for (Vote tempVote : user.getUserVote()) {
-                    if (tempVote.getAnswerId().equals(answerId)) {
+                    if (tempVote.getAnswerId() != null && tempVote.getAnswerId().equals(answerId)) {
                         if (tempVote.getDirection().equals(1)) {
                             return;
                         } else if (tempVote.getDirection().equals(-1)) {
@@ -271,7 +271,7 @@ public class QuestionServiceImpl implements QuestionService{
                 userRepository.save(user);
             } else if (vote.equals(-1)) {
                 for (Vote tempVote : user.getUserVote()) {
-                    if (tempVote.getAnswerId().equals(answerId)) {
+                    if (tempVote.getAnswerId() != null && tempVote.getAnswerId().equals(answerId)) {
                         if (tempVote.getDirection().equals(-1)) {
                             return;
                         } else if (tempVote.getDirection().equals(1)) {
