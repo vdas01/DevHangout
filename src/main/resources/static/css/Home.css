@@ -23,6 +23,21 @@
     background-color: white;
     width: 100vw;
 }
+
+#logout{
+background-color:orange;
+color=grey;
+padding: 0.5rem 1rem;
+font-weight:bold;
+font-size: 1rem;
+border-radius: 12%;
+box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
+}
+
+#logout:hover{
+background-color:#FF8C00;
+}
+
 .items{
     display: flex;
     gap: 1vw;
@@ -89,43 +104,13 @@ header a {
 }
 
 main {
+background-color: rgb(0,0,0,0.1);
     padding: 20px;
 }
 
-.questions-list {
+.row-container{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-article {
-    background-color: #eaeaea;
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 5px;
-    box-sizing: border-box;
-    width: 100%; /* Set width to 100% to ensure each article takes a full row */
-    transition: transform 0.3s ease-in-out;
-}
-
-.row-container {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.row-container p {
-    margin-right: 20px;
-}
-
-.row-container a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
-.row-container p:last-child {
-    margin-right: 0;
+    float:left;
 }
 
 .row-container .tags {
@@ -135,11 +120,18 @@ article {
 }
 
 .row-container .tag {
-    background-color: lightblue;
+    background-color: orange;
+    font-weight:bold;
     margin: 5px;
-    padding: 5px;
+    padding: 10px;
     border: 1px solid #ccc;
+    width:fit-content;
     border-radius: 12%;
+     box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
+}
+
+.row-container .tag a{
+color:black;
 }
 
 #parent {
@@ -227,4 +219,78 @@ article {
 .row:hover{
     background-color: rgb(0,0,0,0.07);
     border-radius: 10px 0px 0px 10px;
+}
+
+/* ------------------------ */
+.contentBox{
+    width:100%;
+    border-radius:20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    min-height: 40%;
+    background: #F0F1F4;
+    text-align: center;
+     margin-top:2vh;
+}
+
+.q_box{
+    display: flex;
+    margin-bottom: 20px;
+    flex-direction: column;
+    padding:2vh 1vw;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
+}
+.q_lower{
+    display: grid;
+    grid-template-columns: 80% 20%;
+    margin-top: 2vh;
+}
+.q_left{
+    display: flex;
+    gap:1vw;
+}
+.q_title{
+    font-size:1.6rem;
+    cursor: pointer;
+}
+.q_content{
+    font-size: 1.1rem;
+}
+.fa-heart{
+    color: red;
+}
+.fa-eye{
+    color:rgb(42, 65, 165);
+}
+.fa-message{
+    color: rgb(58, 183, 224);
+}
+.fa-comment{
+    color:green;
+}
+.fa-pen-clip{
+    color: goldenrod;
+    margin-right: 0.3vw;
+}
+.q_title:hover{
+    color:blue;
+}
+
+.author_box{
+    background-color: rgb(41, 41, 41);
+    border-radius: 1rem;
+    color: goldenrod;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
+}
+.author_box:hover{
+    background-color: goldenrod;
+    color:black;
+}
+.author_box:hover .fa-pen-clip{
+    color: black;
 }

@@ -273,6 +273,12 @@ ul#menuOptions li{
 .q_title:hover{
     color:blue;
 }
+.tick-accept{
+ color:green;
+}
+.tick_not_accept{
+color:red;
+}
 
 .author_box{
     background-color: rgb(41, 41, 41);

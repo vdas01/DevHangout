@@ -157,8 +157,11 @@
                                 <br>
                                 <input type="submit" value="Update">
                             </form>
-                            <a th:each="tag : ${question.tags}" th:text="${tag.name}" class="tags"
-                               th:href="@{/questions/tagged/{tagId}(tagId=${tag.id})}"></a>
+                            <span th:each="tag : ${question.tags}">
+                            <a th:text="${tag.name}" class="tags"
+                               th:href="@{/questions/tagged/{tagId}(tagId=${tag.id})}">
+                            </a>
+                                </span>
                         </div><br><br>
                     </div>
                 </div>

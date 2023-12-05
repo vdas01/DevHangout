@@ -246,6 +246,63 @@
                         <br><br><br><br>
                         <span>No Questions Asked</span><br><br>
                     </div>
+
+                <span class = "profile-heading">
+                         Answers Posted
+                </span>
+
+
+                <div  th:if="${!user.answerList.isEmpty()}" class="qs_box">
+                        <span th:each="answer : ${user.answerList}" class="q_box">
+                            <a th:text="${answer.content}" class="q_title" th:href="@{'/viewQuestion/' + ${answer.question.id}}">What is title</a>
+                            <div class="q_lower">
+                                  <div class="q_left">
+                                     <p class="answers_count" >
+                                         <i th:if="${answer.accepted}" class="fa-solid fa-circle-check tick-accept"></i>
+                                         <i th:if="!${answer.accepted}" class="fa-regular fa-circle-check tick_not_accept"></i>
+                                         <span th:if="${answer.accepted}"  class="answer_view" th:text="Accepted"></span>
+                                          <span th:if="!${answer.accepted}"  class="answer_view" th:text="'Not Accepted'"></span>
+                                      </p>
+                                        <p class="votes" >
+                                         <i class="fa-solid fa-heart"></i>
+                                         <span class="vote_text" th:text="${answer.votes}"></span>
+                                     </p>
+                                     <p class="comment_count">
+                                         <i class="fa-solid fa-comment q_icons"></i>
+                                         <span class="comment_view" th:text="${answer.comment.size()}"></span>
+                                     </p>
+                                 </div>
+                                 <div class="q_right">
+                                     <a class="author_box" th:href="@{'/userProfile?userId='+ ${answer.user.id}}">
+                                          <i class="fa-solid fa-pen-clip"></i>
+                                         <span class="author_view" th:text="${answer.author}"></span>
+                                      </a>
+                                 </div>
+                            </div>
+                        </span>
+
+                </div>
+
+                <div class="contentBox"  th:if="${user.answerList.isEmpty()}">
+                    <br><br><br><br>
+                    <span>No Answers Posted</span><br><br>
+                </div>
+
+                <span class = "profile-heading">
+                         Comments Posted
+                </span>
+
+
+                <div  th:if="${!user.commentList.isEmpty()}" class="qs_box">
+                        <span th:each="comment : ${user.commentList}" class="q_box">
+                            <a th:text="${comment.comment}" class="q_title" th:href="@{'/viewQuestion/' + ${answer.question.id}}">What is title</a>
+                        </span>
+                </div>
+
+                <div class="contentBox"  th:if="${user.commentList.isEmpty()}">
+                    <br><br><br><br>
+                    <span>No Comments Posted</span><br><br>
+                </div>
             </div>
         </div>
     </div>

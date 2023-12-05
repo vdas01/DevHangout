@@ -23,7 +23,7 @@ public class Answer {
     @JoinColumn(name = "question_id")
     private Question question;
     @Column(name = "photo")
-    private String photo;
+    private String photo = null;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
