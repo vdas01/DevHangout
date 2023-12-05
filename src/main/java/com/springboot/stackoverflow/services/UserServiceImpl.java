@@ -4,6 +4,7 @@ import com.springboot.stackoverflow.entity.Role;
 import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.repository.RoleRepository;
 import com.springboot.stackoverflow.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -90,6 +91,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return userRepository.findByEmail(authentication.getName());
+    }
+
+    @Transactional
+    @Override
+    public void saveCommentList(User user) {
+        userRepository.save(user);
     }
 
 }

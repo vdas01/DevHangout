@@ -14,4 +14,7 @@ public interface UserService {
 
     User findByEmail(String email);
 
+    User getUser();
+
+    void saveCommentList(User user);
 }

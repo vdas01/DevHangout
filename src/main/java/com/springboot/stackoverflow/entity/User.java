@@ -58,7 +58,7 @@ public class User {
     )
     private List<User> followers;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userName")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comment> commentList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -257,6 +257,7 @@ public class User {
         }
 
         commentList.add(theComment);
+        theComment.setUser(this);
     }
 
     public void addAnswer(Answer theAnswer) {
