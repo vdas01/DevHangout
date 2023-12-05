@@ -107,17 +107,8 @@
                 <h4>Users</h4>
             </div>
             <div class="filters">
-                <form th:action="@{/tags}" class="search_box">
-                    <input type="hidden" name="page" th:value="${currentPage}">
-                    <input type="hidden" name="limit" th:value="8">
-                    <input type="hidden" name="sortField" th:value="${sortField}">
-                    <input type="hidden" name="sortDir" th:value="${reverseSortDir}">
-                    <input type="text" name="search" id="search" placeholder="Filter by user name">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass filter_search_icon"></i></button>
-                </form>
                 <ul class="sort_items">
-                    <li class="sort_item"><a
-                    >Popular</a></li>
+                    <li class="sort_item"><a>Popular</a></li>
                     <li class="sort_item"><a href="/tag">Name</a></li>
                     <li class="sort_item"><a href="/tag">new</a></li>
                 </ul>
