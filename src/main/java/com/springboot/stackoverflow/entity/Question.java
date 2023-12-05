@@ -29,7 +29,7 @@ public class Question {
     private String photo = null;
 
     @Column(name = "views")
-    private int views;
+    private int views =0 ;
 
     @Column(name = "created_at",updatable = false)
     @CreationTimestamp
@@ -40,7 +40,7 @@ public class Question {
     private Date modifiedAt;
 
     @Column(name = "votes")
-    private int votes;
+    private int votes = 0;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "question")
     //in answers there should be private Question question; with joinColumn("foreign_key")
@@ -68,11 +68,9 @@ public class Question {
     private List<User> savedUsers;
 
     public Question(){}
-    public Question(String title, String content, int views, int votes) {
+    public Question(String title, String content) {
         this.title = title;
         this.content = content;
-        this.views = views;
-        this.votes = votes;
     }
 
     public Integer getId() {

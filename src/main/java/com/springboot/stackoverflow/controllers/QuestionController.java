@@ -69,7 +69,7 @@ public class QuestionController {
             }
         }
         model.addAttribute("add",add);
-        System.out.println("Question page:- " + add);
+
         return "questionPage";
     }
 
