@@ -126,17 +126,22 @@
             <div class = "question-detail">
                 <div class = "voting" th:if = "${isEdited != null}"></div>
                 <div class = "voting" th:unless = "${isEdited != null}">
+                    <th:block th:unless="${#authentication.principal.username eq question.user.email}">
                         <a th:href="@{'/processVote?vote=1&type=question&questionId=' + ${question.id}}">
                             <span class = "voting-button">
                                 <i class="fa-solid fa-caret-up"></i>
                             </span>
                         </a>
+                    </th:block>
                         <span th:text = "${question.votes}" class = "voting-count"></span>
+                    <span>Votes</span>
+                    <th:block th:unless="${#authentication.principal.username eq question.user.email}">
                         <a th:href="@{'/processVote?vote=-1&type=question&questionId=' + ${question.id}}">
                             <span class = "voting-button">
                                 <i class="fa-solid fa-caret-down"></i>
                             </span>
                         </a>
+                    </th:block>
                 </div>
 
                 <div th:if = "${isEdited != null}">
@@ -166,6 +171,7 @@
                             <span th:each = "tag : ${question.tags}" th:text = "*{tag.name}" class = "tags"></span>
                         </div><br><br>
 
+                        <th:block th:if="${#authentication.principal.username eq question.user.email}">
                         <a th:href = "@{/editQuestion/{questionId} (questionId = ${question.id})}"
                            class = "answer-action">
                             Edit
@@ -175,6 +181,7 @@
                            class = "answer-action">
                             Delete
                         </a>
+                        </th:block>
                         <a th:unless="${addComment != null}" th:href="@{/addComment/{questionId} (questionId = ${question.id})}"
                            class = "answer-action">comment</a>
                         <form th:if="${addComment != null}" th:action = "@{/saveComment}" method="Post">
@@ -187,10 +194,13 @@
                             <input type="submit" value="Comment">
                         </form>
                         <br><br>
-                        <div th:each = "comments : ${question.comments}" class="comment">
+                        <div th:if="${comments != null and comments.user != null}" th:each =
+                                "comments : ${question.comments}" class="comment">
+
                             <span th:text = "*{comments.user.userName}+' : '"  ></span><br>
                             <th:block th:unless="${editComment != null and editComment eq comments.id}">
                             <span th:text = "*{comments.comment}"  ></span><br>
+                                <th:block th:if="${#authentication.principal.username eq comments.email}">
                             <a  th:href = "@{/editComment/{commentId} (commentId = ${comments.id})}"
                                class = "answer-action">
                                 Edit
@@ -199,6 +209,7 @@
                                class = "answer-action">
                                 Delete
                             </a><br>
+                                </th:block>
                             </th:block>
                             <form th:if="${editComment != null and editComment eq comments.id}" th:action =
                                     "@{/updateComment/{commentId} (commentId = ${comments.id})}" method="Post">
@@ -239,23 +250,30 @@
                     <div th:unless = "${editAnswer != null && question.acceptedAnswer.id == editAnswer.id}">
                         <div class = "question-detail">
                             <div class = "voting">
+                                <th:block th:unless="${#authentication.principal.username eq answer.user.email}">
                                 <a th:href="@{'/processVote?vote=1&type=answer&questionId=' + ${question.id} +
                                 '&answerId=' + ${question.acceptedAnswer.id}}">
                                     <span class = "voting-button">
                                         <i class="fa-solid fa-caret-up"></i>
                                     </span>
                                 </a>
+                                </th:block>
                                 <span th:text = "${question.acceptedAnswer.votes}" class = "voting-count"></span>
+                                <span>Votes</span>
+                                <th:block th:unless="${#authentication.principal.username eq answer.user.email}">
                                 <a th:href="@{'/processVote?vote=-1&type=answer&questionId=' + ${question.id} +
                                 '&answerId=' + ${question.acceptedAnswer.id}}">
                                     <span class = "voting-button">
                                         <i class="fa-solid fa-caret-down"></i>
                                     </span>
                                 </a>
+                                </th:block>
+                                <th:block th:if="${#authentication.principal.username eq question.user.email}">
                                 <a th:href="@{'/acceptAnswer?questionId=' + ${question.id} +
                                 '&answerId=' + ${question.acceptedAnswer.id}}" class = "accepted-answer">
                                     <i class="fa-solid fa-circle-check"></i>
                                 </a>
+                                </th:block>
                             </div>
 
                             <div class = "content-body">
@@ -352,23 +370,30 @@
                     <div th:unless = "${editAnswer != null && answer.id == editAnswer.id}">
                         <div class = "question-detail">
                             <div class = "voting">
+                                <th:block th:unless="${#authentication.principal.username eq answer.user.email}">
                                 <a th:href="@{'/processVote?vote=1&type=answer&questionId=' + ${question.id} +
                                 '&answerId=' + ${answer.id}}">
                                     <span class = "voting-button">
                                         <i class="fa-solid fa-caret-up"></i>
                                     </span>
                                 </a>
+                                </th:block>
                                 <span th:text = "${answer.votes}" class = "voting-count"></span>
+                                <span>Votes</span>
+                                <th:block th:unless="${#authentication.principal.username eq answer.user.email}">
                                 <a th:href="@{'/processVote?vote=-1&type=answer&questionId=' + ${question.id} +
                                 '&answerId=' + ${answer.id}}">
                                     <span class = "voting-button">
                                         <i class="fa-solid fa-caret-down"></i>
                                     </span>
                                 </a>
+                                </th:block>
+                                <th:block th:if="${#authentication.principal.username eq question.user.email}">
                                 <a th:href="@{'/acceptAnswer?questionId=' + ${question.id} +
                                 '&answerId=' + ${answer.id}}" class = "accepted-answer">
                                     <i class="fa-regular fa-circle-check"></i>
                                 </a>
+                                </th:block>
                             </div>
 
                             <div class = "content-body">
@@ -385,7 +410,7 @@
                                 <img th:if="${answer.photo != null}" th:src="@{'/css/image/' + ${answer.photo}}"
                                      height="200px" width="200px" class="show_img">
                                 <br>
-
+                                <th:block th:if="${#authentication.principal.username eq answer.user.email}">
                                 <a th:href = "@{/editAnswer/{questionId}/{answerId} (questionId = ${question.id},
                                 answerId = *{answer.id})}" class = "answer-action">
                                     Edit
@@ -395,7 +420,7 @@
                                 answerId = *{answer.id})}" class = "answer-action">
                                     Delete
                                 </a>
-
+                                </th:block>
                                 <a th:unless="*{addAnswerComment != null and addAnswerComment eq answer.id}"
                                    th:href="@{/addAnswerComment/{questionId}/{answerID}
                                    (questionId = ${question.id},answerID=*{answer.id})}"
@@ -413,11 +438,13 @@
                                     <input type="submit" value="Comment">
                                 </form>
                                 <br><br>
-                                <div th:each = "comments : *{answer.comment}" class="comment">
+                                <div th:if="${comments != null and comments.user != null}" th:each =
+                                        "comments : *{answer.comment}" class="comment">
                                     <span th:text = "*{comments.user.userName}+' : '"  ></span><br>
+                                    <th:block th:unless="${editAnswerComment != null and editAnswerComment eq comments.id}">
                                     <span th:text = "*{comments.comment}"  ></span><br>
-                                    <a th:unless="${editAnswerComment != null and editAnswerComment eq comments.id}"
-                                       th:href = "@{/editAnswerComment/{commentId}/{questionId}
+                                    <th:block th:if="${#authentication.principal.username eq comments.email}">
+                                    <a th:href = "@{/editAnswerComment/{commentId}/{questionId}
                                         (commentId = ${comments.id},questionId = ${question.id})}"
                                        class = "answer-action">
                                         Edit
@@ -426,6 +453,8 @@
                                        class = "answer-action">
                                         Delete
                                     </a><br>
+                                    </th:block>
+                                    </th:block>
                                     <form th:if="${editAnswerComment != null and editAnswerComment eq comments.id}"
                                           th:action ="@{/updateAnswerComment/{commentId} (commentId = ${comments.id})}"
                                           method="Post">

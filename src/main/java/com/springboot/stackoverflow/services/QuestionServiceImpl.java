@@ -169,7 +169,8 @@ public class QuestionServiceImpl implements QuestionService{
     public void acceptAnswer(Integer questionId, Integer answerId) {
         Question question = questionRepository.findById(questionId).get();
         Answer answer = answerRepository.findById(answerId).get();
-        if(question.getAcceptedAnswer()!= null && question.getAcceptedAnswer().equals(answer)) {
+
+        if(question.getAcceptedAnswer() != null && question.getAcceptedAnswer().equals(answer)) {
             question.setAcceptedAnswer(null);
         }
         else
