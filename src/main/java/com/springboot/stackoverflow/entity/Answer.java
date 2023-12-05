@@ -2,6 +2,7 @@ package com.springboot.stackoverflow.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,17 +22,13 @@ public class Answer {
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "question_id")
     private Question question;
-
     @Column(name = "photo")
     private String photo;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-
     @Column(name = "votes")
     private int votes = 0;
-
     @Column(name = "accepted")
     private boolean accepted = false;
 
@@ -95,6 +92,14 @@ public class Answer {
 
     public void setComment(List<Comment> comment) {
         this.comment = comment;
+    }
+
+    public void addComment(Comment comments) {
+        if (comment == null) {
+            comment = new ArrayList<>();
+        }
+        comment.add(comments);
+        comments.setAnswer(this);
     }
 
     public String getPhoto() {

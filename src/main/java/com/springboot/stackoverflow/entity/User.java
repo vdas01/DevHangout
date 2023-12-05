@@ -49,7 +49,6 @@ public class User {
     )
     private List<Question> savedQuestions;
 
-
     @ManyToMany()
     @JoinTable(
             name = "FollowRelation",
@@ -58,27 +57,26 @@ public class User {
     )
     private List<User> followers;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userName")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comment> commentList;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Answer> answerList;
-
     @ManyToMany
     @JoinTable(name = "user_badge",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns =@JoinColumn(name ="badge_id")
     )
     private List<Badge> userBadges;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Question> userQuestions;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Vote> userVotes;
     @ManyToMany()
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> role;
+
     public User() {}
 
     public User(String userName, String email,
@@ -88,6 +86,14 @@ public class User {
         this.password = password;
         this.reputation = 0;
         this.about = "";
+    }
+
+    public List<Vote> getUserVote() {
+        return userVotes;
+    }
+
+    public void setUserVote(List<Vote> userVote) {
+        this.userVotes = userVote;
     }
 
     public String getCountry() {
@@ -257,6 +263,7 @@ public class User {
         }
 
         commentList.add(theComment);
+        theComment.setUser(this);
     }
 
     public void addAnswer(Answer theAnswer) {
@@ -289,6 +296,15 @@ public class User {
         }
 
         role.add(theRole);
+    }
+
+    public void addVote(Vote theVote) {
+        if(userVotes == null) {
+            userVotes = new ArrayList<>();
+        }
+
+        userVotes.add(theVote);
+        theVote.setUser(this);
     }
 
     @Override

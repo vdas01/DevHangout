@@ -21,9 +21,11 @@ public interface QuestionService {
 
     List<Question> findQuestionsList();
 
+    void votingSystem(Integer vote, String type, Integer questionId, Integer answerId);
+
+    void saveCommentList(Question question);
     void bookmarkQuestion(int questionId);
 
     void removeBookmarkQuestion(int questionId);
-
 
 }

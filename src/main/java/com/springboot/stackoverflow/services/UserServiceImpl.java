@@ -5,6 +5,7 @@ import com.springboot.stackoverflow.entity.Role;
 import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.repository.RoleRepository;
 import com.springboot.stackoverflow.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -94,6 +95,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+
     public List<Question> getBookmarkQuestionsByUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName());
@@ -101,4 +103,36 @@ public class UserServiceImpl implements UserService {
         return user.getSavedQuestions();
     }
 
+    public User getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return userRepository.findByEmail(authentication.getName());
+    }
+
+    @Transactional
+    @Override
+    public void saveCommentList(User user) {
+        userRepository.save(user);
+    }
+
+    public void updateUser(String userName, String country, String title, String about) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName());
+
+        user.setUserName(userName);
+        user.setCountry(country);
+        user.setTitle(title);
+        user.setAbout(about);
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public User editUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user=userRepository.findByEmail(authentication.getName());
+        return user;
+    }
+
 }
+
+

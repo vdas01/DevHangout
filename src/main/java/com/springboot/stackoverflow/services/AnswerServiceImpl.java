@@ -81,4 +81,14 @@ public class AnswerServiceImpl implements AnswerService{
     public void deleteAnswer(Integer answerId) {
             answerRepository.deleteById(answerId);
     }
+
+    @Override
+    public Answer findQuestionById(int answerId) {
+        return answerRepository.findById(answerId).orElse(null);
+    }
+
+    @Override
+    public void saveCommentList(Answer answer) {
+        answerRepository.save(answer);
+    }
 }

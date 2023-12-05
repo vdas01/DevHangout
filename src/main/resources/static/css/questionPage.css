@@ -101,11 +101,16 @@
 .voting-button {
     border: 2px solid rgba(0, 0, 0, 0.5);
     border-radius: 100%;
-    height: 30px;
-    width: 30px;
     cursor: pointer;
-    padding: 5% 10% 10% 10%;
-    margin: 10px 0px;
+    padding: 20% 50% 20% 50%;
+    margin: 0% -150%;
+    color: black;
+    text-decoration: none;
+}
+
+.voting-count {
+    text-align: center;
+    width: 100%;
 }
 
 .voting-button:hover {
@@ -126,10 +131,10 @@
 .voting {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: end;
     min-height: 100px;
     padding-top: 20px;
+    gap: 10px;
 }
 
 input[type = "submit"] {
@@ -149,6 +154,15 @@ input[type = "submit"] {
 
 .question-content {
     font-size: 2rem;
+}
+
+.comment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width:80%;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
 }
 
 .tags {

@@ -42,9 +42,17 @@
             </li>
             <li><a href=""><i class="fa-solid fa-circle-question icons"></i></a></li>
         </ul>
+
         <span id = "login-logout">
+            <th:block th:unless="${#authorization.expression('isAuthenticated()')}">
             <a th:href="@{/login}">Login</a>
             <a th:href="@{/signup}">signup</a>
+            </th:block>
+            <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                <form method="post" th:action = "@{/logout}">
+                    <input type="submit" value="Logout">
+                </form>
+            </th:block>
         </span>
     </nav>
     <div id = "parent">
