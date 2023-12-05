@@ -17,6 +17,9 @@ public interface UserService {
 
     User editUser();
 
+    User getUser();
+
+    void saveCommentList(User user);
 }
 
 
