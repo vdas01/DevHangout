@@ -187,7 +187,8 @@
                             Delete
                         </a>
                         </th:block>
-                        <a th:unless="${addComment != null}" th:href="@{/addComment/{questionId} (questionId = ${question.id})}"
+                        <a th:unless="${addComment != null}" th:href="@{/addComment/{questionId}
+                        (questionId = ${question.id})}"
                            class = "answer-action">comment</a>
                         <form th:if="${addComment != null}" th:action = "@{/saveComment}" method="Post">
                             Comment:
@@ -307,11 +308,11 @@
                                 </a>
                                 </th:block>
 
-                                <a th:unless="${addAnswerComment != null and addAnswerComment eq question.acceptedAnswer.id}"
+                                <a th:unless="${addAnswerComment != null and
+                                addAnswerComment eq question.acceptedAnswer.id}"
                                    th:href="@{/addAnswerComment/{questionId}/{answerID}
                                    (questionId = ${question.id},answerID=${question.acceptedAnswer.id})}"
                                    class = "answer-action">comment</a>
-
                                 <form th:if="${addAnswerComment != null and addAnswerComment eq question.acceptedAnswer.id}"
                                       th:action = "@{/saveAnswerComment}" method="Post">
                                     Comment:

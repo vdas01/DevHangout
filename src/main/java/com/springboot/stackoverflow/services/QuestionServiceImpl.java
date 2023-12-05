@@ -180,6 +180,11 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     @Override
+    public List<Question> searchProducts(String search) {
+        return questionRepository.searchQuestions(search);
+    }
+
+    @Override
     public void votingSystem(Integer vote, String type, Integer questionId, Integer answerId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName());
