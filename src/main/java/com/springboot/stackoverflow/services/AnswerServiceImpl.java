@@ -83,7 +83,7 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
-    public Answer findQuestionById(int answerId) {
+    public Answer findAnswerById(int answerId) {
         return answerRepository.findById(answerId).orElse(null);
     }
 

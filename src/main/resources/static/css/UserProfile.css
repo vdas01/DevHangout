@@ -168,7 +168,6 @@ ul#menuOptions li{
     border-radius:20px;
     padding: 10px;
     margin-bottom: 20px;
-    min-height: 40%;
     background: #F0F1F4;
     text-align: center;
 }
@@ -204,7 +203,7 @@ ul#menuOptions li{
 }
 
 .pen {
-    padding-right: 5px;
+    padding-right: 15px;
 }
 
 #login-logout {
