@@ -120,14 +120,19 @@
                 </div>
             </div>
             <div class = "question-detail">
-                <div class = "voting">
-                    <span class = "voting-button">
-                        <i class="fa-solid fa-caret-up"></i>
-                    </span>
-                        <span th:text = "${question.votes}"></span>
-                        <span class = "voting-button">
-                        <i class="fa-solid fa-caret-down"></i>
-                    </span>
+                <div class = "voting" th:if = "${isEdited != null}"></div>
+                <div class = "voting" th:unless = "${isEdited != null}">
+                        <a th:href="@{'/processVote?vote=1&type=question&questionId=' + ${question.id}}">
+                            <span class = "voting-button">
+                                <i class="fa-solid fa-caret-up"></i>
+                            </span>
+                        </a>
+                        <span th:text = "${question.votes}" class = "voting-count"></span>
+                        <a th:href="@{'/processVote?vote=-1&type=question&questionId=' + ${question.id}}">
+                            <span class = "voting-button">
+                                <i class="fa-solid fa-caret-down"></i>
+                            </span>
+                        </a>
                 </div>
 
                 <div th:if = "${isEdited != null}">
@@ -140,9 +145,9 @@
                                 <br>
                                 <input type="submit" value="Update">
                             </form>
-                            <a th:each="tag : ${question.tags}" th:text="${tag.name}" class="tags" th:href="@{/questions/tagged/{tagId}(tagId=${tag.id})}"></a>
+                            <a th:each="tag : ${question.tags}" th:text="${tag.name}" class="tags"
+                               th:href="@{/questions/tagged/{tagId}(tagId=${tag.id})}"></a>
                         </div><br><br>
-
                     </div>
                 </div>
 
@@ -150,7 +155,8 @@
                     <div class = "content-body">
                         <div class = "question-content">
                             <p th:text = "${question.content}"></p>
-                            <img th:if="${question.photo != null}" th:src="@{'/css/image/' + ${question.photo}}" height="400px" width="400px" class="show_img">
+                            <img th:if="${question.photo != null}" th:src="@{'/css/image/' + ${question.photo}}"
+                                 height="400px" width="400px" class="show_img">
                             <br>
                             <span th:each = "tag : ${question.tags}" th:text = "*{tag.name}" class = "tags"></span>
                         </div><br><br>
@@ -199,6 +205,7 @@
                     </div>
                 </div>
             </div>
+            <hr>
 
             <div>
                 <span th:text = "${question.answers.size()}"></span>Answer
@@ -206,13 +213,6 @@
                     <div th:if="${editAnswer != null && answer.id == editAnswer.id}">
                         <div class = "question-detail">
                             <div class = "voting">
-                            <span class = "voting-button">
-                                <i class="fa-solid fa-caret-up"></i>
-                            </span>
-                                <span th:text = "${question.votes}"></span>
-                                <span class = "voting-button">
-                                <i class="fa-solid fa-caret-down"></i>
-                            </span>
                             </div>
 
                             <form th:action = "@{/updateAnswer/{questionId}/{answerId}
@@ -229,18 +229,25 @@
                     <div th:unless = "${editAnswer != null && answer.id == editAnswer.id}">
                         <div class = "question-detail">
                             <div class = "voting">
-                            <span class = "voting-button">
-                                <i class="fa-solid fa-caret-up"></i>
-                            </span>
-                                <span th:text = "${question.votes}"></span>
-                                <span class = "voting-button">
-                                <i class="fa-solid fa-caret-down"></i>
-                            </span>
+                                <a th:href="@{'/processVote?vote=1&type=answer&questionId=' + ${question.id} +
+                                '&answerId=' + ${answer.id}}">
+                                    <span class = "voting-button">
+                                        <i class="fa-solid fa-caret-up"></i>
+                                    </span>
+                                </a>
+                                <span th:text = "${answer.votes}" class = "voting-count"></span>
+                                <a th:href="@{'/processVote?vote=-1&type=answer&questionId=' + ${question.id} +
+                                '&answerId=' + ${answer.id}}">
+                                    <span class = "voting-button">
+                                        <i class="fa-solid fa-caret-down"></i>
+                                    </span>
+                                </a>
                             </div>
 
                             <div class = "content-body">
                                 <div th:text = "*{answer.content}"></div><br><br>
-                                <img th:if="${answer.photo != null}" th:src="@{'/css/image/' + ${answer.photo}}" height="200px" width="200px" class="show_img">
+                                <img th:if="${answer.photo != null}" th:src="@{'/css/image/' + ${answer.photo}}"
+                                     height="200px" width="200px" class="show_img">
                                 <br>
 
                                 <a th:href = "@{/editAnswer/{questionId}/{answerId} (questionId = ${question.id},
@@ -294,13 +301,14 @@
                                 </div>
                             </div>
                         </div>
+                        <hr>
                     </div>
                 </div>
             </div>
             <div>
                 <p style="font-size: x-large">Your Answer</p>
-
-                <form th:action = "@{/addAnswer{questionId} (questionId = ${question.id})}" method="post" enctype="multipart/form-data">
+                <form th:action = "@{/addAnswer{questionId} (questionId = ${question.id})}" method="post"
+                      enctype="multipart/form-data">
                     <textarea name = "content" rows = "10" cols = "130" ></textarea><br><br><br>
                     <input type="file" name="imageName" accept="image/**" class="add_image">
                     <input type="submit" value="Post Answer">

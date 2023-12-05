@@ -9,22 +9,23 @@
           crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <nav id="navbar">
-        <svg aria-hidden="true" class="native svg-icon iconLogoGlyphMd" width="32" height="37" viewBox="0 0 32 37">
-            <path d="M26 33v-9h4v13H0V24h4v9h22Z" fill="#BCBBBB"></path><path d="m21.5 0-2.7 2 9.9 13.3 2.7-2L21.5
+<nav id="navbar">
+    <svg aria-hidden="true" class="native svg-icon iconLogoGlyphMd" width="32" height="37" viewBox="0 0 32 37">
+        <path d="M26 33v-9h4v13H0V24h4v9h22Z" fill="#BCBBBB"></path><path d="m21.5 0-2.7 2 9.9 13.3 2.7-2L21.5
                     0ZM26 18.4 13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5ZM9.1 15.2l15 7 1.4-3-15-7-1.4 3Zm14
                     10.79.68-2.95-16.1-3.35L7
                     23l16.1 2.99ZM23 30H7v-3h16v3Z" fill="#F48024"></path><span id="title">
                     Stack<b>overflow</b>
                 </span>
-        </svg>
-        <div class="search">
-            <input type="search" name="search_bar" id="search_bar">
-            <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
-        </div>
-        <span class="profile">
+    </svg>
+    <div class="search">
+        <input type="search" name="search_bar" id="search_bar">
+        <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
+    </div>
+    <span class="profile">
                 <img src="" alt="" id="user_pic">
             </span>
+<<<<<<< HEAD
         <ul class="items">
             <li>
                 <a th:href="@{/userProfile}">
@@ -43,7 +44,7 @@
             <li><a href=""><i class="fa-solid fa-circle-question icons"></i></a></li>
         </ul>
         <span id = "login-logout">
-             <th:block th:unless="${#authorization.expression('isAuthenticated()')}">
+            <th:block th:unless="${#authorization.expression('isAuthenticated()')}">
             <a th:href="@{/login}">Login</a>
             <a th:href="@{/signup}">signup</a>
             </th:block>
@@ -53,161 +54,159 @@
                 </form>
             </th:block>
         </span>
-    </nav>
+</nav>
 
-    <div id = "parent">
-        <div id = "sidebar-container">
-            <div id="sidebar">
-                <div class="row">
-                    <a href="/" >
-                        <i class="fa-solid fa-house side_icons"></i>
-                        <small class="side-text">Home</small>
-                    </a>
-                </div>
+<div id = "parent">
+    <div id = "sidebar-container">
+        <div id="sidebar">
+            <div class="row">
+                <a href="/" >
+                    <i class="fa-solid fa-house side_icons"></i>
+                    <small class="side-text">Home</small>
+                </a>
+            </div>
 
-                <div class="row">
-                    <a href="/" >
-                        <i class="fa-solid fa-circle-question side_icons"></i>
-                        <small class="side-text">Questions</small>
-                    </a>
-                </div>
+            <div class="row">
+                <a href="/" >
+                    <i class="fa-solid fa-circle-question side_icons"></i>
+                    <small class="side-text">Questions</small>
+                </a>
+            </div>
 
-                <div class="row">
-                    <a href="/tags" >
-                        <i class="fa-solid fa-tag side_icons"></i>
-                        <small class="side-text">Tags</small>
-                    </a>
-                </div>
-                <br><br>
-                <div class="row">
-                    <a href="/users/saves">
-                        <i class="fa-solid fa-bookmark side_icons"></i>
-                        <small class="side-text">Saves</small>
-                    </a>
-                </div>
-                <div class="row active-bar">
-                    <a href="/users">
-                        <i class="fa-solid fa-user side_icons"></i>
-                        <small class="side-text active">Users</small>
-                    </a>
-                </div>
-                <br>
-                <div class="row">
-                    <a href="/discussions">
-                        <i class="fa-solid fa-message side_icons"></i>
-                        <small class="side-text">Discussions</small>
-                    </a>
-                </div>
+            <div class="row">
+                <a href="/tags" >
+                    <i class="fa-solid fa-tag side_icons"></i>
+                    <small class="side-text">Tags</small>
+                </a>
+            </div>
+            <br><br>
+            <div class="row">
+                <a href="/users/saves">
+                    <i class="fa-solid fa-bookmark side_icons"></i>
+                    <small class="side-text">Saves</small>
+                </a>
+            </div>
+            <div class="row active-bar">
+                <a href="/users">
+                    <i class="fa-solid fa-user side_icons"></i>
+                    <small class="side-text active">Users</small>
+                </a>
+            </div>
+            <br>
+            <div class="row">
+                <a href="/discussions">
+                    <i class="fa-solid fa-message side_icons"></i>
+                    <small class="side-text">Discussions</small>
+                </a>
             </div>
         </div>
+    </div>
 
-        <div id="userContainer">
-            <div id="userDetail">
-                <div id="profilePhoto">
-                    <img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-icon-logo-png-transparent-svg-vector-bie-supply-14.png" width="50%" >
-                </div>
+    <div id="userContainer">
+        <div id="userDetail">
+            <div id="profilePhoto">
+                <img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-icon-logo-png-transparent-svg-vector-bie-supply-14.png" width="50%" >
+            </div>
 
-                <div id="profileName">
-                    <span th:text="${user.userName}" id = "userName"></span>
-                    <br>
-                    <span id="memberSince">
+            <div id="profileName">
+                <span th:text="${user.userName}" id = "userName"></span>
+                <br>
+                <span id="memberSince">
                         <svg aria-hidden="true" class="svg-icon iconCake" width="18" height="18" viewBox="0 0 18 18">
                             <path d="M9 4.5a1.5 1.5 0 0 0 1.28-2.27L9 0 7.72 2.23c-.14.22-.22.48-.22.77 0 .83.68 1.5 1.5 1.5Zm3.45 7.5-.8-.81-.81.8c-.98.98-2.69.98-3.67 0l-.8-.8-.82.8c-.49.49-1.14.76-1.83.76-.55 0-1.3-.17-1.72-.46V15c0 1.1.9 2 2 2h10a2 2 0 0 0 2-2v-2.7c-.42.28-1.17.45-1.72.45-.69 0-1.34-.27-1.83-.76Zm1.3-5H10V5H8v2H4.25C3 7 2 8 2 9.25v.9c0 .81.91 1.47 1.72 1.47.39 0 .77-.14 1.03-.42l1.61-1.6 1.6 1.6a1.5 1.5 0 0 0 2.08 0l1.6-1.6 1.6 1.6c.28.28.64.43 1.03.43.81 0 1.73-.67 1.73-1.48v-.9C16 8.01 15 7 13.75 7Z">
                             </path>
                         </svg>
                         Member Since: <span th:text = "${#dates.format(user.createdAt, 'dd/MM/YYYY')}"></span>
                     </span>
-                </div>
-
-                <div id="editButtons">
-                    <span th:if = "${#strings.equals(#authentication.principal.username, user.email)}">
-                        <a href="#"><i class="fa-solid fa-pen pen"></i>Edit Profile</a>
-                    </span>
-                    <a href="#">Network Profile</a>
-                </div>
             </div>
 
-            <div id="menu">
-                <ul id="menuOptions">
-                    <li><a href="#">Profile</a> </li>
-                    <li><a href="#">Activity</a></li>
-                    <li><a href="#">Saves</a> </li>
-                    <li><a href="#">Settings</a> </li>
-                </ul>
+            <div id="editButtons">
+                <a href="/editProfile"><i class="fa-solid fa-pen pen"></i>Edit Profile</a>
+                <a href="#">Network Profile</a>
             </div>
+        </div>
 
-                <div id="userDetails">
-                <div class = "status-view">
-                    <div class = "profile-heading">
-                        Stats
-                    </div>
-                    <div id="statsBox">
+        <div id="menu">
+            <ul id="menuOptions">
+                <li><a href="#">Profile</a> </li>
+                <li><a href="#">Activity</a></li>
+                <li><a href="#">Saves</a> </li>
+                <li><a href="#">Settings</a> </li>
+            </ul>
+        </div>
+
+        <div id="userDetails">
+            <div class = "status-view">
+                <div class = "profile-heading">
+                    Stats
+                </div>
+                <div id="statsBox">
                     <span class = "statusDetail">
                         <span th:text="${user.reputation}" style = "color: black"></span>
                         reputation
                     </span>
-                        <span class = "statusDetail">
+                    <span class = "statusDetail">
                         <span th:text="${user.followers.size()}" style = "color: black"></span>
                         reach
                     </span>
-                        <span class = "statusDetail">
+                    <span class = "statusDetail">
                         <span th:text="${user.answerList.size()}" style = "color: black"></span>
                         answers
                     </span>
-                        <span class = "statusDetail">
+                    <span class = "statusDetail">
                         <span th:text="${user.userQuestions.size()}" style = "color: black"></span>
                         questions
                     </span>
-                    </div>
                 </div>
+            </div>
 
-                <div id="about">
+            <div id="about">
                 <span class = "profile-heading">
                     About
                 </span>
 
-                    <div th:if="${!user.about.isEmpty()}">
-                        <span th:text="${user.about}"></span><br><br><br>
-                    </div>
+                <div th:if="${!user.about.isEmpty()}">
+                    <span th:text="${user.about}"></span><br><br><br>
+                </div>
 
-                    <div class="contentBox"  th:if="${user.about.isEmpty()}">
-                        <br><br><br><br>
-                        <span>
+                <div class="contentBox"  th:if="${user.about.isEmpty()}">
+                    <br><br><br><br>
+                    <span>
                         Your about me section is currently blank. Would you <br>like to add one? <br>
                         <a href = "#">Edit profile</a>
                     </span>
-                        <br><br>
-                    </div>
+                    <br><br>
+                </div>
 
-                    <span class = "profile-heading">
+                <span class = "profile-heading">
                     Badges
                 </span>
 
-                    <div th:if="${!user.userBadges.isEmpty()}">
-                        <span th:text="${user.userBadges}"></span><br><br><br>
-                    </div>
+                <div th:if="${!user.userBadges.isEmpty()}">
+                    <span th:text="${user.userBadges}"></span><br><br><br>
+                </div>
 
-                    <div class="contentBox" th:if="${user.userBadges.isEmpty()}">
-                        <br><br><br><br>
-                        <span>No badges earned</span><br><br>
-                    </div>
+                <div class="contentBox" th:if="${user.userBadges.isEmpty()}">
+                    <br><br><br><br>
+                    <span>No badges earned</span><br><br>
+                </div>
 
-                    <span class = "profile-heading">
+                <span class = "profile-heading">
                     Posts
                 </span>
 
-                    <div  th:if="${!true}">
-                        <span th:text="${user.post}"></span><br><br><br>
-                    </div>
+                <div  th:if="${!true}">
+                    <span th:text="${user.post}"></span><br><br><br>
+                </div>
 
-                    <div class="contentBox"  th:if="${true}">
-                        <br><br><br><br>
-                        <span>No Questions Asked</span><br><br>
-                    </div>
+                <div class="contentBox"  th:if="${true}">
+                    <br><br><br><br>
+                    <span>No Questions Asked</span><br><br>
                 </div>
             </div>
         </div>
-        <div></div>
     </div>
+    <div></div>
+</div>
 </body>
 </html>
