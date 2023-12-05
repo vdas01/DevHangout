@@ -110,20 +110,19 @@
                 </div>
             </div>
             <div class = "question-detail">
-                <div class = "voting">
-                    <span th:unless = "${isEdited != null}">
+                <div class = "voting" th:if = "${isEdited != null}"></div>
+                <div class = "voting" th:unless = "${isEdited != null}">
                         <a th:href="@{'/processVote?vote=1&type=question&questionId=' + ${question.id}}">
                             <span class = "voting-button">
                                 <i class="fa-solid fa-caret-up"></i>
                             </span>
                         </a>
-                        <span th:text = "${question.votes}"></span>
+                        <span th:text = "${question.votes}" class = "voting-count"></span>
                         <a th:href="@{'/processVote?vote=-1&type=question&questionId=' + ${question.id}}">
                             <span class = "voting-button">
                                 <i class="fa-solid fa-caret-down"></i>
                             </span>
                         </a>
-                    </span>
                 </div>
 
                 <div th:if = "${isEdited != null}">
@@ -164,6 +163,7 @@
                     </div>
                 </div>
             </div>
+            <hr>
 
             <div>
                 <span th:text = "${question.answers.size()}"></span>Answer
@@ -193,7 +193,7 @@
                                         <i class="fa-solid fa-caret-up"></i>
                                     </span>
                                 </a>
-                                <span th:text = "${answer.votes}"></span>
+                                <span th:text = "${answer.votes}" class = "voting-count"></span>
                                 <a th:href="@{'/processVote?vote=-1&type=answer&questionId=' + ${question.id} +
                                 '&answerId=' + ${answer.id}}">
                                     <span class = "voting-button">
@@ -223,6 +223,7 @@
                                 </a>
                             </div>
                         </div>
+                        <hr>
                     </div>
                 </div>
             </div>
