@@ -30,28 +30,28 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public void saveComment(Comment comments,int questionId) {
         User user=userService.getUser();
-        comments.setUserName(user.getUserName());
-        comments.setEmail(user.getEmail());
-        Question question = questionService.findQuestionById(questionId);
-        question.addComment(comments);
-        user.addComment(comments);
-
-        questionService.saveCommentList(question);
+        Comment comment = new Comment(comments.getComment());
+        comment.setUserName(user.getUserName());
+        comment.setEmail(user.getEmail());
+        user.addComment(comment);
         userService.saveCommentList(user);
 
+        Question question = questionService.findQuestionById(questionId);
+        question.addComment(comment);
+        questionService.saveCommentList(question);
     }
 
     public void saveAnswerComment(Comment comments,int answerId) {
         User user=userService.getUser();
-        comments.setUserName(user.getUserName());
-        comments.setEmail(user.getEmail());
-        user.addComment(comments);
+        Comment comment = new Comment(comments.getComment());
+        comment.setUserName(user.getUserName());
+        comment.setEmail(user.getEmail());
+        user.addComment(comment);
         userService.saveCommentList(user);
 
-        Answer answer = answerService.findQuestionById(answerId);
-        answer.addComment(comments);
+        Answer answer = answerService.findAnswerById(answerId);
+        answer.addComment(comment);
         answerService.saveCommentList(answer);
-
     }
 
     @Override

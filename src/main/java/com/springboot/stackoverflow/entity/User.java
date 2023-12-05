@@ -40,15 +40,6 @@ public class User {
             inverseJoinColumns=@JoinColumn(name = "following_id") // field from other class
     )
     private List<User> followings;
-
-    @ManyToMany()
-    @JoinTable(
-            name = "saved_question_user",
-            joinColumns = @JoinColumn(name = "saved_user_id"), // field from current class
-            inverseJoinColumns=@JoinColumn(name = "saved_question_id") // field from other class
-    )
-    private List<Question> savedQuestions;
-
     @ManyToMany()
     @JoinTable(
             name = "FollowRelation",
@@ -56,9 +47,16 @@ public class User {
             inverseJoinColumns=@JoinColumn(name = "follower_id") // field from other class
     )
     private List<User> followers;
-
+    @ManyToMany()
+    @JoinTable(
+            name = "saved_question_user",
+            joinColumns = @JoinColumn(name = "saved_user_id"), // field from current class
+            inverseJoinColumns=@JoinColumn(name = "saved_question_id") // field from other class
+    )
+    private List<Question> savedQuestions;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comment> commentList;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Answer> answerList;
     @ManyToMany
@@ -241,7 +239,7 @@ public class User {
         this.savedQuestions = savedQuestions;
     }
 
-    public void addFollowers(User theUser) {
+    public void addFollower(User theUser) {
         if(followers == null) {
             followers = new ArrayList<>();
         }

@@ -60,6 +60,7 @@ public class UserController {
         User user = userService.findUserByUserId(userId);
         model.addAttribute("user", user);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("loggedUser", userService.findByEmail(authentication.getName()));
 
         return "UserProfile";
     }
@@ -96,6 +97,22 @@ public class UserController {
                                  @RequestParam String about){
         userService.updateUser(userName, country, title, about);
         return "redirect:/userProfile";
+    }
+
+    @GetMapping("/follow")
+    public String follow(@RequestParam("follower") String follower,
+                         @RequestParam("following") String following) {
+        userService.follow(follower, following);
+
+        return "redirect:/userProfile?userId=" + userService.findByEmail(following).getId();
+    }
+
+    @GetMapping("/unfollow")
+    public String unfollow(@RequestParam("follower") String follower,
+                         @RequestParam("following") String following) {
+        userService.unfollow(follower, following);
+
+        return "redirect:/userProfile?userId=" + userService.findByEmail(following).getId();
     }
 }
 
