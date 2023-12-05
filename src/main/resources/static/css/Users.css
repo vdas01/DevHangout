@@ -78,7 +78,7 @@
 
 #parent {
     display: grid;
-    grid-template-columns: 20% 58% 20%;
+    grid-template-columns: 20% 80%;
     min-height: 100vh;
     padding-top: 60px;
 }
@@ -271,30 +271,19 @@ margin-right:0.8vw;
 }
 
 /* --------sidebar---------- */
-
+.userGrid{
+display:grid;
+grid-template-columns:25% 25% 25% 25%;
+}
 .user_container{
-    display: grid;
-    grid-template-columns: repeat(4,23%);
-    gap: 2%;
-    margin-top: 2vh;
-}
-.user{
-    display: flex;
-    gap: 1vw;
-    padding:1vh 2vw;
-    /* border-right:1px solid rgb(182, 182, 182); */
-    margin-bottom:2vh;
-}
-.user_profile{
-    width: 3vw;
-    height: 3vw;
-    border-radius: 100%;
-    border: 1px solid blue;
+margin:15%;
+padding:1%;
 }
 .user_info{
     display:flex;
     flex-direction: column;
     align-items: flex-start;
+    padding-left:8%;
 }
 .user_title{
     font-size:1.3rem;
@@ -307,4 +296,7 @@ margin-right:0.8vw;
 .user_country{
     color: rgb(92, 92, 92);
     margin-bottom: 2px;
+}
+.user{
+display:flex;
 }
