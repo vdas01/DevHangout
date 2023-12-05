@@ -59,6 +59,7 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comment> commentList;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Answer> answerList;
     @ManyToMany
