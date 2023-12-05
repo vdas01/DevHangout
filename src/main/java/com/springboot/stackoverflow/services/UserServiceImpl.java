@@ -1,5 +1,4 @@
 package com.springboot.stackoverflow.services;
-
 import com.springboot.stackoverflow.entity.Role;
 import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.repository.RoleRepository;
@@ -92,4 +91,26 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    @Override
+    public void updateUser(String userName, String country, String title, String about) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName());
+
+        user.setUserName(userName);
+        user.setCountry(country);
+        user.setTitle(title);
+        user.setAbout(about);
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public User editUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user=userRepository.findByEmail(authentication.getName());
+        return user;
+    }
+
 }
+
+
