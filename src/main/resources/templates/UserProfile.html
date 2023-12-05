@@ -125,13 +125,24 @@
                     <a href="/editProfile"><i class="fa-solid fa-pen pen"></i>Edit Profile</a>
                 </th:block>
                 <th:block th:unless="${#authentication.principal.username eq user.email}">
-                    <a th:href="@{'/follow?follower=' + ${#authentication.principal.username}
-                    + '&following=' + ${user.email}}" style="background-color: darkred;">
-                        <i class="fa-solid fa-user-plus follow"></i>
-                        <span class = "follow">
+                    <th:block th:unless = "${#lists.contains(user.followers, loggedUser)}">
+                        <a th:href="@{'/follow?follower=' + ${#authentication.principal.username}
+                        + '&following=' + ${user.email}}">
+                            <i class="fa-solid fa-user-plus"></i>
+                            <span>
                             Follow
                         </span>
-                    </a>
+                        </a>
+                    </th:block>
+                    <th:block th:if = "${#lists.contains(user.followers, loggedUser)}">
+                        <a th:href="@{'/unfollow?follower=' + ${#authentication.principal.username}
+                        + '&following=' + ${user.email}}">
+                            <i class="fa-solid fa-check"></i>
+                            <span>
+                                Following
+                            </span>
+                        </a>
+                    </th:block>
                 </th:block>
                 <a href="#">Network Profile</a>
             </div>
@@ -181,7 +192,7 @@
                 </div>
 
                 <div class="contentBox"  th:if="${user.about.isEmpty()}">
-                    <br><br><br><br>
+                    <br><br>
                     <span>
                         Your about me section is currently blank. Would you <br>like to add one? <br>
                         <th:block th:if="${#authentication.principal.username eq user.email}">
@@ -200,8 +211,9 @@
                 </div>
 
                 <div class="contentBox" th:if="${user.userBadges.isEmpty()}">
-                    <br><br><br><br>
+                    <br><br>
                     <span>No badges earned</span><br><br>
+                    <br><br>
                 </div>
 
                     <span class = "profile-heading">
@@ -295,7 +307,7 @@
 
                 <div  th:if="${!user.commentList.isEmpty()}" class="qs_box">
                         <span th:each="comment : ${user.commentList}" class="q_box">
-                            <a th:text="${comment.comment}" class="q_title" th:href="@{'/viewQuestion/' + ${answer.question.id}}">What is title</a>
+                            <a th:text="${comment.comment}" class="q_title" >What is title</a>
                         </span>
                 </div>
 

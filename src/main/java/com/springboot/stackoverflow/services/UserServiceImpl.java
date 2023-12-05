@@ -120,9 +120,20 @@ public class UserServiceImpl implements UserService {
         User followingUser = userRepository.findByEmail(following);
 
         followerUser.addFollowing(followingUser);
-        followingUser.addFollower(followerUser);
 
+        userRepository.save(followerUser);
+    }
 
+    @Override
+    public void unfollow(String follower, String following) {
+        User followerUser = userRepository.findByEmail(follower);
+        User followingUser = userRepository.findByEmail(following);
+
+        List<User> followings = followerUser.getFollowings();
+        followings.remove(followingUser);
+        followerUser.setFollowings(followings);
+
+        userRepository.save(followerUser);
     }
 
     public void updateUser(String userName, String country, String title, String about) {
