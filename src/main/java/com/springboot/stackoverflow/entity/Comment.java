@@ -44,12 +44,8 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String email, String comment, Date createdAt, Date updatedAt, String userName) {
-        this.email = email;
+    public Comment(String comment) {
         this.comment = comment;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.userName = userName;
     }
 
     public User getUser() {

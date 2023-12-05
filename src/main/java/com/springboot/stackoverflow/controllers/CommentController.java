@@ -3,9 +3,11 @@ package com.springboot.stackoverflow.controllers;
 import com.springboot.stackoverflow.entity.Answer;
 import com.springboot.stackoverflow.entity.Comment;
 import com.springboot.stackoverflow.entity.Question;
+import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.services.AnswerService;
 import com.springboot.stackoverflow.services.CommentService;
 import com.springboot.stackoverflow.services.QuestionService;
+import com.springboot.stackoverflow.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +19,14 @@ public class CommentController {
     private final CommentService commentService;
     private final QuestionService questionService;
     private final AnswerService answerService;
+    private final UserService userService;
 
     @Autowired
-    public CommentController(CommentService commentService, QuestionService questionService, AnswerService answerService) {
+    public CommentController(CommentService commentService, QuestionService questionService, AnswerService answerService, UserService userService) {
         this.commentService = commentService;
         this.questionService = questionService;
         this.answerService = answerService;
+        this.userService = userService;
     }
 
     @GetMapping("/addComment/{questionId}")
@@ -37,9 +41,8 @@ public class CommentController {
 
     @PostMapping("/saveComment")
     public String saveComment(@ModelAttribute("comments") Comment comments,@RequestParam("questionId") int questionId){
-        Question question = questionService.findQuestionById(questionId);
-        question.addComment(comments);
-        questionService.saveCommentList(question);
+        commentService.saveComment(comments,questionId);
+
         return "redirect:/viewQuestion/"+questionId;
     }
 
@@ -57,9 +60,8 @@ public class CommentController {
     @PostMapping("/saveAnswerComment")
     public String saveAnswerComment(@ModelAttribute("comments") Comment comments,
                                     @RequestParam("answerId") int answerId,@RequestParam("questionId") int questionId){
-        Answer answer = answerService.findQuestionById(answerId);
-        answer.addComment(comments);
-        answerService.saveCommentList(answer);
+        commentService.saveAnswerComment(comments,answerId);
+
         return "redirect:/viewQuestion/"+questionId;
     }
 

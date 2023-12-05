@@ -2,11 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Questions Tagged</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmark question</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/css/QuestionsTagged.css">
+    <link rel="stylesheet" href="/css/BookmarkQuestion.css">
 </head>
 <body>
     <nav id="navbar">
@@ -43,15 +44,8 @@
             <li><a href=""><i class="fa-solid fa-circle-question icons"></i></a></li>
         </ul>
         <span id = "login-logout">
-                 <th:block th:unless="${#authorization.expression('isAuthenticated()')}">
-            <a th:href="@{/login}">Login</a>
-            <a th:href="@{/signup}">signup</a>
-            </th:block>
-            <th:block th:if="${#authorization.expression('isAuthenticated()')}">
-                <form method="post" th:action = "@{/logout}">
-                    <input type="submit" value="Logout">
-                </form>
-            </th:block>
+                <a th:href="@{/login}">Login</a>
+                <a th:href="@{/signup}">signup</a>
             </span>
     </nav>
 
@@ -103,7 +97,7 @@
 
     <div id = "body">
         <div class="heading">
-            <h4>Questions Tagged</h4>
+            <h4>Bookmark Questions</h4>
             <p>For questions about programming in ECMAScript (JavaScript/JS) and its different dialects/implementations
                 (except for <br> ActionScript). Note that JavaScript is NOT Java. Include all tags that are relevant to your
                 question: e.g., [node.js], [jQuery], <br> [JSON], [ReactJS], [angular], [ember.js], [vue.js], [typescript],
@@ -111,8 +105,14 @@
             </p>
         </div>
         <div class="filters">
-            <div class="search_box"  th:text="${questions.size() > 1 ? questions.size() + ' questions' : questions.size() + ' question'}">
-            </div>
+            <form th:action="@{/tags}" class="search_box">
+                <input type="hidden" name="page" th:value="${currentPage}">
+                <input type="hidden" name="limit" th:value="8">
+                <input type="hidden" name="sortField" th:value="${sortField}">
+                <input type="hidden" name="sortDir" th:value="${reverseSortDir}">
+                <input type="text" name="search" id="search" placeholder="Filter by question name">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass filter_search_icon"></i></button>
+            </form>
             <ul class="sort_items">
                 <li class="sort_item"><a
                 >Popular</a></li>
@@ -120,34 +120,50 @@
                 <li class="sort_item"><a href="/tag">new</a></li>
             </ul>
         </div>
-        <div class="question_container" th:each="question : ${questions}" th:if="${question != null}">
-            <div class="left">
-                <p id="count_votes" th:text="${question.votes < 0 ? '- ' + question.votes : question.votes } + ' votes'"></p>
-                <p id="count_answers" th:text="${question.answers.size() > 1 ? question.answers.size() +
-                ' answers' : question.answers.size() + ' answer'}"></p>
-                <p id="count_views" th:text="${question.views > 1 ? question.views + ' views' : question.views + ' views'}"></p>
-            </div>
-            <div class="right">
-                <h3 id="question_title">
-                    <a href="" th:text="${question.title}" th:href="@{'/viewQuestion/' + ${question.id}}"></a>
-                </h3>
-                <p id="question_descrp" th:text="${question.content}"></p>
-                <div class="subbox">
-                    <div class="question_tags">
-                        <a class="question_tag" th:each="tag : ${question.tags}" th:text="${tag.name}"
-                           th:href="@{'/questions/tagged/' + ${tag.id}}"></a>
-                    </div>
-                    <div class="question_author">
-                        <img src="" alt="" id="author_logo">
-                        <a id="author_name" th:text="${question.author}"></a>
-                    </div>
+
+        <div  th:if="${!questions.isEmpty()}" class="qs_box">
+            <span th:each="question : ${questions}" class="q_box">
+                <a th:text="${question.title}" class="q_title" th:href="@{'/viewQuestion/' + ${question.id}}">What is title</a>
+                <p th:text="${question.content}" class="q_content">Content is content that is upto everybody how they keep their content updated.</p>
+                <div class="q_lower">
+                      <div class="q_left">
+                         <p class="views" >
+                             <i class="fa-solid fa-eye"></i>
+                             <span class="view_text" th:text="${question.views}"></span>
+                          </p>
+                         <p class="votes" >
+                             <i class="fa-solid fa-heart"></i>
+                             <span class="vote_text" th:text="${question.votes}"></span>
+                         </p>
+                         <p class="answers_count" >
+                             <i class="fa-solid fa-message"></i>
+                             <span class="answer_view" th:text="${question.answers.size()}"></span>
+                          </p>
+                         <p class="comment_count">
+                             <i class="fa-solid fa-comment q_icons"></i>
+                             <span class="comment_view" th:text="${question.comments.size()}"></span>
+                         </p>
+                     </div>
+                     <div class="q_right">
+                         <a class="author_box" th:href="@{'/userProfile?userId='+ ${question.user.id}}">
+                              <i class="fa-solid fa-pen-clip"></i>
+                             <span class="author_view" th:text="${question.author}"></span>
+                          </a>
+                     </div>
                 </div>
-            </div>
+            </span>
+
+        </div>
+
+        <div class="contentBox"  th:if="${questions.isEmpty()}">
+            <br><br><br><br>
+            <span>No Bookmark Questions</span><br><br>
         </div>
 
 
     </div>
     <div></div>
 </div>
+
 </body>
 </html>

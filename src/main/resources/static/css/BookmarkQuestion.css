@@ -1,3 +1,5 @@
+/*<-------- navbar ------------>*/
+
 *{
     margin: 0;
     padding: 0;
@@ -10,7 +12,6 @@
     min-height: 100vh;
     width: 100%;
 }
-
 #navbar{
     border: 2px solid black;
     display: flex;
@@ -24,7 +25,6 @@
     background-color: white;
     width: 100vw;
 }
-
 .items{
     display: flex;
     gap: 1vw;
@@ -37,13 +37,11 @@
     flex-direction: column;
     align-items: center;
 }
-
 #search_bar{
     width: 20vw;
     padding:1vh 2vw;
     border-radius: 10px;
 }
-
 #heading{
     font-size: 2rem;
     margin-bottom: 2.3vh;
@@ -59,17 +57,6 @@
     color: black;
 }
 
-#login-logout {
-    position: fixed;
-    right: 50px;
-}
-
-#login-logout a {
-    padding: 0px 20px;
-}
-
-/*<-------- navbar ------------>*/
-
 /* --------- middle box---------------------- */
 #body {
     border-left: 2px solid rgba(0, 0, 0, 0.54);
@@ -78,7 +65,7 @@
 
 #parent {
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 20% 58% 20%;
     min-height: 100vh;
     padding-top: 60px;
 }
@@ -94,8 +81,7 @@
     justify-content: space-between;
     padding: 2vh 1vw;
     align-items: center;
-    border-bottom: 1px solid rgb(161, 159, 159);
-    
+    border-bottom: 1px solid rgb(163, 163, 163);
 }
 .sort_items{
     display: flex;
@@ -111,7 +97,7 @@
     color: black;
 }
 .sort_item:hover{
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(226, 226, 226);   
 }
 .search_box{
   position: relative;
@@ -146,17 +132,102 @@
     color: rgb(58, 57, 57);
     gap:1vw;
 }
-#tag_title{
-    background-color: lightblue;
-    display: inline-block;
-    padding:0.4rem;
-    box-shadow: 3px 3px 2px 0px rgba(0, 0, 0, 1);
+
+
+#login-logout {
+    position: fixed;
+    right: 50px;
+}
+
+#login-logout a {
+    padding: 0px 20px;
+}
+
+.qs_box{
+    max-height:60vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+   overflow-y: scroll;
+   padding: 1vh;
+}
+::-webkit-scrollbar {
+    width: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(0,0,0,0.1);
+    border-radius: 1px;
+}
+.contentBox{
+    width:100%;
+    border-radius:20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    min-height: 40%;
+    background: #F0F1F4;
+    text-align: center;
+}
+
+.q_box{
+    display: flex;
+    flex-direction: column;
+    padding:2vh 1vw;
+    background-color:rgb(226, 226, 226);
+    color: black;
+    border-radius: 10px;
+    box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
+}
+.q_lower{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2vh;
+}
+.q_left{
+    display: flex;
+    gap:1vw;
+}
+.q_title{
+    font-size:1.6rem;
     cursor: pointer;
+}
+.q_content{
+    font-size: 1.1rem;
+}
+.fa-heart{
+    color: red;
+}
+.fa-eye{
+    color:rgb(42, 65, 165);
+}
+.fa-message{
+    color: rgb(58, 183, 224);
+}
+.fa-comment{
+    color:green;
+}
+.fa-pen-clip{
+    color: goldenrod;
+    margin-right: 0.3vw;
+}
+.q_title:hover{
+    color:blue;
+}
+
+.author_box{
+    background-color: rgb(41, 41, 41);
+    border-radius: 1rem;
+    color: goldenrod;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
+}
+.author_box:hover{
+    background-color: goldenrod;
     color:black;
 }
-#tag_title:hover{
-    background-color:rgb(4, 95, 126);
-    color: wheat;
+.author_box:hover .fa-pen-clip{
+    color: black;
 }
 
 /* --------- pagination---------------------- */
@@ -210,7 +281,6 @@ margin-right:0.8vw;
 
 
 /* --------sidebar---------- */
-
 #sidebar{
     display: flex;
     flex-direction: column;
@@ -236,7 +306,7 @@ margin-right:0.8vw;
     border-radius: 10px 0px 0px 10px;
 }
 
-.active-user {
+.active-tag {
     color: black;
 }
 
@@ -264,39 +334,4 @@ margin-right:0.8vw;
 .row:hover{
     background-color: rgb(0,0,0,0.07);
     border-radius: 10px 0px 0px 10px;
-}
-
-.add_image{
-    margin-top:2vh;
-}
-
-/* --------sidebar---------- */
-.userGrid{
-display:grid;
-grid-template-columns:25% 25% 25% 25%;
-}
-.user_container{
-margin:15%;
-padding:1%;
-}
-.user_info{
-    display:flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-left:8%;
-}
-.user_title{
-    font-size:1.3rem;
-    margin-bottom: 2px;
-    cursor: pointer;
-}
-.user_title:hover{
-    color:black;
-}
-.user_country{
-    color: rgb(92, 92, 92);
-    margin-bottom: 2px;
-}
-.user{
-display:flex;
 }

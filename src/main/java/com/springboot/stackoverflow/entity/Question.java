@@ -29,7 +29,7 @@ public class Question {
     private String photo = null;
 
     @Column(name = "views")
-    private int views;
+    private int views =0 ;
 
     @Column(name = "created_at",updatable = false)
     @CreationTimestamp
@@ -40,7 +40,7 @@ public class Question {
     private Date modifiedAt;
 
     @Column(name = "votes")
-    private int votes;
+    private int votes = 0;
     @OneToOne
     private Answer acceptedAnswer;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "question")

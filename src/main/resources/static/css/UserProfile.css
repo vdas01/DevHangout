@@ -215,6 +215,76 @@ ul#menuOptions li{
 #login-logout a {
     padding: 0px 20px;
 }
+.qs_box{
+    max-height:60vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+   overflow-y: scroll;
+   padding: 1vh;
+}
+
+.q_box{
+    display: flex;
+    flex-direction: column;
+    padding:2vh 1vw;
+    background-color:rgb(226, 226, 226);
+    color: black;
+    border-radius: 10px;
+    box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
+}
+.q_lower{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2vh;
+}
+.q_left{
+    display: flex;
+    gap:1vw;
+}
+.q_title{
+    font-size:1.6rem;
+    cursor: pointer;
+}
+.q_content{
+    font-size: 1.1rem;
+}
+.fa-heart{
+    color: red;
+}
+.fa-eye{
+    color:rgb(42, 65, 165);
+}
+.fa-message{
+    color: rgb(58, 183, 224);
+}
+.fa-comment{
+    color:green;
+}
+.fa-pen-clip{
+    color: goldenrod;
+    margin-right: 0.3vw;
+}
+.q_title:hover{
+    color:blue;
+}
+
+.author_box{
+    background-color: rgb(41, 41, 41);
+    border-radius: 1rem;
+    color: goldenrod;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
+}
+.author_box:hover{
+    background-color: goldenrod;
+    color:black;
+}
+.author_box:hover .fa-pen-clip{
+    color: black;
+}
+
 
 /*-----------Side Bar starts here -----------------*/
 

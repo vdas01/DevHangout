@@ -42,8 +42,15 @@
             <li><a href=""><i class="fa-solid fa-circle-question icons"></i></a></li>
         </ul>
         <span id = "login-logout">
+           <th:block th:unless="${#authorization.expression('isAuthenticated()')}">
             <a th:href="@{/login}">Login</a>
             <a th:href="@{/signup}">signup</a>
+            </th:block>
+            <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                <form method="post" th:action = "@{/logout}">
+                    <input type="submit" value="Logout">
+                </form>
+            </th:block>
         </span>
     </nav>
 
@@ -181,8 +188,10 @@
                         </form>
                         <br><br>
                         <div th:each = "comments : ${question.comments}" class="comment">
+                            <span th:text = "*{comments.user.userName}+' : '"  ></span><br>
+                            <th:block th:unless="${editComment != null and editComment eq comments.id}">
                             <span th:text = "*{comments.comment}"  ></span><br>
-                            <a th:unless="${editComment != null and editComment eq comments.id}" th:href = "@{/editComment/{commentId} (commentId = ${comments.id})}"
+                            <a  th:href = "@{/editComment/{commentId} (commentId = ${comments.id})}"
                                class = "answer-action">
                                 Edit
                             </a>
@@ -190,6 +199,7 @@
                                class = "answer-action">
                                 Delete
                             </a><br>
+                            </th:block>
                             <form th:if="${editComment != null and editComment eq comments.id}" th:action =
                                     "@{/updateComment/{commentId} (commentId = ${comments.id})}" method="Post">
                                 <textarea name="updateContent"
@@ -404,6 +414,7 @@
                                 </form>
                                 <br><br>
                                 <div th:each = "comments : *{answer.comment}" class="comment">
+                                    <span th:text = "*{comments.user.userName}+' : '"  ></span><br>
                                     <span th:text = "*{comments.comment}"  ></span><br>
                                     <a th:unless="${editAnswerComment != null and editAnswerComment eq comments.id}"
                                        th:href = "@{/editAnswerComment/{commentId}/{questionId}

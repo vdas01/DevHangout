@@ -44,8 +44,15 @@
             <li><a href=""><i class="fa-solid fa-circle-question icons"></i></a></li>
         </ul>
         <span id = "login-logout">
+             <th:block th:unless="${#authorization.expression('isAuthenticated()')}">
             <a th:href="@{/login}">Login</a>
             <a th:href="@{/signup}">signup</a>
+            </th:block>
+            <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                <form method="post" th:action = "@{/logout}">
+                    <input type="submit" value="Logout">
+                </form>
+            </th:block>
         </span>
     </nav>
     
@@ -105,7 +112,7 @@
                     <input type="hidden" name="limit" th:value="8">
                     <input type="hidden" name="sortField" th:value="${sortField}">
                     <input type="hidden" name="sortDir" th:value="${reverseSortDir}">
-                    <input type="text" name="search" id="search" placeholder="Filter by tag name">
+                    <input type="text" name="search" id="search" placeholder="Filter by user name">
                     <button type="submit"><i class="fa-solid fa-magnifying-glass filter_search_icon"></i></button>
                 </form>
                 <ul class="sort_items">
@@ -115,19 +122,21 @@
                     <li class="sort_item"><a href="/tag">new</a></li>
                 </ul>
             </div>
-            <div class="user_container" th:each = "user: ${users}">
-                <div class="user">
-                    <img src="./avatar.png" alt="profile" class="user_profile">
-                    <div class="user_info">
-                        <a class="user_title" th:text = "*{user.userName}"
-                           th:href="@{'/userProfile?userId=' + *{user.id}}"></a>
-                        <p class="user_country" th:text = "*{user.country}"></p>
-                        <p class="user_reputation" th:text = "*{user.reputation}"></p>
+            <div class="userGrid">
+                <div class="user_container" th:each = "user: ${users}">
+                    <div class="user">
+                        <img src="./avatar.png" alt="profile" class="user_profile">
+                        <div class="user_info">
+                            <a class="user_title" th:text = "*{user.userName}"
+                               th:href="@{'/userProfile?userId=' + *{user.id}}"></a>
+                            <p class="user_country" th:text = "*{user.country}"></p>
+                            <p class="user_reputation" th:text = "*{user.reputation}"></p>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
-        <div></div>
+
     </div>
 </body>
 </html>
