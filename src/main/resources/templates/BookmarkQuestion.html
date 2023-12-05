@@ -44,9 +44,16 @@
             <li><a href=""><i class="fa-solid fa-circle-question icons"></i></a></li>
         </ul>
         <span id = "login-logout">
+            <th:block th:unless="${#authorization.expression('isAuthenticated()')}">
                 <a th:href="@{/login}">Login</a>
                 <a th:href="@{/signup}">signup</a>
-            </span>
+            </th:block>
+            <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                <form method="post" th:action = "@{/logout}">
+                    <input type="submit" value="Logout">
+                </form>
+            </th:block>
+        </span>
     </nav>
 
 <div id = "parent">
@@ -59,10 +66,10 @@
                 </a>
             </div>
 
-            <div class="row active-bar">
+            <div class="row">
                 <a href="/" >
                     <i class="fa-solid fa-circle-question side_icons"></i>
-                    <small class="side-text active-question">Questions</small>
+                    <small class="side-text">Questions</small>
                 </a>
             </div>
 
@@ -73,10 +80,10 @@
                 </a>
             </div>
             <br><br>
-            <div class="row">
+            <div class="row active-bar">
                 <a href="/users/saves">
                     <i class="fa-solid fa-bookmark side_icons"></i>
-                    <small class="side-text">Saves</small>
+                    <small class="side-text active-question">Saves</small>
                 </a>
             </div>
             <div class="row">
@@ -98,21 +105,17 @@
     <div id = "body">
         <div class="heading">
             <h4>Bookmark Questions</h4>
-            <p>For questions about programming in ECMAScript (JavaScript/JS) and its different dialects/implementations
-                (except for <br> ActionScript). Note that JavaScript is NOT Java. Include all tags that are relevant to your
-                question: e.g., [node.js], [jQuery], <br> [JSON], [ReactJS], [angular], [ember.js], [vue.js], [typescript],
-                [svelte], etc.
+            <p>
+                A bookmark page is a user-friendly feature within a web browser or application that allows users to
+                save and organize links to specific web pages or content of interest. By bookmarking a page, users can
+                quickly revisit their favorite websites, articles, or resources without the need to remember or retype
+                the URL. Bookmark pages often provide functionalities to categorize, tag, or arrange bookmarks,
+                facilitating efficient navigation and retrieval of saved content. This feature enhances user
+                convenience, enabling them to create a personalized collection of valuable online resources for easy
+                access and reference.
             </p>
         </div>
         <div class="filters">
-            <form th:action="@{/tags}" class="search_box">
-                <input type="hidden" name="page" th:value="${currentPage}">
-                <input type="hidden" name="limit" th:value="8">
-                <input type="hidden" name="sortField" th:value="${sortField}">
-                <input type="hidden" name="sortDir" th:value="${reverseSortDir}">
-                <input type="text" name="search" id="search" placeholder="Filter by question name">
-                <button type="submit"><i class="fa-solid fa-magnifying-glass filter_search_icon"></i></button>
-            </form>
             <ul class="sort_items">
                 <li class="sort_item"><a
                 >Popular</a></li>

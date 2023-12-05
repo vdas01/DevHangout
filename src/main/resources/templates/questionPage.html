@@ -173,6 +173,7 @@
                             <br>
                             <span th:each = "tag : ${question.tags}" th:text = "*{tag.name}" class = "tags"></span>
                         </div><br><br>
+
                         <th:block th:if="${#authentication.principal.username eq question.user.email}">
                         <a th:href = "@{/editQuestion/{questionId} (questionId = ${question.id})}"
                            class = "answer-action">
