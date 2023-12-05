@@ -9,6 +9,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.text.html.Option;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -134,30 +135,56 @@ public class QuestionServiceImpl implements QuestionService{
         return questionRepository.findAll();
     }
 
+    public void saveCommentList(Question question) {
+        questionRepository.save(question);
+    }
+
+    @Override
+    public void bookmarkQuestion(int questionId) {
+        Optional<Question> retrievedQuestionById = questionRepository.findById(questionId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName());
+        if(retrievedQuestionById.isPresent()){
+            Question question = retrievedQuestionById.get();
+            question.addSavedUser(user);
+            questionRepository.save(question);
+        }
+    }
+
+    @Override
+    public void removeBookmarkQuestion(int questionId) {
+        Optional<Question> retrievedQuestionById = questionRepository.findById(questionId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName());
+        if(retrievedQuestionById.isPresent()){
+            Question question = retrievedQuestionById.get();
+            question.removedSavedUser(user);
+            questionRepository.save(question);
+        }
+    }
+
     @Override
     public void votingSystem(Integer vote, String type, Integer questionId, Integer answerId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName());
 
-        if(type.equals("question")) {
-            if(vote.equals(1)) {
-                for(Vote tempVote: user.getUserVote()) {
+        if (type.equals("question")) {
+            if (vote.equals(1)) {
+                for (Vote tempVote : user.getUserVote()) {
                     System.out.println("here");
-                    if(tempVote.getQuestionId().equals(questionId)) {
-                        if(tempVote.getDirection().equals(1)) {
+                    if (tempVote.getQuestionId().equals(questionId)) {
+                        if (tempVote.getDirection().equals(1)) {
                             return;
-                        }
-                        else if(tempVote.getDirection().equals(-1)) {
+                        } else if (tempVote.getDirection().equals(-1)) {
                             Question question = questionRepository.findById(questionId).get();
-                            question.setVotes(question.getVotes()+1);
+                            question.setVotes(question.getVotes() + 1);
                             user.getUserVote().remove(tempVote);
 
                             voteRepository.delete(tempVote);
                             questionRepository.save(question);
                             userRepository.save(user);
                             return;
-                        }
-                        else {
+                        } else {
                             break;
                         }
                     }
@@ -165,30 +192,27 @@ public class QuestionServiceImpl implements QuestionService{
 
                 Vote theVote = new Vote(answerId, questionId, vote);
                 Question question = questionRepository.findById(questionId).get();
-                question.setVotes(question.getVotes()+1);
+                question.setVotes(question.getVotes() + 1);
                 questionRepository.save(question);
 
                 user.addVote(theVote);
                 userRepository.save(user);
-            }
-            else if(vote.equals(-1)) {
-                for(Vote tempVote: user.getUserVote()) {
-                    if(tempVote.getQuestionId().equals(questionId)) {
-                        if(tempVote.getDirection().equals(-1)) {
+            } else if (vote.equals(-1)) {
+                for (Vote tempVote : user.getUserVote()) {
+                    if (tempVote.getQuestionId().equals(questionId)) {
+                        if (tempVote.getDirection().equals(-1)) {
                             return;
-                        }
-                        else if(tempVote.getDirection().equals(1)) {
+                        } else if (tempVote.getDirection().equals(1)) {
                             System.out.println("here2");
                             Question question = questionRepository.findById(questionId).get();
-                            question.setVotes(question.getVotes()-1);
+                            question.setVotes(question.getVotes() - 1);
                             user.getUserVote().remove(tempVote);
 
                             voteRepository.delete(tempVote);
                             questionRepository.save(question);
                             userRepository.save(user);
                             return;
-                        }
-                        else {
+                        } else {
                             break;
                         }
                     }
@@ -196,31 +220,28 @@ public class QuestionServiceImpl implements QuestionService{
 
                 Vote theVote = new Vote(answerId, questionId, vote);
                 Question question = questionRepository.findById(questionId).get();
-                question.setVotes(question.getVotes()-1);
+                question.setVotes(question.getVotes() - 1);
                 questionRepository.save(question);
 
                 user.addVote(theVote);
                 userRepository.save(user);
             }
-        }
-        else if(type.equals("answer")) {
-            if(vote.equals(1)) {
-                for(Vote tempVote: user.getUserVote()) {
-                    if(tempVote.getAnswerId().equals(answerId)) {
-                        if(tempVote.getDirection().equals(1)) {
+        } else if (type.equals("answer")) {
+            if (vote.equals(1)) {
+                for (Vote tempVote : user.getUserVote()) {
+                    if (tempVote.getAnswerId().equals(answerId)) {
+                        if (tempVote.getDirection().equals(1)) {
                             return;
-                        }
-                        else if(tempVote.getDirection().equals(-1)) {
+                        } else if (tempVote.getDirection().equals(-1)) {
                             Answer answer = answerRepository.findById(answerId).get();
-                            answer.setVotes(answer.getVotes()+1);
+                            answer.setVotes(answer.getVotes() + 1);
                             user.getUserVote().remove(tempVote);
 
                             voteRepository.delete(tempVote);
                             answerRepository.save(answer);
                             userRepository.save(user);
                             return;
-                        }
-                        else {
+                        } else {
                             break;
                         }
                     }
@@ -228,29 +249,26 @@ public class QuestionServiceImpl implements QuestionService{
 
                 Vote theVote = new Vote(answerId, null, vote);
                 Answer answer = answerRepository.findById(answerId).get();
-                answer.setVotes(answer.getVotes()+1);
+                answer.setVotes(answer.getVotes() + 1);
                 answerRepository.save(answer);
 
                 user.addVote(theVote);
                 userRepository.save(user);
-            }
-            else if(vote.equals(-1)) {
-                for(Vote tempVote: user.getUserVote()) {
-                    if(tempVote.getAnswerId().equals(answerId)) {
-                        if(tempVote.getDirection().equals(-1)) {
+            } else if (vote.equals(-1)) {
+                for (Vote tempVote : user.getUserVote()) {
+                    if (tempVote.getAnswerId().equals(answerId)) {
+                        if (tempVote.getDirection().equals(-1)) {
                             return;
-                        }
-                        else if(tempVote.getDirection().equals(1)) {
+                        } else if (tempVote.getDirection().equals(1)) {
                             Answer answer = answerRepository.findById(answerId).get();
-                            answer.setVotes(answer.getVotes()-1);
+                            answer.setVotes(answer.getVotes() - 1);
                             user.getUserVote().remove(tempVote);
 
                             voteRepository.delete(tempVote);
                             answerRepository.save(answer);
                             userRepository.save(user);
                             return;
-                        }
-                        else {
+                        } else {
                             break;
                         }
                     }
@@ -258,7 +276,7 @@ public class QuestionServiceImpl implements QuestionService{
 
                 Vote theVote = new Vote(answerId, null, vote);
                 Answer answer = answerRepository.findById(answerId).get();
-                answer.setVotes(answer.getVotes()-1);
+                answer.setVotes(answer.getVotes() - 1);
                 answerRepository.save(answer);
 
                 user.addVote(theVote);

@@ -40,6 +40,15 @@ public class User {
             inverseJoinColumns=@JoinColumn(name = "following_id") // field from other class
     )
     private List<User> followings;
+
+    @ManyToMany()
+    @JoinTable(
+            name = "saved_question_user",
+            joinColumns = @JoinColumn(name = "saved_user_id"), // field from current class
+            inverseJoinColumns=@JoinColumn(name = "saved_question_id") // field from other class
+    )
+    private List<Question> savedQuestions;
+
     @ManyToMany()
     @JoinTable(
             name = "FollowRelation",
@@ -220,6 +229,15 @@ public class User {
 
     public void setUserQuestions(List<Question> userQuestions) {
         this.userQuestions = userQuestions;
+    }
+
+
+    public List<Question> getSavedQuestions() {
+        return savedQuestions;
+    }
+
+    public void setSavedQuestions(List<Question> savedQuestions) {
+        this.savedQuestions = savedQuestions;
     }
 
     public void addFollowers(User theUser) {

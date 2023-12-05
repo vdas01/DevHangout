@@ -59,6 +59,14 @@ public class Question {
     @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
     private User user;
 
+    @ManyToMany()
+    @JoinTable(
+            name = "saved_question_user",
+            joinColumns = @JoinColumn(name = "saved_question_id"), // field from current class
+            inverseJoinColumns=@JoinColumn(name = "saved_user_id") // field from other class
+    )
+    private List<User> savedUsers;
+
     public Question(){}
     public Question(String title, String content, int views, int votes) {
         this.title = title;
@@ -171,10 +179,37 @@ public class Question {
         this.photo = photo;
     }
 
+    public List<User> getSavedUsers() {
+        return savedUsers;
+    }
+
+    public void setSavedUsers(List<User> savedUsers) {
+        this.savedUsers = savedUsers;
+    }
+
     public void addTags(Tag tag){
         if(tags == null)
             tags = new ArrayList<>();
         tags.add(tag);
+    }
+    public void addComment(Comment comment){
+        if(comments==null){
+            comments=new ArrayList<>();
+        }
+        comments.add(comment);
+        comment.setQuestion(this);
+    }
+
+    public void addSavedUser(User user){
+        if(savedUsers == null)
+            savedUsers = new ArrayList<>();
+        savedUsers.add(user);
+    }
+
+    public void removedSavedUser(User user){
+        if(savedUsers.contains(user)){
+            savedUsers.remove(user);
+        }
     }
 
 }
