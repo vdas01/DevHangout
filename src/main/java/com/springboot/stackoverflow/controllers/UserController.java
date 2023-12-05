@@ -1,6 +1,8 @@
 package com.springboot.stackoverflow.controllers;
 
+import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.User;
+import com.springboot.stackoverflow.services.QuestionService;
 import com.springboot.stackoverflow.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,9 +20,12 @@ import java.util.List;
 public class UserController {
     private UserService userService;
 
+    private QuestionService questionService;
+
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService,QuestionService questionService) {
         this.userService = userService;
+        this.questionService = questionService;
     }
 
 
@@ -54,9 +59,6 @@ public class UserController {
         User user = userService.findUserByUserId(userId);
         model.addAttribute("user", user);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication.getName());
-        System.out.println(user.getEmail());
-        System.out.println(user.getEmail().equals(authentication.getName()));
 
         return "UserProfile";
     }
@@ -78,6 +80,13 @@ public class UserController {
         model.addAttribute("user", user);
 
         return "editProfile";
+    }
 
+    @GetMapping("/users/saves")
+    public String processBookmarkQuestions(Model model){
+        List<Question> bookmarkQuestions = userService.getBookmarkQuestionsByUser();
+
+        model.addAttribute("questions",bookmarkQuestions);
+        return "BookmarkQuestion";
     }
 }

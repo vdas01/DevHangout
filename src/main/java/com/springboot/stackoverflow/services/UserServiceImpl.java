@@ -1,5 +1,6 @@
 package com.springboot.stackoverflow.services;
 
+import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.Role;
 import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.repository.RoleRepository;
@@ -90,6 +91,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<Question> getBookmarkQuestionsByUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName());
+
+        return user.getSavedQuestions();
     }
 
 }

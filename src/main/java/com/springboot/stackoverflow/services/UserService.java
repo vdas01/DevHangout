@@ -1,5 +1,6 @@
 package com.springboot.stackoverflow.services;
 
+import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.User;
 
 import java.util.List;
@@ -13,5 +14,7 @@ public interface UserService {
     User findUserByUserName(String name);
 
     User findByEmail(String email);
+
+    List<Question> getBookmarkQuestionsByUser();
 
 }
