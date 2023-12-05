@@ -25,7 +25,7 @@
     <span class="profile">
                 <img src="" alt="" id="user_pic">
             </span>
-<<<<<<< HEAD
+
         <ul class="items">
             <li>
                 <a th:href="@{/userProfile}">
@@ -191,18 +191,48 @@
                     <span>No badges earned</span><br><br>
                 </div>
 
-                <span class = "profile-heading">
-                    Posts
-                </span>
+                    <span class = "profile-heading">
+                         Questions Asked
+                    </span>
 
-                <div  th:if="${!true}">
-                    <span th:text="${user.post}"></span><br><br><br>
-                </div>
+                    <div  th:if="${!user.userQuestions.isEmpty()}" class="qs_box">
+                        <span th:each="question : ${user.userQuestions}" class="q_box">
+                            <a th:text="${question.title}" class="q_title" th:href="@{'/viewQuestion/' + ${question.id}}">What is title</a>
+                            <p th:text="${question.content}" class="q_content">Content is content that is upto everybody how they keep their content updated.</p>
+                            <div class="q_lower">
+                                  <div class="q_left">
+                                     <p class="views" >
+                                         <i class="fa-solid fa-eye"></i>
+                                         <span class="view_text" th:text="${question.views}">100</span>
+                                      </p>
+                                     <p class="votes" >
+                                         <i class="fa-solid fa-heart"></i>
+                                         <span class="vote_text" th:text="${question.votes}">210</span>
+                                     </p>
+                                     <p class="answers_count" >
+                                         <i class="fa-solid fa-message"></i>
+                                         <span class="answer_view" th:text="${question.answers.size()}"></span>
+                                      </p>
+                                     <p class="comment_count">
+                                         <i class="fa-solid fa-comment q_icons"></i>
+                                         <span class="comment_view" th:text="${question.comments.size()}"></span>
+                                     </p>
+                                 </div>
+                                 <div class="q_right">
+                                     <a class="author_box" th:href="@{'/userProfile?userId='+ ${question.user.id}}">
+                                          <i class="fa-solid fa-pen-clip"></i>
+                                         <span class="author_view" th:text="${question.author}"></span>
+                                      </a>
+                                 </div>
+                            </div>
+                        </span>
 
-                <div class="contentBox"  th:if="${true}">
-                    <br><br><br><br>
-                    <span>No Questions Asked</span><br><br>
-                </div>
+                    </div>
+
+                    <div class="contentBox"  th:if="${user.userQuestions.isEmpty()}">
+                        <br><br><br><br>
+                        <span>No Questions Asked</span><br><br>
+                    </div>
             </div>
         </div>
     </div>

@@ -104,10 +104,14 @@
             <div id = "main-question">
                 <div id = "question">
                     <h1 th:text = "${question.title}"></h1>
+                    <a class="author_box" th:href="@{'/userProfile?userId='+ ${question.user.id}}"
+                       style="color: black; padding-top: 5px;">
+                        <i class="fa-solid fa-pen-clip"></i>
+                        <span class="author_view" th:text="${question.author}"></span>
+                    </a>
                     <form th:action = "@{/questions/ask}">
                         <input type="submit" value="Ask Question">
                     </form>
-                  
                 </div>
                 <div id = "view-detail">
                     Asked: <b><span th:text = "${#dates.format(question.createdAt, 'dd/MM/YYYY')}"
@@ -141,7 +145,8 @@
                             <form th:action = "@{/updateQuestion/{questionId}
                             (questionId = ${question.id})}" method="GET">
                                 <textarea th:text="${question.content}" name="editedContent"
-                                          th:value = "${question.content}" rows="10" cols="110"></textarea>
+                                          th:value = "${question.content}" rows="10"
+                                          style="width: 90%; margin-left: 5%;"></textarea>
                                 <br>
                                 <input type="submit" value="Update">
                             </form>
@@ -176,7 +181,8 @@
                         <form th:if="${addComment != null}" th:action = "@{/saveComment}" method="Post">
                             Comment:
                             <textarea name="saveContent"
-                                      th:field = "${comments.comment}" rows="10" cols="110" required></textarea>
+                                      th:field = "${comments.comment}" rows="10"
+                                      style="width: 90%; margin-left: 5%;" required></textarea>
                             <input type="hidden" th:name="questionId" th:value="${question.id}">
                             <br>
                             <input type="submit" value="Comment">
@@ -202,7 +208,8 @@
                             <form th:if="${editComment != null and editComment eq comments.id}" th:action =
                                     "@{/updateComment/{commentId} (commentId = ${comments.id})}" method="Post">
                                 <textarea name="updateContent"
-                                          th:field = "${comments.comment}" rows="10" cols="110"></textarea>
+                                          th:field = "${comments.comment}" rows="10"
+                                          style="width: 90%; margin-left: 5%;"></textarea>
                                 <input type="hidden" th:name="questionId" th:value="${question.id}">
                                 <br>
                                 <input type="submit" value="Edit">
@@ -215,7 +222,121 @@
 
             <div>
                 <span th:text = "${question.answers.size()}"></span>Answer
-                <div th:each = "answer: ${question.answers}">
+
+                <div th:each = "answer: ${question.answers}" th:unless = "${answer != question.acceptedAnswer}">
+                    <div th:if="${editAnswer != null && answer.id == editAnswer.id}">
+                        <div class = "question-detail">
+                            <div class = "voting">
+                            </div>
+
+                            <form th:action = "@{/updateAnswer/{questionId}/{answerId}
+                             (questionId = ${question.id}, answerId = ${question.acceptedAnswer.id})}" method="GET">
+                                <textarea th:text="${question.acceptedAnswer.content}" name="editedContent"
+                                          th:value = "${question.acceptedAnswer.content}" rows="10"
+                                          style="width: 90%; margin-left: 5%;"></textarea>
+                                <br>
+                                <input type="file" name="imageName" accept="image/**" class="add_image">
+                                <input type="submit" value="Update">
+                            </form>
+                        </div>
+                    </div>
+
+                    <div th:unless = "${editAnswer != null && question.acceptedAnswer.id == editAnswer.id}">
+                        <div class = "question-detail">
+                            <div class = "voting">
+                                <a th:href="@{'/processVote?vote=1&type=answer&questionId=' + ${question.id} +
+                                '&answerId=' + ${question.acceptedAnswer.id}}">
+                                    <span class = "voting-button">
+                                        <i class="fa-solid fa-caret-up"></i>
+                                    </span>
+                                </a>
+                                <span th:text = "${question.acceptedAnswer.votes}" class = "voting-count"></span>
+                                <a th:href="@{'/processVote?vote=-1&type=answer&questionId=' + ${question.id} +
+                                '&answerId=' + ${question.acceptedAnswer.id}}">
+                                    <span class = "voting-button">
+                                        <i class="fa-solid fa-caret-down"></i>
+                                    </span>
+                                </a>
+                                <a th:href="@{'/acceptAnswer?questionId=' + ${question.id} +
+                                '&answerId=' + ${question.acceptedAnswer.id}}" class = "accepted-answer">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </a>
+                            </div>
+
+                            <div class = "content-body">
+                                <div class = "answer-content">
+                                    <a class="author_box answer-author" th:href="@{'/userProfile?userId='+
+                                    ${question.acceptedAnswer.user.id}}"
+                                       style="color: black; padding-top: 5px;">
+                                        <i class="fa-solid fa-pen-clip"></i>
+                                        <span class="author_view" th:text="${question.acceptedAnswer.author}"></span>
+                                    </a>
+                                    <div th:text = "${question.acceptedAnswer.content}">
+                                    </div>
+                                </div><br><br>
+                                <img th:if="${question.acceptedAnswer.photo != null}" th:src="@{'/css/image/' +
+                                ${question.acceptedAnswer.photo}}"
+                                     height="200px" width="200px" class="show_img">
+                                <br>
+
+                                <a th:href = "@{/editAnswer/{questionId}/{answerId} (questionId = ${question.id},
+                                answerId = ${question.acceptedAnswer.id})}" class = "answer-action">
+                                    Edit
+                                </a>
+
+                                <a th:href = "@{/deleteAnswer/{questionId}/{answerId} (questionId = ${question.id},
+                                answerId = ${question.acceptedAnswer.id})}" class = "answer-action">
+                                    Delete
+                                </a>
+
+                                <a th:unless="${addAnswerComment != null and addAnswerComment eq question.acceptedAnswer.id}"
+                                   th:href="@{/addAnswerComment/{questionId}/{answerID}
+                                   (questionId = ${question.id},answerID=${question.acceptedAnswer.id})}"
+                                   class = "answer-action">comment</a>
+                                <form th:if="${addAnswerComment != null and addAnswerComment eq question.acceptedAnswer.id}"
+                                      th:action = "@{/saveAnswerComment}" method="Post">
+                                    Comment:
+                                    <textarea name="saveContent"
+                                              th:field = "${comments.comment}" rows="10"
+                                              style="width: 90%; margin-left: 5%;"
+                                              required></textarea>
+                                    <input type="hidden" th:name="questionId" th:value="${question.id}">
+                                    <input type="hidden" th:name="answerId" th:value="${question.acceptedAnswer.id}">
+                                    <br>
+                                    <input type="submit" value="Comment">
+                                </form>
+                                <br><br>
+                                <div th:each = "comments : ${question.acceptedAnswer.comment}" class="comment">
+                                    <span th:text = "*{comments.comment}"  ></span><br>
+                                    <a th:unless="${editAnswerComment != null and editAnswerComment eq comments.id}"
+                                       th:href = "@{/editAnswerComment/{commentId}/{questionId}
+                                        (commentId = ${comments.id},questionId = ${question.id})}"
+                                       class = "answer-action">
+                                        Edit
+                                    </a>
+                                    <a th:href = "@{/deleteComment/{commentId} (commentId = ${comments.id})}"
+                                       class = "answer-action">
+                                        Delete
+                                    </a><br>
+                                    <form th:if="${editAnswerComment != null and editAnswerComment eq comments.id}"
+                                          th:action ="@{/updateAnswerComment/{commentId} (commentId = ${comments.id})}"
+                                          method="Post">
+                                <textarea name="updateContent"
+                                          th:field = "${comments.comment}" rows="10"
+                                          style="width: 90%; margin-left: 5%;"></textarea>
+                                        <input type="hidden" th:name="questionId" th:value="${question.id}">
+                                        <input type="hidden" th:name="answerId" th:value="*{question.acceptedAnswer.id}">
+                                        <br>
+                                        <input type="submit" value="Edit">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+
+                <div th:each = "answer: ${question.answers}" th:if = "${answer != question.acceptedAnswer}">
                     <div th:if="${editAnswer != null && answer.id == editAnswer.id}">
                         <div class = "question-detail">
                             <div class = "voting">
@@ -224,7 +345,8 @@
                             <form th:action = "@{/updateAnswer/{questionId}/{answerId}
                              (questionId = ${question.id}, answerId = *{answer.id})}" method="GET">
                                 <textarea th:text="*{answer.content}" name="editedContent"
-                                          th:value = "*{answer.content}" rows="10" cols="110"></textarea>
+                                          th:value = "*{answer.content}" rows="10"
+                                          style="width: 90%; margin-left: 5%;"></textarea>
                                 <br>
                                 <input type="file" name="imageName" accept="image/**" class="add_image">
                                 <input type="submit" value="Update">
@@ -248,10 +370,23 @@
                                         <i class="fa-solid fa-caret-down"></i>
                                     </span>
                                 </a>
+                                <a th:href="@{'/acceptAnswer?questionId=' + ${question.id} +
+                                '&answerId=' + ${answer.id}}" class = "accepted-answer">
+                                    <i class="fa-regular fa-circle-check"></i>
+                                </a>
                             </div>
 
                             <div class = "content-body">
-                                <div th:text = "*{answer.content}"></div><br><br>
+                                <div class = "answer-content">
+                                    <a class="author_box answer-author" th:href="@{'/userProfile?userId='+
+                                    ${answer.user.id}}"
+                                       style="color: black; padding-top: 5px;">
+                                        <i class="fa-solid fa-pen-clip"></i>
+                                        <span class="author_view" th:text="${answer.author}"></span>
+                                    </a>
+                                    <div th:text = "*{answer.content}">
+                                </div>
+                                </div><br><br>
                                 <img th:if="${answer.photo != null}" th:src="@{'/css/image/' + ${answer.photo}}"
                                      height="200px" width="200px" class="show_img">
                                 <br>
@@ -274,7 +409,9 @@
                                       th:action = "@{/saveAnswerComment}" method="Post">
                                     Comment:
                                     <textarea name="saveContent"
-                                              th:field = "${comments.comment}" rows="10" cols="110" required></textarea>
+                                              th:field = "${comments.comment}" rows="10"
+                                              style="width: 90%; margin-left: 5%;"
+                                              required></textarea>
                                     <input type="hidden" th:name="questionId" th:value="${question.id}">
                                     <input type="hidden" th:name="answerId" th:value="*{answer.id}">
                                     <br>
@@ -302,7 +439,8 @@
                                           th:action ="@{/updateAnswerComment/{commentId} (commentId = ${comments.id})}"
                                           method="Post">
                                 <textarea name="updateContent"
-                                          th:field = "${comments.comment}" rows="10" cols="110"></textarea>
+                                          th:field = "${comments.comment}" rows="10"
+                                          style="width: 90%; margin-left: 5%;"></textarea>
                                         <input type="hidden" th:name="questionId" th:value="${question.id}">
                                         <input type="hidden" th:name="answerId" th:value="*{answer.id}">
                                         <br>
@@ -319,7 +457,7 @@
                 <p style="font-size: x-large">Your Answer</p>
                 <form th:action = "@{/addAnswer{questionId} (questionId = ${question.id})}" method="post"
                       enctype="multipart/form-data">
-                    <textarea name = "content" rows = "10" cols = "130" ></textarea><br><br><br>
+                    <textarea name = "content" rows = "10" style="width: 90%; margin-left: 5%;"></textarea><br><br><br>
                     <input type="file" name="imageName" accept="image/**" class="add_image">
                     <input type="submit" value="Post Answer">
                 </form>

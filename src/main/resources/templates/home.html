@@ -126,7 +126,6 @@
                         <a th:href="@{/viewQuestion/{questionId} (questionId=${questions.id})}">
                             <h2 th:text="*{questions.title}"></h2>
                         </a>
-
                         <div class="row-container">
                             <p class="views" th:text="'Views : ' + *{questions.views}"></p>
                             <p class="votes" th:text="'Votes : ' + *{questions.votes}"></p>

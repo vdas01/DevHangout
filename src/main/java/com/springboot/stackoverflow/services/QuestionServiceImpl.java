@@ -126,6 +126,8 @@ public class QuestionServiceImpl implements QuestionService{
     public Question findQuestionById(Integer questionId) {
         Optional<Question> byId = questionRepository.findById(questionId);
         if(byId.isEmpty()) return null;
+        byId.get().setViews(byId.get().getViews()+1);
+        questionRepository.save(byId.get());
 
         return byId.get();
     }
@@ -161,6 +163,19 @@ public class QuestionServiceImpl implements QuestionService{
             question.removedSavedUser(user);
             questionRepository.save(question);
         }
+    }
+
+    @Override
+    public void acceptAnswer(Integer questionId, Integer answerId) {
+        Question question = questionRepository.findById(questionId).get();
+        Answer answer = answerRepository.findById(answerId).get();
+        if(question.getAcceptedAnswer().equals(answer)) {
+            question.setAcceptedAnswer(null);
+        }
+        else
+            question.setAcceptedAnswer(answer);
+
+        questionRepository.save(question);
     }
 
     @Override
