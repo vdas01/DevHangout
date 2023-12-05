@@ -50,7 +50,7 @@
             </th:block>
             <th:block th:if="${#authorization.expression('isAuthenticated()')}">
                 <form method="post" th:action = "@{/logout}">
-                    <input type="submit" value="Logout">
+                    <input id="logout" type="submit" value="Logout">
                 </form>
             </th:block>
         </span>
@@ -122,26 +122,64 @@
             <main>
                 <section class="questions-list">
 
-                    <article th:each="questions : ${questionsList}">
-                        <a th:href="@{/viewQuestion/{questionId} (questionId=${questions.id})}">
-                            <h2 th:text="*{questions.title}"></h2>
-                        </a>
-                        <div class="row-container">
-                            <p class="views" th:text="'Views : ' + *{questions.views}"></p>
-                            <p class="votes" th:text="'Votes : ' + *{questions.votes}"></p>
-                            <p class="answers_count" th:text="'Answers : ' + *{questions.answers.size()}"></p>
-                            <a th:href="@{'/userProfile?userId=' + ${questions.user.id}}">
-                                <span th:text = "'Author: ' + *{questions.user.userName}"></span>
-                            </a>
+<!--                    <article th:each="questions : ${questionsList}">-->
+<!--                        <a th:href="@{/viewQuestion/{questionId} (questionId=${questions.id})}">-->
+<!--                            <h2 th:text="*{questions.title}"></h2>-->
+<!--                        </a>-->
+<!--                        <div class="row-container">-->
+<!--                            <p class="views" th:text="'Views : ' + *{questions.views}"></p>-->
+<!--                            <p class="votes" th:text="'Votes : ' + *{questions.votes}"></p>-->
+<!--                            <p class="answers_count" th:text="'Answers : ' + *{questions.answers.size()}"></p>-->
+<!--                            <a th:href="@{'/userProfile?userId=' + ${questions.user.id}}">-->
+<!--                                <span th:text = "'Author: ' + *{questions.user.userName}"></span>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="row-container">-->
+<!--                            <p class="tags">-->
+<!--                                <span class="tag" th:each="tag, tagStatus : ${questions.tags}"-->
+<!--                                      th:text="${tag.name}+' '" >-->
+<!--                                </span>-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </article>-->
+                    <span th:each="question : ${questionsList}" class="q_box">
+                        <a th:text="${question.title}" class="q_title" th:href="@{'/viewQuestion/' + ${question.id}}"></a>
+                        <div class="q_lower">
+                            <div class="q_left">
+                                <p class="views" >
+                                    <i class="fa-solid fa-eye"></i>
+                                    <span class="view_text" th:text="${question.views}"></span>
+                                </p>
+                                <p class="votes" >
+                                    <i class="fa-solid fa-heart"></i>
+                                    <span class="vote_text" th:text="${question.votes}"></span>
+                                </p>
+                                <p class="answers_count" >
+                                    <i class="fa-solid fa-message"></i>
+                                    <span class="answer_view" th:text="${question.answers.size()}"></span>
+                                </p>
+                                <p class="comment_count">
+                                    <i class="fa-solid fa-comment q_icons"></i>
+                                    <span class="comment_view" th:text="${question.comments.size()}"></span>
+                                </p>
+                            </div>
+                             <div class="q_right">
+                                 <a class="author_box" th:href="@{'/userProfile?userId='+ ${question.user.id}}">
+                                    <i class="fa-solid fa-pen-clip"></i>
+                                    <span class="author_view" th:text="${question.author}"></span>
+                                </a>
+                             </div><br><br>
                         </div>
                         <div class="row-container">
                             <p class="tags">
-                                <span class="tag" th:each="tag, tagStatus : ${questions.tags}"
-                                      th:text="${tag.name}+' '" >
-                                </span>
+                                <div class="tag" th:each="tag : ${question.tags}">
+                                    <a th:href="@{/questions/tagged/{tagId}(tagId=${tag.id})}">
+                                        <span th:text="${tag.name}+' '" ></span>
+                                    </a>
+                                </div>
                             </p>
                         </div>
-                    </article>
+                    </span>
                 </section>
             </main>
         </div>

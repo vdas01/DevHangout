@@ -155,8 +155,11 @@
                                 <br>
                                 <input type="submit" value="Update">
                             </form>
-                            <a th:each="tag : ${question.tags}" th:text="${tag.name}" class="tags"
-                               th:href="@{/questions/tagged/{tagId}(tagId=${tag.id})}"></a>
+                            <span th:each="tag : ${question.tags}">
+                            <a th:text="${tag.name}" class="tags"
+                               th:href="@{/questions/tagged/{tagId}(tagId=${tag.id})}">
+                            </a>
+                                </span>
                         </div><br><br>
                     </div>
                 </div>
@@ -476,7 +479,7 @@
                 <p style="font-size: x-large">Your Answer</p>
                 <form th:action = "@{/addAnswer{questionId} (questionId = ${question.id})}" method="post"
                       enctype="multipart/form-data">
-                    <textarea name = "content" rows = "10" style="width: 90%; margin-left: 5%;"></textarea><br><br><br>
+                    <textarea name = "content" rows = "10" style="width: 90%; margin-left: 5%;" required></textarea><br><br><br>
                     <input type="file" name="imageName" accept="image/**" class="add_image">
                     <input type="submit" value="Post Answer">
                 </form>
