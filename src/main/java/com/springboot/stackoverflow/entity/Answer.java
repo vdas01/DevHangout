@@ -22,17 +22,13 @@ public class Answer {
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "question_id")
     private Question question;
-
     @Column(name = "photo")
     private String photo;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-
     @Column(name = "votes")
     private int votes = 0;
-
     @Column(name = "accepted")
     private boolean accepted = false;
 

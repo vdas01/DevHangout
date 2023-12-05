@@ -1,13 +1,12 @@
 package com.springboot.stackoverflow.controllers;
 
-import com.springboot.stackoverflow.entity.Comment;
 import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.Tag;
 import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.services.QuestionService;
 import com.springboot.stackoverflow.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,12 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 
@@ -101,6 +95,20 @@ public class QuestionController {
         questionService.deleteQuestion(questionId);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/processVote")
+    public String processVote(@RequestParam("vote") Integer vote,
+                              @RequestParam("type") String type,
+                              @RequestParam("questionId") Integer questionId,
+                              @RequestParam(value = "answerId", required = false) Integer answerId) {
+        System.out.println(vote);
+        System.out.println(type);
+        System.out.println(questionId);
+        System.out.println(answerId);
+        questionService.votingSystem(vote, type, questionId, answerId);
+
+        return "redirect:/viewQuestion/" + questionId;
     }
 
     public List<Question> findAllQuestions() {
