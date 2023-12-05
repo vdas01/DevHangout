@@ -19,8 +19,12 @@
                 </span>
         </svg>
         <div class="search">
-            <input type="search" name="search_bar" id="search_bar">
+            <form th:action="@{/}">
+            <input type="search" th:name="search" id="search_bar" placeholder="Search...">
+                <button type="submit">
             <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
+                </button>
+            </form>
         </div>
         <span class="profile">
                 <img src="" alt="" id="user_pic">
@@ -142,6 +146,7 @@
 <!--                            </p>-->
 <!--                        </div>-->
 <!--                    </article>-->
+                    <div th:if="${questionsList.size() eq 0}"><strong>No Match Found</strong></div>
                     <span th:each="question : ${questionsList}" class="q_box">
                         <a th:text="${question.title}" class="q_title" th:href="@{'/viewQuestion/' + ${question.id}}"></a>
                         <div class="q_lower">

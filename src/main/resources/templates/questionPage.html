@@ -119,8 +119,10 @@
                     Modified: <b><span th:text = "${#dates.format(question.modifiedAt, 'dd/MM/YYYY')}"
                                        style="margin-right:0.5rem;"></span></b>
                     Views: <b><span th:text = "${question.views}" style="margin-right:0.5rem;"></span></b>
-                    <a  th:unless="${add}"  th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}" class="bookmark"><i class="fa-solid fa-bookmark bookmark-icon"></i></a>
-                     <a  th:if="${add}"    th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}" class="bookmark"><i class="fa-regular fa-bookmark bookmark-icon"></i></a>
+                    <a  th:unless="${add}"  th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}"
+                        class="bookmark"><i class="fa-solid fa-bookmark bookmark-icon"></i></a>
+                     <a  th:if="${add}"    th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}"
+                         class="bookmark"><i class="fa-regular fa-bookmark bookmark-icon"></i></a>
                 </div>
             </div>
             <div class = "question-detail">
@@ -185,7 +187,8 @@
                             Delete
                         </a>
                         </th:block>
-                        <a th:unless="${addComment != null}" th:href="@{/addComment/{questionId} (questionId = ${question.id})}"
+                        <a th:unless="${addComment != null}" th:href="@{/addComment/{questionId}
+                        (questionId = ${question.id})}"
                            class = "answer-action">comment</a>
                         <form th:if="${addComment != null}" th:action = "@{/saveComment}" method="Post">
                             Comment:
@@ -305,11 +308,13 @@
                                     Delete
                                 </a>
 
-                                <a th:unless="${addAnswerComment != null and addAnswerComment eq question.acceptedAnswer.id}"
+                                <a th:unless="${addAnswerComment != null and
+                                addAnswerComment eq question.acceptedAnswer.id}"
                                    th:href="@{/addAnswerComment/{questionId}/{answerID}
                                    (questionId = ${question.id},answerID=${question.acceptedAnswer.id})}"
                                    class = "answer-action">comment</a>
-                                <form th:if="${addAnswerComment != null and addAnswerComment eq question.acceptedAnswer.id}"
+                                <form th:if="${addAnswerComment != null and
+                                addAnswerComment eq question.acceptedAnswer.id}"
                                       th:action = "@{/saveAnswerComment}" method="Post">
                                     Comment:
                                     <textarea name="saveContent"
