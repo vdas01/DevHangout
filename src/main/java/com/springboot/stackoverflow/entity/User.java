@@ -56,7 +56,7 @@ public class User {
             inverseJoinColumns=@JoinColumn(name = "follower_id") // field from other class
     )
     private List<User> followers;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userName")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comment> commentList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Answer> answerList;

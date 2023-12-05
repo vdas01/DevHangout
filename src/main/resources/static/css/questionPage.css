@@ -95,7 +95,18 @@
 
 #question{
     display: grid;
-    grid-template-columns: 85% 10%;
+    grid-template-columns: 75% 15% 10%;
+}
+
+.answer-content {
+    display: grid;
+    grid-template-column: 10% 90%;
+}
+
+.answer-author {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
 }
 
 .voting-button {
@@ -108,13 +119,27 @@
     text-decoration: none;
 }
 
+.accepted-answer {
+    cursor: pointer;
+    margin: 20px 0% 0% 0px;
+    color: rgb(0,0,0,0.5);
+    text-decoration: none;
+    padding-right: 12px;
+    transform: scale(150%);
+}
+
+.accepted-answer i:hover {
+    background-color: #F0BF4C;
+    border-radius: 100%;
+}
+
 .voting-count {
     text-align: center;
     width: 100%;
 }
 
 .voting-button:hover {
-    background-color: #F0BF4C
+    background-color: #F0BF4C;
 }
 
 #parent {

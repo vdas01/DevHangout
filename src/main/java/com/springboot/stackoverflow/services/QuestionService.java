@@ -27,5 +27,6 @@ public interface QuestionService {
     void bookmarkQuestion(int questionId);
 
     void removeBookmarkQuestion(int questionId);
+    void acceptAnswer(Integer questionId, Integer answerId);
 
 }
