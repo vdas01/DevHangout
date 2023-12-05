@@ -41,7 +41,8 @@ public class Question {
 
     @Column(name = "votes")
     private int votes = 0;
-
+    @OneToOne
+    private Answer acceptedAnswer;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "question")
     //in answers there should be private Question question; with joinColumn("foreign_key")
     private List<Answer> answers;
@@ -95,6 +96,14 @@ public class Question {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Answer getAcceptedAnswer() {
+        return acceptedAnswer;
+    }
+
+    public void setAcceptedAnswer(Answer acceptedAnswer) {
+        this.acceptedAnswer = acceptedAnswer;
     }
 
     public int getViews() {
@@ -155,6 +164,14 @@ public class Question {
 
     public String getAuthor() {
         return author;
+    }
+
+    public Answer getAnswer() {
+        return acceptedAnswer;
+    }
+
+    public void setAnswer(Answer acceptedAnswer) {
+        this.acceptedAnswer = acceptedAnswer;
     }
 
     public void setAuthor(String author) {

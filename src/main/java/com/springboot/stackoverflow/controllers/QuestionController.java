@@ -44,8 +44,6 @@ public class QuestionController {
     public String processSaveQuestion(@RequestParam("imageName") MultipartFile file,
                                       @ModelAttribute("question") Question newQuestion,
                                       @ModelAttribute("tag")Tag newTag) throws IOException {
-
-
         questionService.saveQuestion(newQuestion,newTag,file);
 
         return "redirect:/";
@@ -116,7 +114,8 @@ public class QuestionController {
     }
 
     @GetMapping("/question/bookmark/{questionId}/add/{add}")
-    public String processBookmarkQuestion(@PathVariable(value = "questionId")int questionId,@PathVariable(value = "add")String add){
+    public String processBookmarkQuestion(@PathVariable(value = "questionId") Integer questionId,
+                                          @PathVariable(value = "add")String add){
         if(add.equals("true")){
             questionService.bookmarkQuestion(questionId);
         }
@@ -124,5 +123,13 @@ public class QuestionController {
             questionService.removeBookmarkQuestion(questionId);
         }
         return "redirect:/viewQuestion/{questionId}";
+    }
+
+    @GetMapping("/acceptAnswer")
+    public String acceptAnswer(@RequestParam(value = "questionId") Integer questionId,
+                               @RequestParam(value = "answerId") Integer answerId) {
+        questionService.acceptAnswer(questionId, answerId);
+
+        return "redirect:/viewQuestion/" + questionId;
     }
 }
