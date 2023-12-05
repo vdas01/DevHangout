@@ -15,7 +15,7 @@ public interface AnswerService {
 
     void deleteAnswer(Integer answerId);
 
-    Answer findQuestionById(int questionId);
+    Answer findAnswerById(int questionId);
 
     void saveCommentList(Answer answer);
 }

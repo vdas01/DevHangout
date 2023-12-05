@@ -121,7 +121,18 @@
             </div>
 
             <div id="editButtons">
-                <a href="/editProfile"><i class="fa-solid fa-pen pen"></i>Edit Profile</a>
+                <th:block th:if="${#authentication.principal.username eq user.email}">
+                    <a href="/editProfile"><i class="fa-solid fa-pen pen"></i>Edit Profile</a>
+                </th:block>
+                <th:block th:unless="${#authentication.principal.username eq user.email}">
+                    <a th:href="@{'/follow?follower=' + ${#authentication.principal.username}
+                    + '&following=' + ${user.email}}" style="background-color: darkred;">
+                        <i class="fa-solid fa-user-plus follow"></i>
+                        <span class = "follow">
+                            Follow
+                        </span>
+                    </a>
+                </th:block>
                 <a href="#">Network Profile</a>
             </div>
         </div>
@@ -173,7 +184,9 @@
                     <br><br><br><br>
                     <span>
                         Your about me section is currently blank. Would you <br>like to add one? <br>
-                        <a href = "/editProfile">Edit profile</a>
+                        <th:block th:if="${#authentication.principal.username eq user.email}">
+                            <a href = "/editProfile">Edit profile</a>
+                        </th:block>
                     </span>
                     <br><br>
                 </div>

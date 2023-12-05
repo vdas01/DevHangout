@@ -119,8 +119,10 @@
                     Modified: <b><span th:text = "${#dates.format(question.modifiedAt, 'dd/MM/YYYY')}"
                                        style="margin-right:0.5rem;"></span></b>
                     Views: <b><span th:text = "${question.views}" style="margin-right:0.5rem;"></span></b>
-                    <a  th:unless="${add}"  th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}" class="bookmark"><i class="fa-solid fa-bookmark bookmark-icon"></i></a>
-                     <a  th:if="${add}"    th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}" class="bookmark"><i class="fa-regular fa-bookmark bookmark-icon"></i></a>
+                    <a  th:unless="${add}"  th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}"
+                        class="bookmark"><i class="fa-solid fa-bookmark bookmark-icon"></i></a>
+                     <a  th:if="${add}"    th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}"
+                         class="bookmark"><i class="fa-regular fa-bookmark bookmark-icon"></i></a>
                 </div>
             </div>
             <div class = "question-detail">
@@ -268,12 +270,10 @@
                                     </span>
                                 </a>
                                 </th:block>
-                                <th:block th:if="${#authentication.principal.username eq question.user.email}">
                                 <a th:href="@{'/acceptAnswer?questionId=' + ${question.id} +
                                 '&answerId=' + ${question.acceptedAnswer.id}}" class = "accepted-answer">
                                     <i class="fa-solid fa-circle-check"></i>
                                 </a>
-                                </th:block>
                             </div>
 
                             <div class = "content-body">
@@ -292,6 +292,7 @@
                                      height="200px" width="200px" class="show_img">
                                 <br>
 
+                                <th:block th:if="${#authentication.principal.username eq question.acceptedAnswer.user.email}">
                                 <a th:href = "@{/editAnswer/{questionId}/{answerId} (questionId = ${question.id},
                                 answerId = ${question.acceptedAnswer.id})}" class = "answer-action">
                                     Edit
@@ -301,11 +302,13 @@
                                 answerId = ${question.acceptedAnswer.id})}" class = "answer-action">
                                     Delete
                                 </a>
+                                </th:block>
 
                                 <a th:unless="${addAnswerComment != null and addAnswerComment eq question.acceptedAnswer.id}"
                                    th:href="@{/addAnswerComment/{questionId}/{answerID}
                                    (questionId = ${question.id},answerID=${question.acceptedAnswer.id})}"
                                    class = "answer-action">comment</a>
+
                                 <form th:if="${addAnswerComment != null and addAnswerComment eq question.acceptedAnswer.id}"
                                       th:action = "@{/saveAnswerComment}" method="Post">
                                     Comment:
@@ -318,19 +321,25 @@
                                     <br>
                                     <input type="submit" value="Comment">
                                 </form>
+
                                 <br><br>
                                 <div th:each = "comments : ${question.acceptedAnswer.comment}" class="comment">
+                                    <span th:text = "*{comments.user.userName}"></span> :<br>
                                     <span th:text = "*{comments.comment}"  ></span><br>
-                                    <a th:unless="${editAnswerComment != null and editAnswerComment eq comments.id}"
-                                       th:href = "@{/editAnswerComment/{commentId}/{questionId}
-                                        (commentId = ${comments.id},questionId = ${question.id})}"
-                                       class = "answer-action">
-                                        Edit
-                                    </a>
-                                    <a th:href = "@{/deleteComment/{commentId} (commentId = ${comments.id})}"
-                                       class = "answer-action">
-                                        Delete
-                                    </a><br>
+
+                                    <th:block th:if="${#authentication.principal.username eq comments.user.email}">
+                                        <a th:unless="${editAnswerComment != null and editAnswerComment eq comments.id}"
+                                           th:href = "@{/editAnswerComment/{commentId}/{questionId}
+                                            (commentId = ${comments.id},questionId = ${question.id})}"
+                                           class = "answer-action">
+                                            Edit
+                                        </a>
+                                        <a th:href = "@{/deleteComment/{commentId} (commentId = ${comments.id})}"
+                                           class = "answer-action">
+                                            Delete
+                                        </a><br>
+                                    </th:block>
+
                                     <form th:if="${editAnswerComment != null and editAnswerComment eq comments.id}"
                                           th:action ="@{/updateAnswerComment/{commentId} (commentId = ${comments.id})}"
                                           method="Post">
@@ -444,15 +453,15 @@
                                     <th:block th:unless="${editAnswerComment != null and editAnswerComment eq comments.id}">
                                     <span th:text = "*{comments.comment}"  ></span><br>
                                     <th:block th:if="${#authentication.principal.username eq comments.email}">
-                                    <a th:href = "@{/editAnswerComment/{commentId}/{questionId}
-                                        (commentId = ${comments.id},questionId = ${question.id})}"
-                                       class = "answer-action">
-                                        Edit
-                                    </a>
-                                    <a th:href = "@{/deleteComment/{commentId} (commentId = ${comments.id})}"
-                                       class = "answer-action">
-                                        Delete
-                                    </a><br>
+                                        <a th:href = "@{/editAnswerComment/{commentId}/{questionId}
+                                            (commentId = ${comments.id},questionId = ${question.id})}"
+                                           class = "answer-action">
+                                            Edit
+                                        </a>
+                                        <a th:href = "@{/deleteComment/{commentId} (commentId = ${comments.id})}"
+                                           class = "answer-action">
+                                            Delete
+                                        </a><br>
                                     </th:block>
                                     </th:block>
                                     <form th:if="${editAnswerComment != null and editAnswerComment eq comments.id}"
@@ -477,7 +486,8 @@
                 <p style="font-size: x-large">Your Answer</p>
                 <form th:action = "@{/addAnswer{questionId} (questionId = ${question.id})}" method="post"
                       enctype="multipart/form-data">
-                    <textarea name = "content" rows = "10" style="width: 90%; margin-left: 5%;"></textarea><br><br><br>
+                    <textarea name = "content" rows = "10" style="width: 90%; margin-left: 5%;" required>
+                    </textarea><br><br><br>
                     <input type="file" name="imageName" accept="image/**" class="add_image">
                     <input type="submit" value="Post Answer">
                 </form>

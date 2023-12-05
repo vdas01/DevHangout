@@ -108,6 +108,11 @@
     background-color: rgb(0,0,0,0.1);
 }
 
+.follow {
+    background-color: darkred;
+    color: white;
+}
+
 #name{
     font-size:xx-large;
 }
@@ -204,7 +209,7 @@ ul#menuOptions li{
 }
 
 .pen {
-    padding-right: 5px;
+    padding-right: 15px;
 }
 
 #login-logout {

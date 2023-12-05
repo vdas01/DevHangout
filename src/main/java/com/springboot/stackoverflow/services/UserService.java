@@ -26,6 +26,7 @@ public interface UserService {
 
     void saveCommentList(User user);
 
+    void follow(String follower, String following);
 }
 
 

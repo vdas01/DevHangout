@@ -97,5 +97,15 @@ public class UserController {
         userService.updateUser(userName, country, title, about);
         return "redirect:/userProfile";
     }
+
+    @GetMapping("/follow")
+    public String follow(@RequestParam("follower") String follower,
+                         @RequestParam("following") String following) {
+        System.out.println(follower);
+        System.out.println(following);
+        userService.follow(follower, following);
+
+        return "redirect:/";
+    }
 }
 
