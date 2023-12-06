@@ -20,8 +20,12 @@
             </span>
             </svg>
             <div class="search">
-                <input type="search" name="search_bar" id="search_bar">
-                <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
+                <form th:action="@{/}">
+                    <input type="search" th:name="search" id="search_bar" placeholder="Search...">
+                    <button type="submit">
+                        <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
+                    </button>
+                </form>
             </div>
             <span class="profile">
             <img src="" alt="" id="user_pic">

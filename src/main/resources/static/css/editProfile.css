@@ -59,6 +59,23 @@
     color: black;
 }
 
+.search {
+    position: relative;
+    display: inline-block;
+}
+
+#search_bar {
+    padding-left: 34px;
+}
+
+.search_icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+     font-size: 24px;
+}
 /*-----------nav bar ends here -------------------*/
 
 #userContainer {

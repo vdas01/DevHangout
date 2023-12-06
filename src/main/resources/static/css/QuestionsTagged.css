@@ -67,7 +67,23 @@
 #login-logout a {
     padding: 0px 20px;
 }
+.search {
+    position: relative;
+    display: inline-block;
+}
 
+#search_bar {
+    padding-left: 34px;
+}
+
+.search_icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+     font-size: 24px;
+}
 /*<-------- navbar ------------>*/
 
 /* --------- middle box---------------------- */
@@ -129,6 +145,7 @@
     grid-template-columns: repeat(4,23%);
     gap: 2%;
 }
+
 .tag{
     margin-bottom: 3vh;
 }
@@ -344,4 +361,29 @@ margin-right:0.8vw;
     cursor: pointer;
     color: rgb(18, 18, 131);
 }
+#main-container {
+            text-align: center;
+            margin-top:60px;
+  }
 
+  .section-container {
+
+            background-color: rgb(244, 210, 123);
+            padding: 10px;
+            margin: -12px;
+            border-radius: 8px;
+  }
+
+  h3 {
+            color: #daa520;
+  }
+
+  p {
+            color: #555;
+   }
+  .static-content {
+                    background-color : rgb(250, 236, 198);
+                    padding: 20px;
+                    margin: 20px 0;
+                    border-radius: 8px;
+  }
