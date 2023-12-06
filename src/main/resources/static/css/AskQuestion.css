@@ -11,17 +11,18 @@
     width: 100%;
 }
 #navbar{
-    border: 2px solid black;
-    display: flex;
-    justify-content: center;
-    gap:1vw;
-    padding: 1.5vh;
-    font-size: 1.2rem;
-    align-items: center;
-    position: fixed;
-    z-index: 2;
-    background-color: white;
-    width: 100vw;
+     border: none;
+         border-bottom: 1px solid black;
+         display: flex;
+         justify-content: center;
+         gap: 1vw;
+         padding: 1.5vh;
+         font-size: 1.2rem;
+         align-items: center;
+         position: fixed;
+         z-index: 2;
+         background-color: white;
+         width: 100vw;
 }
 .items{
     display: flex;
