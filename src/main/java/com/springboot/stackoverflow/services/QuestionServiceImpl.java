@@ -80,7 +80,8 @@ public class QuestionServiceImpl implements QuestionService{
             Path path = Paths.get(file1.getAbsolutePath() + File.separator + file.getOriginalFilename());//create a path
             Files.copy(file.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
         }
-
+        user.setReputation(user.getReputation()+20);
+        userRepository.save(user);
         questionRepository.save(newQuestion);
     }
 
