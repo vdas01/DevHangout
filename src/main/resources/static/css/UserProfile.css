@@ -72,7 +72,7 @@
 
 #parent {
     display: grid;
-    grid-template-columns: 20% 68% 10%;
+    grid-template-columns: 13% 75% 10%;
     padding-top: 50px;
 }
 

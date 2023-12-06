@@ -78,7 +78,7 @@
 
 #parent {
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 13% 87%;
     min-height: 100vh;
     padding-top: 60px;
 }

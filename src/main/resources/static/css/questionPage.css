@@ -144,7 +144,7 @@
 
 #parent {
     display: grid;
-    grid-template-columns: 20% 58% 20%;
+    grid-template-columns: 13% 65% 20%;
     padding-top: 60px;
 }
 
