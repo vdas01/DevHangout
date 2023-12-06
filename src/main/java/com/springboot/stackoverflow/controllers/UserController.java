@@ -114,5 +114,10 @@ public class UserController {
 
         return "redirect:/userProfile?userId=" + userService.findByEmail(following).getId();
     }
+
+    @GetMapping("/followers")
+    public String showFollower() {
+        return "follow";
+    }
 }
 
