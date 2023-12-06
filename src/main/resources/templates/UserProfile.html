@@ -126,6 +126,8 @@
 
             <div id="editButtons">
                 <th:block th:if="${#authentication.principal.username eq user.email}">
+                    <a href="/followers">Followers</a>
+                    <a href="/following">Following</a>
                     <a href="/editProfile"><i class="fa-solid fa-pen pen"></i>Edit Profile</a>
                 </th:block>
                 <th:block th:unless="${#authentication.principal.username eq user.email}">
@@ -148,7 +150,6 @@
                         </a>
                     </th:block>
                 </th:block>
-                <a href="#">Network Profile</a>
             </div>
         </div>
 

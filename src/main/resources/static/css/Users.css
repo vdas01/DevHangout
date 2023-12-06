@@ -115,7 +115,7 @@ background-color:#FF8C00;
 /* --------- middle box---------------------- */
 #body {
     border-left: 2px solid rgba(0, 0, 0, 0.54);
-        padding-left: 10px;
+    padding-left: 10px;
 }
 
 #parent {
@@ -326,6 +326,7 @@ margin-right:0.8vw;
 }
 
 /* --------sidebar---------- */
+
 .userGrid{
 display:grid;
 grid-template-columns:25% 25% 25% 25%;
