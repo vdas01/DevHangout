@@ -118,6 +118,7 @@ public class UserController {
     public String showFollower(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user", userService.findByEmail(authentication.getName()));
+        model.addAttribute("type", "followers");
 
         return "follow";
     }
@@ -126,14 +127,13 @@ public class UserController {
     public String showFollowing(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user", userService.findByEmail(authentication.getName()));
+        model.addAttribute("type", "following");
 
         return "follow";
     }
     @PostMapping("/saveProfilePic{userId}")
     public String saveProfilePic(@RequestParam("imageName") MultipartFile file,
                                  @PathVariable(value = "userId")int userId) throws IOException {
-        System.out.println(file.getOriginalFilename());
-        System.out.println(userId);
         userService.saveProfilePic(file,userId);
         return "redirect:/editProfile";
     }
