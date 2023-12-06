@@ -50,7 +50,7 @@
             </th:block>
             <th:block th:if="${#authorization.expression('isAuthenticated()')}">
                 <form method="post" th:action = "@{/logout}">
-                    <input type="submit" value="Logout">
+                    <input id="logout" type="submit" value="Logout">
                 </form>
             </th:block>
         </span>
@@ -116,7 +116,9 @@
             <div class="userGrid">
                 <div class="user_container" th:each = "user: ${users}">
                     <div class="user">
-                        <img src="./avatar.png" alt="profile" class="user_profile">
+                        <img th:if="${user.photo != null}" th:src="@{'/css/image/' + ${user.photo}}"
+                             class="show_img" width="8%">
+                        <img th:if="${user.photo == null}" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2048px-Facebook_icon.svg.png" width="8%" >
                         <div class="user_info">
                             <a class="user_title" th:text = "*{user.userName}"
                                th:href="@{'/userProfile?userId=' + *{user.id}}"></a>

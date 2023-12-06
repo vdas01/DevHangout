@@ -79,10 +79,17 @@
 }
 
 #imageEdit {
-    background-color: black;
-    padding: 8px;
+   /** background-color: black;
+    padding: 8px; **/
     border-radius: 5px;
     margin-bottom: 20px; /* Increase the margin to create more space */
+}
+#submit_btn{
+    padding:1vh 2vh;
+    background-color:green;
+    color:black;
+    border-radius: 12%;
+    box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
 }
 
 #textBox {

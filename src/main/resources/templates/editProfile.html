@@ -110,11 +110,14 @@
         <div id="editForm">
             <b>Profile Image</b>
             <br><span id="profilePhoto">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2048px-Facebook_icon.svg.png" width="8%" >
+                 <img th:if="${user.photo != null}" th:src="@{'/css/image/' + ${user.photo}}"
+                      class="show_img" width="8%">
+                <img th:if="${user.photo == null}" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2048px-Facebook_icon.svg.png" width="8%" >
                 <br>
-                <span id="imageEdit">
-               <a href="#">Edit Image</a>
-           </span>
+                <form id="imageEdit" enctype="multipart/form-data" th:action="@{'/saveProfilePic' + ${user.id}}" method="post">
+                    <input type="file" name="imageName" accept="image/**" id="add_image"> <br> <br>
+                     <input type="submit" value="Submit" id="submit_btn">
+                </form>
 
             </span>
 

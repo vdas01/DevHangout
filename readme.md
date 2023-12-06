@@ -8,7 +8,7 @@
 7. User profile:- Each user has a profile showcasing their activity, reputation, badges earned, and a history of their contributions and edit it.
 8. Badges to user:- Users can earn badges for various achievements, such as providing a certain number of helpful answers, reaching a specific reputation milestone.
 9. Reputation :- earned when you post good answers or asks good questions 
-10. Following:- users can follow each
+10. Following:- users can follow each 
 
 ## Entities:-
 1. Questions(vishal)
