@@ -52,7 +52,7 @@
             </th:block>
             <th:block th:if="${#authorization.expression('isAuthenticated()')}">
                 <form method="post" th:action = "@{/logout}">
-                    <input type="submit" value="Logout">
+                    <input id="logout" type="submit" value="Logout">
                 </form>
             </th:block>
         </span>

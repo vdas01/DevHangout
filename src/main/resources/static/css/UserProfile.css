@@ -89,7 +89,7 @@
 
 #parent {
     display: grid;
-    grid-template-columns: 20% 68% 10%;
+    grid-template-columns: 13% 75% 10%;
     padding-top: 50px;
 }
 
@@ -305,6 +305,20 @@ color:red;
 }
 .author_box:hover .fa-pen-clip{
     color: black;
+}
+
+#logout{
+background-color:orange;
+color=grey;
+padding: 0.5rem 1rem;
+font-weight:bold;
+font-size: 1rem;
+border-radius: 12%;
+box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
+}
+
+#logout:hover{
+background-color:#FF8C00;
 }
 
 
