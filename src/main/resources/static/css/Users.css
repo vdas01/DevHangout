@@ -25,6 +25,36 @@
     width: 100vw;
 }
 
+#logout{
+background-color:orange;
+color=grey;
+padding: 0.5rem 1rem;
+font-weight:bold;
+font-size: 1rem;
+border-radius: 12%;
+box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
+}
+
+#logout:hover{
+background-color:#FF8C00;
+}
+.search {
+    position: relative;
+    display: inline-block;
+}
+
+#search_bar {
+    padding-left: 34px;
+}
+
+.search_icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+     font-size: 24px;
+}
 .items{
     display: flex;
     gap: 1vw;
