@@ -10,7 +10,18 @@
     min-height: 100vh;
     width: 100%;
 }
+#logout{
+background-color:orange;
+padding: 0.5rem 1rem;
+font-weight:bold;
+font-size: 1rem;
+border-radius: 12%;
+box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
+}
 
+#logout:hover{
+background-color:#FF8C00;
+}
 #navbar{
     border: none;
         border-bottom: 1px solid black;
