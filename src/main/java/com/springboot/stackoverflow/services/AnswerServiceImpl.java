@@ -55,7 +55,8 @@ public class AnswerServiceImpl implements AnswerService{
                 Path path = Paths.get(file1.getAbsolutePath() + File.separator + file.getOriginalFilename());//create a path
                 Files.copy(file.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
             }
-
+            user.setReputation(user.getReputation()+5);
+            userRepository.save(user);
             answerRepository.save(answer);
         }
     }
