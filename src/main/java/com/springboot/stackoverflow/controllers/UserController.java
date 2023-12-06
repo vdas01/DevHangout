@@ -116,7 +116,18 @@ public class UserController {
     }
 
     @GetMapping("/followers")
-    public String showFollower() {
+    public String showFollower(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("user", userService.findByEmail(authentication.getName()));
+
+        return "follow";
+    }
+
+    @GetMapping("/following")
+    public String showFollowing(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("user", userService.findByEmail(authentication.getName()));
+
         return "follow";
     }
 }
