@@ -151,6 +151,11 @@ public class QuestionServiceImpl implements QuestionService{
             Question question = retrievedQuestionById.get();
             question.addSavedUser(user);
             questionRepository.save(question);
+            user.setReputation(user.getReputation()+5);
+            userRepository.save(user);
+            User questionUser = userRepository.findByEmail(question.getUser().getEmail());
+            questionUser.setReputation(questionUser.getReputation()+10);
+            userRepository.save(user);
         }
     }
 
@@ -163,6 +168,11 @@ public class QuestionServiceImpl implements QuestionService{
             Question question = retrievedQuestionById.get();
             question.removedSavedUser(user);
             questionRepository.save(question);
+            user.setReputation(user.getReputation()-5);
+            userRepository.save(user);
+            User questionUser = userRepository.findByEmail(question.getUser().getEmail());
+            questionUser.setReputation(questionUser.getReputation()-10);
+            userRepository.save(user);
         }
     }
 
@@ -172,11 +182,19 @@ public class QuestionServiceImpl implements QuestionService{
         Answer answer = answerRepository.findById(answerId).get();
 
         if(question.getAcceptedAnswer() != null && question.getAcceptedAnswer().equals(answer)) {
+            User user = userRepository.findByEmail(answer.getUser().getEmail());
+            System.out.println(user);
+            user.setReputation(user.getReputation()-25);
+            userRepository.save(user);
             question.setAcceptedAnswer(null);
+
         }
         else
             question.setAcceptedAnswer(answer);
-
+        User user = userRepository.findByEmail(answer.getUser().getEmail());
+        System.out.println(user);
+        user.setReputation(user.getReputation()+25);
+        userRepository.save(user);
         questionRepository.save(question);
     }
 
