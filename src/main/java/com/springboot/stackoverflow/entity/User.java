@@ -33,6 +33,9 @@ public class User {
     private String title;
     @Column(name = "is_active")
     private boolean isActive = true;
+
+    @Column(name = "photo")
+    private String photo = null;
     @ManyToMany()
     @JoinTable(
             name = "FollowRelation",
@@ -237,6 +240,22 @@ public class User {
 
     public void setSavedQuestions(List<Question> savedQuestions) {
         this.savedQuestions = savedQuestions;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public List<Vote> getUserVotes() {
+        return userVotes;
+    }
+
+    public void setUserVotes(List<Vote> userVotes) {
+        this.userVotes = userVotes;
     }
 
     public void addFollower(User theUser) {

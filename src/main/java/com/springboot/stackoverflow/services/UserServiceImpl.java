@@ -7,13 +7,22 @@ import com.springboot.stackoverflow.repository.RoleRepository;
 import com.springboot.stackoverflow.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -154,6 +163,28 @@ public class UserServiceImpl implements UserService {
         User user=userRepository.findByEmail(authentication.getName());
         return user;
     }
+
+
+    @Override
+    public void saveProfilePic(MultipartFile file,int userId) throws IOException {
+        Optional<User> retrievedUser = userRepository.findById(userId);
+        if(retrievedUser.isPresent()) {
+            User user = retrievedUser.get();
+            if (!file.isEmpty()) {
+                System.out.println("not empty");
+                user.setPhoto(file.getOriginalFilename());
+                File file1 = new ClassPathResource("static/css/image").getFile();
+
+                Path path = Paths.get(file1.getAbsolutePath() + File.separator + file.getOriginalFilename());//create a path
+                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+                userRepository.save(user);
+            }
+            else{
+                System.out.println("Empty");
+            }
+        }
+    }
+
 
 }
 

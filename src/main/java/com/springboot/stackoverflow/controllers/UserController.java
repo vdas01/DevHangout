@@ -9,11 +9,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -129,6 +128,14 @@ public class UserController {
         model.addAttribute("user", userService.findByEmail(authentication.getName()));
 
         return "follow";
+    }
+    @PostMapping("/saveProfilePic{userId}")
+    public String saveProfilePic(@RequestParam("imageName") MultipartFile file,
+                                 @PathVariable(value = "userId")int userId) throws IOException {
+        System.out.println(file.getOriginalFilename());
+        System.out.println(userId);
+        userService.saveProfilePic(file,userId);
+        return "redirect:/editProfile";
     }
 }
 
