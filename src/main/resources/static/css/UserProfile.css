@@ -391,3 +391,15 @@ background-color:#FF8C00;
     background-color: rgb(0,0,0,0.07);
     border-radius: 10px 0px 0px 10px;
 }
+
+.logo {
+  display: flex;
+  text-decoration: none;
+  color: black;
+}
+
+.title {
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-right: 100px;
+}

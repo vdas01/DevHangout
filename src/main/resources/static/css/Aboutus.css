@@ -46,12 +46,6 @@ body{
     margin-bottom: 2.3vh;
 }
 
-.title {
-    padding: 0px;
-    margin-left: -10px;
-    margin-right: 100px;
-}
-
 .icons{
     color: black;
 }
@@ -120,7 +114,6 @@ background-color:#FF8C00;
     background-color: #f9f9f4;
 }
 .stats_box{
-  
     padding: 3vh 2vw;
     display: flex;
     flex-direction: column;
@@ -135,4 +128,16 @@ background-color:#FF8C00;
 .stats_para{
     font-size: 1.2rem;
     color: rgb(94, 94, 94);
+}
+
+.logo {
+  display: flex;
+  text-decoration: none;
+  color: black;
+}
+
+.title {
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-right: 100px;
 }
