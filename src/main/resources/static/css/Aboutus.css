@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+}
+body{
+    min-height: 100vh;
+    min-width: 100%;
+}
+/* ------ navbar------------ */
+#navbar{
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    gap:1vw;
+    padding: 1.5vh;
+    font-size: 1.2rem;
+    align-items: center;
+    position: fixed;
+    z-index: 2;
+    background-color: white;
+    width: 100vw;
+}
+.items{
+    display: flex;
+    gap: 1vw;
+}
+
+.content{
+    padding: 2vh 2vw;
+    background-color: rgb(231, 231, 231);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#search_bar{
+    width: 20vw;
+    padding:1vh 2vw;
+    border-radius: 10px;
+}
+#heading{
+    font-size: 2rem;
+    margin-bottom: 2.3vh;
+}
+
+.title {
+    padding: 0px;
+    margin-left: -10px;
+    margin-right: 100px;
+}
+
+.icons{
+    color: black;
+}
+
+#login-logout {
+    position: fixed;
+    right: 50px;
+}
+
+#login-logout a {
+    padding: 0px 20px;
+}
+#logout{
+background-color:orange;
+color:grey;
+padding: 0.5rem 1rem;
+font-weight:bold;
+font-size: 1rem;
+border-radius: 12%;
+box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
+}
+
+#logout:hover{
+background-color:#FF8C00;
+}
+/* ------------navbar------------ */
+#hero_section{
+    border: 2px solid black;
+  padding:0 4vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#main_img{
+    height: 8vh;
+    width: 4vw;
+    color: white;
+    margin-bottom: 3vh;
+    margin-top: 18vh ;
+}
+#title{
+    font-size: 3vw;
+    margin-bottom: 2vh;
+    font-family: 'Roboto Slab', serif;
+}
+#title_first{
+    font-weight: 400;
+}
+#title_secon{
+    margin-left: 9vw;
+}
+#hero_section small{
+    font-size:1.3vw;
+    color: rgb(87, 86, 86);
+}
+#secondary{
+    margin-left:5vw;
+}
+#descp{
+    margin-bottom: 10vh;
+}
+.stats_container{
+    display: flex;
+    gap: 1vw;
+    background-color: #f9f9f4;
+}
+.stats_box{
+  
+    padding: 3vh 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.stats_box:not(:last-child){
+    border-right: 1px solid rgb(207, 206, 206);
+}
+.stats_title{
+    font-size: 2.3rem;
+}
+.stats_para{
+    font-size: 1.2rem;
+    color: rgb(94, 94, 94);
+}
