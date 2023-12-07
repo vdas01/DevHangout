@@ -20,8 +20,12 @@
                     </span>
         </svg>
         <div class="search">
-            <input type="search" name="search_bar" id="search_bar">
-            <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
+            <form th:action="@{/}">
+                <input type="search" th:name="search" id="search_bar" placeholder="Search...">
+                <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
+                </button>
+            </form>
         </div>
         <span class="profile">
                     <img src="" alt="" id="user_pic">
@@ -113,10 +117,15 @@
                     <li class="sort_item"><a href="/tag">new</a></li>
                 </ul>
             </div>
+
             <div class="userGrid">
                 <div class="user_container" th:each = "user: ${users}">
                     <div class="user">
-                        <img src="./avatar.png" alt="profile" class="user_profile">
+                        <img th:if="${user.photo != null}" th:src="@{'/css/image/' + ${user.photo}}"
+                             class="show_img" width="30%">
+                        <img th:if="${user.photo == null}"
+                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2048px-Facebook_icon.svg.png"
+                             width="30%" >
                         <div class="user_info">
                             <a class="user_title" th:text = "*{user.userName}"
                                th:href="@{'/userProfile?userId=' + *{user.id}}"></a>

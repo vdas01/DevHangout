@@ -19,8 +19,12 @@
                     </span>
         </svg>
         <div class="search">
-            <input type="search" name="search_bar" id="search_bar">
-            <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
+            <form th:action="@{/}">
+                <input type="search" th:name="search" id="search_bar" placeholder="Search...">
+                <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
+                </button>
+            </form>
         </div>
         <span class="profile">
                     <img src="" alt="" id="user_pic">
@@ -147,7 +151,37 @@
 
 
     </div>
-    <div></div>
+    <div id="main-container">
+        <main>
+            <section class="section-container">
+                <div class="static-content">
+                    <h3>About Stack Overflow</h3>
+                    <p>Stack Overflow is a question-and-answer website for computer programmers. It is the
+                        flagship site of the Stack Exchange Network. It was created in 2008 by Jeff Atwood and Joel
+                        Spolsky. It features questions and answers on certain computer programming topics.</p>
+                </div>
+                <div class="static-content">
+                    <h3>What is Programming</h3>
+                    <p>Programming is the process of creating instructions for a computer to perform tasks.
+                        It's a collaboration between humans and computers. Humans create instructions for computers
+                        to follow in a language that computers can understand.</p>
+                </div>
+                <div class="static-content">
+                    <h3>What is Web Development</h3>
+                    <p>Web development refers to the creating, building, and maintaining of websites. It includes
+                        aspects such as web design, web publishing, web programming, and database management. It
+                        is the creation of an application that works over the internet i.e. websites.</p>
+                </div>
+                <div class="static-content">
+                    <h3>When and How Java introduced</h3>
+                    <p>Java was originally developed by James Gosling at Sun Microsystems. It was released in
+                        May 1995 as a core component of Sun Microsystems' Java platform. The original and reference
+                        implementation Java compilers, virtual machines, and class libraries were originally
+                        released by Sun under proprietary licenses</p>
+                </div>
+            </section>
+        </main>
+    </div>
 </div>
 </body>
 </html>

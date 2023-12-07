@@ -2,7 +2,9 @@ package com.springboot.stackoverflow.services;
 
 import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.User;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
@@ -29,6 +31,8 @@ public interface UserService {
     void follow(String follower, String following);
 
     void unfollow(String follower, String following);
+
+    void saveProfilePic(MultipartFile file,int userId) throws IOException;
 }
 
 

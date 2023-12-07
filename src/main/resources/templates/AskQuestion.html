@@ -20,8 +20,12 @@
             </span>
             </svg>
             <div class="search">
-                <input type="search" name="search_bar" id="search_bar">
-                <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
+                <form th:action="@{/}">
+                    <input type="search" th:name="search" id="search_bar" placeholder="Search...">
+                    <button type="submit">
+                        <i class="fa-solid fa-magnifying-glass search_icon icons"></i>
+                    </button>
+                </form>
             </div>
             <span class="profile">
             <img src="" alt="" id="user_pic">
@@ -68,7 +72,7 @@
                 <div class="input_group">
                     <h5>What are the details of your problem?</h5>
                     <p>Introduce the problem and expand on what you put in the title. Minimum 20 characters.</p>
-                   <textarea name="content"  cols="30" rows="10" minlength="20" th:field="*{content}" required></textarea>
+                   <textarea name="content"   cols="30" rows="10" minlength="20" th:field="*{content}" required></textarea>
                 </div>
 
                 <div class="input_group">
