@@ -277,6 +277,10 @@ input[type = "submit"] {
     /* float: right; */
 }
 
+pre {
+    font-size: small;
+}
+
 /*-----------Side Bar starts here -----------------*/
 
 #sidebar{
