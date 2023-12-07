@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/processBadge}" method="post">
+    Enter Badge name: <input type="text" name="badgeName">
+    Enter Badge Description: <input type="text" name="badgeDescription">
+    Enter Reputation required:<input type="number" name="reputationRequired">
+    <input type="submit">
+</form>
+</body>
+</html>
