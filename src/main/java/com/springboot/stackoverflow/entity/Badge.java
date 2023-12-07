@@ -17,6 +17,8 @@ public class Badge{
     private String name;
     @Column(name="description")
     private String description;
+    @Column(name = "reputationRequired")
+    int reputationRequired;
     @ManyToMany
     @JoinTable(name = "user_badge", joinColumns = @JoinColumn(name = "badge_id"),
             inverseJoinColumns =@JoinColumn(name ="user_id"))
@@ -28,6 +30,15 @@ public class Badge{
         this.name = name;
         this.description = description;
     }
+
+    public int getReputationRequired() {
+        return reputationRequired;
+    }
+
+    public void setReputationRequired(int reputationRequired) {
+        this.reputationRequired = reputationRequired;
+    }
+
     public Integer getId() {
         return id;
     }
