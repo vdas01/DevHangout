@@ -62,6 +62,10 @@
 
         <div class="content">
                 <h3 id="heading">Ask a public question</h3>
+<!--            <form th:action = "@{'/addCode'}">-->
+<!--                <input type="hidden" name="title" class="title" th:field="${question.title}" required>-->
+<!--                <input type = "submit" value = "add code">-->
+<!--            </form><br>-->
             <form th:action="@{/saveQuestion}" method="post" th:object="${question}"  enctype="multipart/form-data">
                 <div class="input_group">
                     <h5>Title</h5>
@@ -72,7 +76,7 @@
                 <div class="input_group">
                     <h5>What are the details of your problem?</h5>
                     <p>Introduce the problem and expand on what you put in the title. Minimum 20 characters.</p>
-                   <textarea name="content"   cols="30" rows="10" minlength="20" th:field="*{content}" required></textarea>
+                   <textarea name="content" cols="30" rows="10" minlength="20" th:field="*{content}" required></textarea>
                 </div>
 
                 <div class="input_group">
@@ -81,7 +85,8 @@
                     <input type="text" name="tags" id="tags" th:field="${tag.name}" >
                 </div>
                 <input type="file" name="imageName" accept="image/**" id="add_image"> <br>
-                <input type="submit" value="Submit" class="buttons">
+                <input type="submit" name="submit" value="Save" class="buttons">
+<!--                <input type="submit" name="submit" value="addCode" class="buttons">-->
             </form>
         </div>
     </div>

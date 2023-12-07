@@ -95,12 +95,12 @@
                     </a>
                 </div>
                 <br>
-                <div class="row">
-                    <a href="/discussions">
-                        <i class="fa-solid fa-message side_icons"></i>
-                        <small class="side-text">Discussions</small>
-                    </a>
-                </div>
+<!--                <div class="row">-->
+<!--                    <a href="/discussions">-->
+<!--                        <i class="fa-solid fa-message side_icons"></i>-->
+<!--                        <small class="side-text">Discussions</small>-->
+<!--                    </a>-->
+<!--                </div>-->
             </div>
         </div>
 
@@ -155,7 +155,7 @@
                         <div class = "question-content">
                             <form th:action = "@{/updateQuestion/{questionId}
                             (questionId = ${question.id})}" method="GET">
-                                <textarea th:text="${question.content}" name="editedContent"
+                                <textarea th:utext="${question.content}" name="editedContent"
                                           th:value = "${question.content}" rows="10"
                                           style="width: 90%; margin-left: 5%;"></textarea>
                                 <br>
@@ -173,7 +173,7 @@
                 <div th:unless = "${isEdited != null}">
                     <div class = "content-body">
                         <div class = "question-content">
-                            <p th:text = "${question.content}"></p>
+                            <pre th:text = "${question.content}"></pre>
                             <img th:if="${question.photo != null}" th:src="@{'/css/image/' + ${question.photo}}"
                                  height="400px" width="400px" class="show_img">
                             <br>
@@ -292,8 +292,8 @@
                                         <i class="fa-solid fa-pen-clip"></i>
                                         <span class="author_view" th:text="${question.acceptedAnswer.author}"></span>
                                     </a>
-                                    <div th:text = "${question.acceptedAnswer.content}">
-                                    </div>
+                                    <pre th:text = "${question.acceptedAnswer.content}">
+                                    </pre>
                                 </div><br><br>
                                 <img th:if="${question.acceptedAnswer.photo != null}" th:src="@{'/css/image/' +
                                 ${question.acceptedAnswer.photo}}"
@@ -421,8 +421,8 @@
                                         <i class="fa-solid fa-pen-clip"></i>
                                         <span class="author_view" th:text="${answer.author}"></span>
                                     </a>
-                                    <div th:text = "*{answer.content}">
-                                </div>
+                                    <pre th:text = "*{answer.content}">
+                                </pre>
                                 </div><br><br>
                                 <img th:if="${answer.photo != null}" th:src="@{'/css/image/' + ${answer.photo}}"
                                      height="200px" width="200px" class="show_img">
