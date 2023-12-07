@@ -206,8 +206,9 @@
                     Badges
                 </span>
 
-                <div th:if="${!user.userBadges.isEmpty()}">
-                    <span th:text="${user.userBadges}"></span><br><br><br>
+                <div th:if="${!user.userBadges.isEmpty()}" th:each = "badge: ${user.userBadges}">
+                    <span th:text="*{badge.name}"></span>->
+                    <span th:text="*{badge.description}"></span><br>
                 </div>
 
                 <div class="contentBox" th:if="${user.userBadges.isEmpty()}">
