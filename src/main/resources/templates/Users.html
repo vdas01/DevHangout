@@ -117,6 +117,12 @@
                     <li class="sort_item"><a href="/tag">new</a></li>
                 </ul>
             </div>
+            <div class="search-filter">
+                <form th:action="@{/searchUser}" class="search_box">
+                    <input type="text" name="search" id="search" placeholder="Filter by user name">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass filter_search_icon icons"></i></button>
+                </form>
+            </div>
 
             <div class="userGrid">
                 <div class="user_container" th:each = "user: ${users}">
