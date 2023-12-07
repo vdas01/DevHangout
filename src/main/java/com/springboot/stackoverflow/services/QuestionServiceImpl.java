@@ -65,13 +65,16 @@ public class QuestionServiceImpl implements QuestionService{
 
         String[] tagsArray = newTag.getName().split(",");
         for(String tempTag: tagsArray){
-            if(tempTags.containsKey(tempTag)){
-                newQuestion.addTags(tempTags.get(tempTag));
-            }
-            else {
-                tempTag = tempTag.trim();
-                Tag tag = new Tag(tempTag);
-                newQuestion.addTags(tag);
+            tempTag = tempTag.trim();
+            if(!tempTag.isEmpty())
+            {
+                if(tempTags.containsKey(tempTag)){
+                    newQuestion.addTags(tempTags.get(tempTag));
+                }
+                else {
+                    Tag tag = new Tag(tempTag);
+                    newQuestion.addTags(tag);
+                }
             }
         }
 
@@ -80,7 +83,7 @@ public class QuestionServiceImpl implements QuestionService{
             newQuestion.setPhoto(file.getOriginalFilename());
             File file1 = new ClassPathResource("static/css/image").getFile();
 
-            Path path = Paths.get(file1.getAbsolutePath() + File.separator + file.getOriginalFilename());//create a path
+            Path path = Paths.get(file1.getAbsolutePath() + File.separator + file.getOriginalFilename());
             Files.copy(file.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
         }
         user.setReputation(user.getReputation()+20);

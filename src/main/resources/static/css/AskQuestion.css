@@ -12,26 +12,26 @@
 }
 #navbar{
      border: none;
-         border-bottom: 1px solid black;
-         display: flex;
-         justify-content: center;
-         gap: 1vw;
-         padding: 1.5vh;
-         font-size: 1.2rem;
-         align-items: center;
-         position: fixed;
-         z-index: 2;
-         background-color: white;
-         width: 100vw;
+     border-bottom: 1px solid black;
+     display: flex;
+     justify-content: center;
+     gap: 1vw;
+     padding: 1.5vh;
+     font-size: 1.2rem;
+     align-items: center;
+     position: fixed;
+     z-index: 2;
+     background-color: white;
+     width: 100vw;
 }
 #logout{
-background-color:orange;
-color=grey;
-padding: 0.5rem 1rem;
-font-weight:bold;
-font-size: 1rem;
-border-radius: 12%;
-box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
+    background-color:orange;
+    color=grey;
+    padding: 0.5rem 1rem;
+    font-weight:bold;
+    font-size: 1rem;
+    border-radius: 12%;
+    box-shadow: 3px 3px 2px 0px rgba(154, 153, 152, 1);
 }
 
 #logout:hover{
@@ -101,14 +101,6 @@ background-color:#FF8C00;
     padding-left: 34px;
 }
 
-.search_icon {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    cursor: pointer;
-     font-size: 24px;
-}
 .input_group{
     background-color: white;
     color: black;
@@ -135,8 +127,11 @@ background-color:#FF8C00;
     position: relative;
 }
 .search_icon{
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 24px;
     position: absolute;
-    top: 10px;
+    top: 18px;
     left: 10px;
 }
 
@@ -150,4 +145,16 @@ background-color:#FF8C00;
 }
 #add_image{
     margin-top:2vh;
+}
+
+.logo {
+  display: flex;
+  text-decoration: none;
+  color: black;
+}
+
+.title {
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-right: 100px;
 }
