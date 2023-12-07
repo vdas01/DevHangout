@@ -132,4 +132,19 @@ public class QuestionController {
 
         return "redirect:/viewQuestion/" + questionId;
     }
+
+//    @GetMapping("/addCode")
+//    public String addCode(@ModelAttribute("question") Question question,
+//                          @ModelAttribute("tag") Tag tag,
+//                          @RequestParam(value = "title", required = false) String title,
+//                          Model model) {
+//        System.out.println(question.getTitle());
+//        System.out.println(tag);
+//        System.out.println(title);
+//
+//        model.addAttribute("question",question);
+//        model.addAttribute("tag",tag);
+//
+//        return "AskQuestion";
+//    }
 }
