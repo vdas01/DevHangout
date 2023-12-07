@@ -209,7 +209,7 @@
 
                             <span th:text = "*{comments.user.userName}+' : '"  ></span><br>
                             <th:block th:unless="${editComment != null and editComment eq comments.id}">
-                            <span th:text = "*{comments.comment}"  ></span><br>
+                            <pre th:text = "*{comments.comment}"  ></pre><br>
                                 <th:block th:if="${#authentication.principal.username eq comments.email}">
                             <a  th:href = "@{/editComment/{commentId} (commentId = ${comments.id})}"
                                class = "answer-action">
@@ -333,7 +333,7 @@
                                 <br><br>
                                 <div th:each = "comments : ${question.acceptedAnswer.comment}" class="comment">
                                     <span th:text = "*{comments.user.userName}"></span> :<br>
-                                    <span th:text = "*{comments.comment}"  ></span><br>
+                                    <pre th:text = "*{comments.comment}"  ></pre><br>
 
                                     <th:block th:if="${#authentication.principal.username eq comments.user.email}">
                                         <a th:unless="${editAnswerComment != null and editAnswerComment eq comments.id}"
@@ -459,7 +459,7 @@
                                         "comments : *{answer.comment}" class="comment">
                                     <span th:text = "*{comments.user.userName}+' : '"  ></span><br>
                                     <th:block th:unless="${editAnswerComment != null and editAnswerComment eq comments.id}">
-                                    <span th:text = "*{comments.comment}"  ></span><br>
+                                    <pre th:text = "*{comments.comment}"  ></pre><br>
                                     <th:block th:if="${#authentication.principal.username eq comments.email}">
                                         <a th:href = "@{/editAnswerComment/{commentId}/{questionId}
                                             (commentId = ${comments.id},questionId = ${question.id})}"
