@@ -164,6 +164,9 @@
                                 <textarea th:utext="${question.content}" name="editedContent"
                                           th:value = "${question.content}" rows="10"
                                           style="width: 90%; margin-left: 5%;"></textarea>
+                                <img th:if="${question.photoName != null}" th:src="'data:' + ${question.photoType} + ';base64,'
+                                 + ${question.photo}"
+                                     height="200px" width="200px" class="show_img">
                                 <br>
                                 <input type="submit" value="Update">
                             </form>
@@ -179,9 +182,9 @@
                 <div th:unless = "${isEdited != null}">
                     <div class = "content-body">
                         <div class = "question-content">
-                            <pre th:utext = "${question.content}"></pre>
-                            <img th:if="${question.photo != null}" th:src="@{'/css/image/' + ${question.photo}}"
-                                 height="400px" width="400px" class="show_img">
+                            <pre th:text = "${question.content}"></pre>
+                            <img th:if="${question.photo} != null" th:src="'data:' + ${question.photoType} + ';base64,'
+                            + ${question.photo}" alt="Photo" height="400px" width="400px" class="show_img">
                             <br>
                             <span th:each = "tag : ${question.tags}" th:text = "*{tag.name}" class = "tags"></span>
                         </div><br><br>
@@ -304,10 +307,9 @@
                                     <pre th:text = "${question.acceptedAnswer.content}">
                                     </pre>
                                 </div><br><br>
-                                <img th:if="${question.acceptedAnswer.photo != null}" th:src="@{'/css/image/' +
-                                ${question.acceptedAnswer.photo}}"
+                                <img th:if="${question.acceptedAnswer.photo != null}" th:src="'data:' + ${question.acceptedAnswer.photoType} + ';base64,'
+                                 + ${question.acceptedAnswer.photo}"
                                      height="200px" width="200px" class="show_img">
-                                <br>
 
                                 <th:block th:if="${#authentication.principal.username eq question.acceptedAnswer.user.email}">
                                 <a th:href = "@{/editAnswer/{questionId}/{answerId} (questionId = ${question.id},
@@ -433,7 +435,8 @@
                                     <pre th:text = "*{answer.content}">
                                 </pre>
                                 </div><br><br>
-                                <img th:if="${answer.photo != null}" th:src="@{'/css/image/' + ${answer.photo}}"
+                                <img th:if="${answer.photo != null}" th:src="'data:' + ${answer.photoType} + ';base64,'
+                                 + ${answer.photo}"
                                      height="200px" width="200px" class="show_img">
                                 <br>
                                 <th:block th:if="${#authentication.principal.username eq answer.user.email}">
