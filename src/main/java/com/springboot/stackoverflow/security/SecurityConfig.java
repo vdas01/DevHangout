@@ -37,7 +37,8 @@ public class SecurityConfig {
                         config
                                 .requestMatchers("/css/**", "/login**", "/signup**", "/"
                                         , "/processUser**").permitAll()
-                                .requestMatchers("/**").hasRole("user")
+                                .requestMatchers("/createBadge").hasRole("admin")
+                                .requestMatchers("/**").hasAnyRole("user", "admin")
                                 .anyRequest().authenticated()
                 )
                 .formLogin(form->
