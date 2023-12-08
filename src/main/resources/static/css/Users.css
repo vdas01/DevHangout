@@ -380,3 +380,15 @@ padding:1%;
 .user{
 display:flex;
 }
+
+.logo {
+  display: flex;
+  text-decoration: none;
+  color: black;
+}
+
+.title {
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-right: 100px;
+}

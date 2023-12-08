@@ -1,6 +1,7 @@
 package com.springboot.stackoverflow.services;
 
 import com.springboot.stackoverflow.entity.Answer;
+import com.springboot.stackoverflow.entity.Badge;
 import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.repository.AnswerRepository;
@@ -27,13 +28,15 @@ public class AnswerServiceImpl implements AnswerService{
     QuestionRepository questionRepository;
     AnswerRepository answerRepository;
     UserRepository userRepository;
+    BadgeService badgeService;
 
     @Autowired
     public AnswerServiceImpl(QuestionRepository questionRepository,AnswerRepository answerRepository
-                            ,UserRepository userRepository) {
+                            ,UserRepository userRepository,BadgeService badgeService) {
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
         this.userRepository = userRepository;
+        this.badgeService=badgeService;
     }
 
     @Override
@@ -56,6 +59,7 @@ public class AnswerServiceImpl implements AnswerService{
                 Files.copy(file.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
             }
             user.setReputation(user.getReputation()+5);
+            badgeService.checkAndAssignBadges(user.getId());
             userRepository.save(user);
             answerRepository.save(answer);
         }

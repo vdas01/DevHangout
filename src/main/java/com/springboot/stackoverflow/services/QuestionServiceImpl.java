@@ -29,17 +29,20 @@ public class QuestionServiceImpl implements QuestionService{
    UserRepository userRepository;
    AnswerRepository answerRepository;
    VoteRepository voteRepository;
+   BadgeService badgeService;
     public QuestionServiceImpl(){}
 
     @Autowired
     public QuestionServiceImpl(TagService tagService,QuestionRepository questionRepository,
                                TagRepository tagRepository, UserRepository userRepository,
-                               AnswerRepository answerRepository, VoteRepository voteRepository) {
+                               AnswerRepository answerRepository, VoteRepository voteRepository,
+                               BadgeService badgeService) {
         this.tagService = tagService;
         this.questionRepository = questionRepository;
         this.tagRepository = tagRepository;
         this.userRepository = userRepository;
         this.answerRepository = answerRepository;
+        this.badgeService=badgeService;
         this.voteRepository = voteRepository;
     }
 
@@ -62,13 +65,16 @@ public class QuestionServiceImpl implements QuestionService{
 
         String[] tagsArray = newTag.getName().split(",");
         for(String tempTag: tagsArray){
-            if(tempTags.containsKey(tempTag)){
-                newQuestion.addTags(tempTags.get(tempTag));
-            }
-            else {
-                tempTag = tempTag.trim();
-                Tag tag = new Tag(tempTag);
-                newQuestion.addTags(tag);
+            tempTag = tempTag.trim();
+            if(!tempTag.isEmpty())
+            {
+                if(tempTags.containsKey(tempTag)){
+                    newQuestion.addTags(tempTags.get(tempTag));
+                }
+                else {
+                    Tag tag = new Tag(tempTag);
+                    newQuestion.addTags(tag);
+                }
             }
         }
 
@@ -77,10 +83,11 @@ public class QuestionServiceImpl implements QuestionService{
             newQuestion.setPhoto(file.getOriginalFilename());
             File file1 = new ClassPathResource("static/css/image").getFile();
 
-            Path path = Paths.get(file1.getAbsolutePath() + File.separator + file.getOriginalFilename());//create a path
+            Path path = Paths.get(file1.getAbsolutePath() + File.separator + file.getOriginalFilename());
             Files.copy(file.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
         }
         user.setReputation(user.getReputation()+20);
+        badgeService.checkAndAssignBadges(user.getId());
         userRepository.save(user);
         questionRepository.save(newQuestion);
     }
@@ -152,9 +159,12 @@ public class QuestionServiceImpl implements QuestionService{
             question.addSavedUser(user);
             questionRepository.save(question);
             user.setReputation(user.getReputation()+5);
+            badgeService.checkAndAssignBadges(user.getId());
             userRepository.save(user);
             User questionUser = userRepository.findByEmail(question.getUser().getEmail());
             questionUser.setReputation(questionUser.getReputation()+10);
+            badgeService.checkAndAssignBadges(questionUser.getId());
+
             userRepository.save(user);
         }
     }
@@ -194,6 +204,7 @@ public class QuestionServiceImpl implements QuestionService{
         User user = userRepository.findByEmail(answer.getUser().getEmail());
         System.out.println(user);
         user.setReputation(user.getReputation()+25);
+        badgeService.checkAndAssignBadges(user.getId());
         userRepository.save(user);
         questionRepository.save(question);
     }
