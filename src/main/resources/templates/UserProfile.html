@@ -208,8 +208,8 @@
                     Badges
                 </span>
 
-                <div th:if="${!user.userBadges.isEmpty()}" th:each = "badge: ${user.userBadges}">
-                    <span th:text="*{badge.name}"></span>->
+                <div class="contentBox" th:if="${!user.userBadges.isEmpty()}" th:each = "badge: ${user.userBadges}">
+                    <b><span th:text="*{badge.name}"></span>:</b>
                     <span th:text="*{badge.description}"></span><br>
                 </div>
 
@@ -226,7 +226,6 @@
                     <div  th:if="${!user.userQuestions.isEmpty()}" class="qs_box">
                         <span th:each="question : ${user.userQuestions}" class="q_box">
                             <a th:text="${question.title}" class="q_title" th:href="@{'/viewQuestion/' + ${question.id}}">What is title</a>
-                            <p th:text="${question.content}" class="q_content">Content is content that is upto everybody how they keep their content updated.</p>
                             <div class="q_lower">
                                   <div class="q_left">
                                      <p class="views" >
@@ -258,7 +257,7 @@
                     </div>
 
                     <div class="contentBox"  th:if="${user.userQuestions.isEmpty()}">
-                        <br><br><br><br>
+                        <br><br>
                         <span>No Questions Asked</span><br><br>
                     </div>
 
@@ -299,7 +298,7 @@
                 </div>
 
                 <div class="contentBox"  th:if="${user.answerList.isEmpty()}">
-                    <br><br><br><br>
+                    <br><br>
                     <span>No Answers Posted</span><br><br>
                 </div>
 
@@ -315,7 +314,7 @@
                 </div>
 
                 <div class="contentBox"  th:if="${user.commentList.isEmpty()}">
-                    <br><br><br><br>
+                    <br><br>
                     <span>No Comments Posted</span><br><br>
                 </div>
             </div>

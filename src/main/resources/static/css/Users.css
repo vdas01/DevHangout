@@ -334,6 +334,7 @@ margin-right:0.8vw;
 
 /* --------sidebar---------- */
 
+
 .search-filter{
     display: flex;
     justify-content: space-between;
@@ -351,10 +352,7 @@ margin-right:0.8vw;
     top: 10px;
 }
 
-.userGrid{
-display:grid;
-grid-template-columns:25% 25% 25% 25%;
-}
+.userGrid{display:grid;grid-template-columns: 33% 33% 33%;}
 .user_container{
 margin:15%;
 padding:1%;

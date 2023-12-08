@@ -92,10 +92,19 @@ background-color:#FF8C00;
 }
 
 /*-----------nav bar ends here -------------------*/
-
+#badges {
+    margin-top: 5%;
+}
+#badges .contentBox {
+    width: 100%;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background: #F0F1F4;
+    text-align: center;
+}
 #userContainer{
     display:grid;
-    grid-template-rows:22% 10% 68%;
     overflow-y: scroll;
     height: 92vh;
     border-left: 2px solid black;
