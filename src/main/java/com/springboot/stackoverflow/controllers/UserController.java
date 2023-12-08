@@ -137,5 +137,11 @@ public class UserController {
         userService.saveProfilePic(file,userId);
         return "redirect:/editProfile";
     }
+
+    @GetMapping("/searchUser")
+    public String searchUser(@RequestParam(value = "search" , required = false) String search,Model model){
+        model.addAttribute("users",userService.searchUser(search));
+        return "Users";
+    }
 }
 

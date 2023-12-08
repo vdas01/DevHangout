@@ -33,6 +33,8 @@ public interface UserService {
     void unfollow(String follower, String following);
 
     void saveProfilePic(MultipartFile file,int userId) throws IOException;
+
+    List<User> searchUser(String search);
 }
 
 

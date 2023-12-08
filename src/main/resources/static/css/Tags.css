@@ -55,7 +55,10 @@ background-color:#FF8C00;
     transform: translateY(-50%);
     cursor: pointer;
      font-size: 24px;
+     border:none;
+     background-color:white;
 }
+
 #logout{
 background-color:orange;
 color=grey;
@@ -98,9 +101,6 @@ background-color:#FF8C00;
     margin-right: 100px;
 }
 
-.icons{
-    color: black;
-}
 
 /* --------- middle box---------------------- */
 #body {
