@@ -45,4 +45,9 @@ public class HomeController {
         }
         return "home";
     }
+
+    @GetMapping("/aboutUs")
+    public String aboutUs() {
+        return "Aboutus";
+    }
 }

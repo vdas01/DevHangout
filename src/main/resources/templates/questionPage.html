@@ -9,14 +9,16 @@
 </head>
 <body>
     <nav id="navbar">
+        <a th:href="@{/}" class = "logo">
         <svg aria-hidden="true" class="native svg-icon iconLogoGlyphMd" width="32" height="37" viewBox="0 0 32 37">
             <path d="M26 33v-9h4v13H0V24h4v9h22Z" fill="#BCBBBB"></path><path d="m21.5 0-2.7 2 9.9 13.3 2.7-2L21.5
                     0ZM26 18.4 13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5ZM9.1 15.2l15 7 1.4-3-15-7-1.4 3Zm14
                     10.79.68-2.95-16.1-3.35L7
-                    23l16.1 2.99ZM23 30H7v-3h16v3Z" fill="#F48024"></path><span id="title">
+                    23l16.1 2.99ZM23 30H7v-3h16v3Z" fill="#F48024"></path><span class="title">
                     Stack<b>overflow</b>
                 </span>
-        </svg>
+            </svg>
+        </a>
         <div class="search">
             <form th:action="@{/}">
                 <input type="search" th:name="search" id="search_bar" placeholder="Search...">
@@ -43,7 +45,7 @@
                     </svg>
                 </a>
             </li>
-            <li><a href=""><i class="fa-solid fa-circle-question icons"></i></a></li>
+            <li><a th:href="@{/aboutUs}"><i class="fa-solid fa-circle-question icons"></i></a></li>
         </ul>
         <span id = "login-logout">
             <th:block th:unless="${#authorization.expression('isAuthenticated()')}">
@@ -71,7 +73,7 @@
                 <div class="row">
                     <a href="/questions/ask" >
                         <i class="fa-solid fa-circle-question side_icons"></i>
-                        <small class="side-text active">Ask Question</small>
+                        <small class="side-text">Ask Question</small>
                     </a>
                 </div>
 
@@ -80,6 +82,7 @@
                         <i class="fa-solid fa-circle-question side_icons"></i>
                         <small class="side-text">Questions</small>
                     </a>
+                    <pre th:text = "*{comments.comment}"  ></pre><br>
                 </div>
 
                 <div class="row">
@@ -102,12 +105,6 @@
                     </a>
                 </div>
                 <br>
-<!--                <div class="row">-->
-<!--                    <a href="/discussions">-->
-<!--                        <i class="fa-solid fa-message side_icons"></i>-->
-<!--                        <small class="side-text">Discussions</small>-->
-<!--                    </a>-->
-<!--                </div>-->
             </div>
         </div>
 
@@ -211,23 +208,26 @@
                             <input type="submit" value="Comment">
                         </form>
                         <br><br>
+
                         <div th:if="${comments != null and comments.user != null}" th:each =
                                 "comments : ${question.comments}" class="comment">
 
                             <span th:text = "*{comments.user.userName}+' : '"  ></span><br>
+
                             <th:block th:unless="${editComment != null and editComment eq comments.id}">
-                            <pre th:text = "*{comments.comment}"  ></pre><br>
+                                <pre th:text = "*{comments.comment}"  ></pre><br>
                                 <th:block th:if="${#authentication.principal.username eq comments.email}">
-                            <a  th:href = "@{/editComment/{commentId} (commentId = ${comments.id})}"
-                               class = "answer-action">
-                                Edit
-                            </a>
-                            <a th:href = "@{/deleteComment/{commentId} (commentId = ${comments.id})}"
-                               class = "answer-action">
-                                Delete
-                            </a><br>
+                                    <a  th:href = "@{/editComment/{commentId} (commentId = ${comments.id})}"
+                                       class = "answer-action">
+                                        Edit
+                                    </a>
+                                    <a th:href = "@{/deleteComment/{commentId} (commentId = ${comments.id})}"
+                                       class = "answer-action">
+                                        Delete
+                                    </a><br>
                                 </th:block>
                             </th:block>
+
                             <form th:if="${editComment != null and editComment eq comments.id}" th:action =
                                     "@{/updateComment/{commentId} (commentId = ${comments.id})}" method="Post">
                                 <textarea name="updateContent"
@@ -501,8 +501,7 @@
                 <p style="font-size: x-large">Your Answer</p>
                 <form th:action = "@{/addAnswer{questionId} (questionId = ${question.id})}" method="post"
                       enctype="multipart/form-data">
-                    <textarea name = "content" rows = "10" style="width: 90%; margin-left: 5%;" required>
-                    </textarea>
+                    <textarea name = "content" rows = "10" style="width: 90%; margin-left: 5%;" required></textarea>
                     <br><br><br>
                     <input type="file" name="imageName" accept="image/**" class="add_image">
                     <input type="submit" value="Post Answer">
@@ -529,13 +528,6 @@
                         <p>Web development refers to the creating, building, and maintaining of websites. It includes
                             aspects such as web design, web publishing, web programming, and database management. It
                             is the creation of an application that works over the internet i.e. websites.</p>
-                    </div>
-                    <div class="static-content">
-                        <h3>When and How Java introduced</h3>
-                        <p>Java was originally developed by James Gosling at Sun Microsystems. It was released in
-                            May 1995 as a core component of Sun Microsystems' Java platform. The original and reference
-                            implementation Java compilers, virtual machines, and class libraries were originally
-                            released by Sun under proprietary licenses</p>
                     </div>
                 </section>
             </main>
