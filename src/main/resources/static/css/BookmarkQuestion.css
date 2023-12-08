@@ -396,15 +396,13 @@ margin-right:0.8vw;
 }
 
 #main-container {
-            text-align: center;
-            margin-top:60px;
-  }
+    text-align: center;
+}
 
 .section-container {
-
     background-color: rgb(244, 210, 123);
-    padding: 10px;
-    margin: -12px;
+    padding: 4%;
+    margin: 5%;
     border-radius: 8px;
 }
 
@@ -415,11 +413,18 @@ h3 {
 p {
     color: #555;
 }
+
 .static-content {
-            background-color : rgb(250, 236, 198);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
+    background-color : rgb(250, 236, 198);
+    padding: 7%;
+    margin: 5% 0%;
+    border-radius: 8px;
+    height: 25vh;
+    overflow: hidden;
+}
+
+.author_box {
+    font-size: 1.5vw;
 }
 
 
