@@ -122,8 +122,10 @@
         <div id="editForm">
             <b>Profile Image</b>
             <br><span id="profilePhoto">
-                 <img th:if="${user.photo != null}" th:src="@{'/css/image/' + ${user.photo}}"
-                      class="show_img" width="8%">
+
+                       <img th:if="${user.photo != null}" th:src="'data:' + ${user.photoType} + ';base64,'
+                                 + ${user.photo}"
+                            width="8%" class="show_img">
                 <img th:if="${user.photo == null}" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2048px-Facebook_icon.svg.png" width="8%" >
                 <br>
                 <form id="imageEdit" enctype="multipart/form-data" th:action="@{'/saveProfilePic' + ${user.id}}" method="post">
