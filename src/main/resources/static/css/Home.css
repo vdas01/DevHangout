@@ -264,12 +264,15 @@ color:black;
 }
 .q_lower{
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 60% 38%;
     margin-top: 2vh;
 }
 .q_left{
     display: flex;
     gap:1vw;
+}
+.q_right {
+    text-align: end;
 }
 .q_title{
     font-size:1.6rem;
@@ -315,13 +318,12 @@ color:black;
 }
 #main-container {
     text-align: center;
-    margin-left:10px;
 }
 
 .section-container {
     background-color: rgb(244, 210, 123);
-    padding: 10px;
-    margin: -12px;
+    padding: 4%;
+    margin: 5%;
     border-radius: 8px;
 }
 
@@ -332,13 +334,19 @@ h3 {
 p {
     color: #555;
 }
+
 .static-content {
     background-color : rgb(250, 236, 198);
-    padding: 20px;
-    margin: 20px 0;
+    padding: 7%;
+    margin: 5% 0%;
     border-radius: 8px;
+    height: 25vh;
+    overflow: hidden;
 }
 
+.author_box {
+    font-size: 1vw;
+}
 
 .logo {
   display: flex;
