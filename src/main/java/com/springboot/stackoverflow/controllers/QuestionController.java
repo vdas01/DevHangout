@@ -12,6 +12,8 @@ import com.springboot.stackoverflow.entity.Tag;
 import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.services.QuestionService;
 import com.springboot.stackoverflow.services.UserService;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.Authentication;
@@ -97,8 +99,12 @@ public class QuestionController {
         }
 
         model.addAttribute("question",question);
-
-
+        if(question == null) return "error";
+        Parser parser = Parser.builder().build();
+        HtmlRenderer renderer = HtmlRenderer.builder().build();
+        String convertedHtml = renderer.render(parser.parse(question.getContent()));
+        question.setContent(convertedHtml);
+        model.addAttribute("question", question);
         String add = "true";
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByEmail(authentication.getName());

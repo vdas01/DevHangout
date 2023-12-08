@@ -125,10 +125,14 @@
                     Modified: <b><span th:text = "${#dates.format(question.modifiedAt, 'dd/MM/YYYY')}"
                                        style="margin-right:0.5rem;"></span></b>
                     Views: <b><span th:text = "${question.views}" style="margin-right:0.5rem;"></span></b>
-                    <a  th:unless="${add}"  th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}"
-                        class="bookmark"><i class="fa-solid fa-bookmark bookmark-icon"></i></a>
-                     <a  th:if="${add}"    th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}"
-                         class="bookmark"><i class="fa-regular fa-bookmark bookmark-icon"></i></a>
+                    <span th:if = "${isEdited==null && editAnswer == null && addComment == null
+                                    && editComment == null && addAnswerComment == null &&
+                                    editAnswerComment == null}">
+                        <a  th:unless="${add}"  th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}"
+                            class="bookmark"><i class="fa-solid fa-bookmark bookmark-icon"></i></a>
+                         <a  th:if="${add}"    th:href="@{'/question/bookmark/' + ${question.id} +'/add/' + ${add}}"
+                             class="bookmark"><i class="fa-regular fa-bookmark bookmark-icon"></i></a>
+                    </span>
                 </div>
             </div>
             <div class = "question-detail">
