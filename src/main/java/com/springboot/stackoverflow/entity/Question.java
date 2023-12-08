@@ -19,6 +19,17 @@ public class Question {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "photoName")
+    private String photoName;
+    @Column(name = "photoType")
+    private String photoType;
+
+    @Column(name = "photoLink")
+    private String photoLink;
+
+    @Column(name = "photoSize")
+    private Long photoSize;
+
     @Column(name = "author")
     private String author;
 
@@ -227,4 +238,35 @@ public class Question {
         }
     }
 
+    public String getPhotoName() {
+        return photoName;
+    }
+
+    public void setPhotoName(String photoName) {
+        this.photoName = photoName;
+    }
+
+    public String getPhotoType() {
+        return photoType;
+    }
+
+    public void setPhotoType(String photoType) {
+        this.photoType = photoType;
+    }
+
+    public String getPhotoLink() {
+        return photoLink;
+    }
+
+    public void setPhotoLink(String photoLink) {
+        this.photoLink = photoLink;
+    }
+
+    public Long getPhotoSize() {
+        return photoSize;
+    }
+
+    public void setPhotoSize(Long photoSize) {
+        this.photoSize = photoSize;
+    }
 }

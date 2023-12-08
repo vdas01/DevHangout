@@ -1,5 +1,12 @@
 package com.springboot.stackoverflow.controllers;
 
+import com.google.auth.Credentials;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
+import com.springboot.stackoverflow.entity.Answer;
 import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.Tag;
 import com.springboot.stackoverflow.entity.User;
@@ -14,7 +21,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,11 +60,44 @@ public class QuestionController {
     }
 
     @GetMapping("/viewQuestion/{questionId}")
-    public String viewQuestion(@PathVariable("questionId") Integer questionId, Model model) {
+    public String viewQuestion(@PathVariable("questionId") Integer questionId, Model model) throws IOException {
         Question question = questionService.findQuestionById(questionId);
+        List<Answer> answers = question.getAnswers();
 
-        if(question == null) return "error";
-        model.addAttribute("question", question);
+        for(Answer answer : answers){
+            if(answer.getPhotoName() != null) {
+                String fileName = answer.getPhotoName();
+                // Download file from Firebase Storage
+                Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("./serviceAccountKey.json"));
+                Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+                Blob blob = storage.get(BlobId.of("stack-overflow-clone-857f4.appspot.com", fileName));
+
+                String contentType = answer.getPhotoType();
+                String base64Image = Base64.getEncoder().encodeToString(blob.getContent());
+
+                answer.setPhotoType(contentType);
+                answer.setPhoto(base64Image);
+            }
+        }
+
+
+        if(question.getPhotoName() != null) {
+            String fileName = question.getPhotoName();
+            // Download file from Firebase Storage
+            Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("./serviceAccountKey.json"));
+            Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+            Blob blob = storage.get(BlobId.of("stack-overflow-clone-857f4.appspot.com", fileName));
+
+            String contentType = question.getPhotoType();
+            String base64Image = Base64.getEncoder().encodeToString(blob.getContent());
+
+            question.setPhotoType(contentType);
+            question.setPhoto(base64Image);
+
+        }
+
+        model.addAttribute("question",question);
+
 
         String add = "true";
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
