@@ -108,7 +108,11 @@ background-color:#FF8C00;
     transform: translateY(-50%);
     cursor: pointer;
      font-size: 24px;
+     border:none;
+     background-color:white;
+     height:1%;
 }
+
 .input_group{
     background-color: white;
     color: black;
