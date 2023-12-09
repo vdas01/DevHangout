@@ -12,10 +12,21 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
+    @Column(name = "photoName")
+    private String photoName;
+    @Column(name = "photoType")
+    private String photoType;
+
+    @Column(name = "photoLink")
+    private String photoLink;
+
+    @Column(name = "photoSize")
+    private Long photoSize;
+
 
     @Column(name = "author")
     private String author;
-    @Column(name = "content")
+    @Column(name = "content",columnDefinition = "TEXT")
     private String content;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "answer")
     private List<Comment> comment;
@@ -92,6 +103,38 @@ public class Answer {
 
     public void setComment(List<Comment> comment) {
         this.comment = comment;
+    }
+
+    public String getPhotoName() {
+        return photoName;
+    }
+
+    public void setPhotoName(String photoName) {
+        this.photoName = photoName;
+    }
+
+    public String getPhotoType() {
+        return photoType;
+    }
+
+    public void setPhotoType(String photoType) {
+        this.photoType = photoType;
+    }
+
+    public String getPhotoLink() {
+        return photoLink;
+    }
+
+    public void setPhotoLink(String photoLink) {
+        this.photoLink = photoLink;
+    }
+
+    public Long getPhotoSize() {
+        return photoSize;
+    }
+
+    public void setPhotoSize(Long photoSize) {
+        this.photoSize = photoSize;
     }
 
     public void addComment(Comment comments) {

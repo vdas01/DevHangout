@@ -1,5 +1,11 @@
 package com.springboot.stackoverflow.controllers;
 
+import com.google.auth.Credentials;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.User;
 import com.springboot.stackoverflow.services.QuestionService;
@@ -12,8 +18,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Base64;
 import java.util.List;
 
 @Controller
@@ -55,8 +64,26 @@ public class UserController {
     }
 
     @GetMapping("/userProfile")
-    public String userProfile(Model model, @RequestParam(value = "userId", required = false) Integer userId) {
+    public String userProfile(Model model, @RequestParam(value = "userId", required = false) Integer userId) throws IOException {
         User user = userService.findUserByUserId(userId);
+
+        if(user.getPhotoName() != null) {
+            System.out.println("in profile");
+            String fileName = user.getPhotoName();
+            // Download file from Firebase Storage
+            Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("./serviceAccountKey.json"));
+            Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+            Blob blob = storage.get(BlobId.of("stack-overflow-clone-857f4.appspot.com", fileName));
+
+            String contentType = user.getPhotoType();
+            String base64Image = Base64.getEncoder().encodeToString(blob.getContent());
+
+            user.setPhotoType(contentType);
+            user.setPhoto(base64Image);
+        }
+
+
+
         model.addAttribute("user", user);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("loggedUser", userService.findByEmail(authentication.getName()));
@@ -65,9 +92,26 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String showAllUsers(Model model) {
+    public String showAllUsers(Model model) throws IOException {
         List<User> users = null;
         users = userService.findAllUsers();
+
+        for(User user:users){
+            if(user.getPhotoName() != null) {
+                String fileName = user.getPhotoName();
+                // Download file from Firebase Storage
+                Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("./serviceAccountKey.json"));
+                Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+                Blob blob = storage.get(BlobId.of("stack-overflow-clone-857f4.appspot.com", fileName));
+
+                String contentType = user.getPhotoType();
+                String base64Image = Base64.getEncoder().encodeToString(blob.getContent());
+
+                user.setPhotoType(contentType);
+                user.setPhoto(base64Image);
+            }
+        }
+
         model.addAttribute("users", users);
 
         return "Users";
@@ -75,8 +119,24 @@ public class UserController {
     }
 
     @GetMapping("/editProfile")
-    public String editProfile(Model model) {
+    public String editProfile(Model model) throws IOException {
         User user=userService.editUser();
+
+        if(user.getPhotoName() != null) {
+            String fileName = user.getPhotoName();
+            // Download file from Firebase Storage
+            Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("./serviceAccountKey.json"));
+            Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+            Blob blob = storage.get(BlobId.of("stack-overflow-clone-857f4.appspot.com", fileName));
+
+            String contentType = user.getPhotoType();
+            String base64Image = Base64.getEncoder().encodeToString(blob.getContent());
+
+            user.setPhotoType(contentType);
+            user.setPhoto(base64Image);
+        }
+
+
         model.addAttribute("user", user);
         return "editProfile";
 
@@ -139,8 +199,24 @@ public class UserController {
     }
 
     @GetMapping("/searchUser")
-    public String searchUser(@RequestParam(value = "search" , required = false) String search,Model model){
-        model.addAttribute("users",userService.searchUser(search));
+    public String searchUser(@RequestParam(value = "search" , required = false) String search,Model model) throws IOException {
+        List<User> users = userService.searchUser(search);
+        for(User user:users){
+            if(user.getPhotoName() != null) {
+                String fileName = user.getPhotoName();
+                // Download file from Firebase Storage
+                Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("./serviceAccountKey.json"));
+                Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+                Blob blob = storage.get(BlobId.of("stack-overflow-clone-857f4.appspot.com", fileName));
+
+                String contentType = user.getPhotoType();
+                String base64Image = Base64.getEncoder().encodeToString(blob.getContent());
+
+                user.setPhotoType(contentType);
+                user.setPhoto(base64Image);
+            }
+        }
+        model.addAttribute("users",users);
         return "Users";
     }
 }

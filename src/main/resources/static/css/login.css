@@ -75,3 +75,10 @@ a:hover {
 .success {
     color: green;
 }
+
+
+.title {
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-right: 100px;
+}
