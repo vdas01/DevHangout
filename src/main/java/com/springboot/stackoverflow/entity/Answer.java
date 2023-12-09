@@ -26,7 +26,7 @@ public class Answer {
 
     @Column(name = "author")
     private String author;
-    @Column(name = "content")
+    @Column(name = "content",columnDefinition = "TEXT")
     private String content;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "answer")
     private List<Comment> comment;
