@@ -259,7 +259,7 @@
 
                             <form th:action = "@{/updateAnswer/{questionId}/{answerId}
                              (questionId = ${question.id}, answerId = ${question.acceptedAnswer.id})}" method="GET">
-                                <textarea th:text="${question.acceptedAnswer.content}" name="editedContent"
+                                <textarea th:utext="${question.acceptedAnswer.content}" name="editedContent"
                                           th:value = "${question.acceptedAnswer.content}" rows="10"
                                           style="width: 90%; margin-left: 5%;"></textarea>
                                 <br>
@@ -304,8 +304,8 @@
                                         <i class="fa-solid fa-pen-clip"></i>
                                         <span class="author_view" th:text="${question.acceptedAnswer.author}"></span>
                                     </a>
-                                    <div th:utext = "${question.acceptedAnswer.content}">
-                                    </div>
+                                    <pre th:utext = "${question.acceptedAnswer.content}">
+                                    </pre>
                                 </div><br><br>
                                 <img th:if="${question.acceptedAnswer.photo != null}" th:src="'data:' + ${question.acceptedAnswer.photoType} + ';base64,'
                                  + ${question.acceptedAnswer.photo}"
@@ -385,7 +385,7 @@
 
                             <form th:action = "@{/updateAnswer/{questionId}/{answerId}
                              (questionId = ${question.id}, answerId = *{answer.id})}" method="GET">
-                                <textarea th:text="*{answer.content}" name="editedContent"
+                                <textarea th:utext="*{answer.content}" name="editedContent"
                                           th:value = "*{answer.content}" rows="10"
                                           style="width: 90%; margin-left: 5%;"></textarea>
                                 <br>
@@ -432,8 +432,7 @@
                                         <i class="fa-solid fa-pen-clip"></i>
                                         <span class="author_view" th:text="${answer.author}"></span>
                                     </a>
-                                    <div th:utext = "*{answer.content}">
-                                </div>
+                                    <pre th:utext = "*{answer.content}"></pre>
                                 </div><br><br>
                                 <img th:if="${answer.photo != null}" th:src="'data:' + ${answer.photoType} + ';base64,'
                                  + ${answer.photo}"
