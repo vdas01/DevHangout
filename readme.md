@@ -1,3 +1,6 @@
+## Project Deployment Link:-
+### https://stackoverflowclone-production.up.railway.app/
+
 ## Core features:- 
 1. Ask questions and answer questions
 2. Comment on question and answer
@@ -29,13 +32,3 @@
 7. Tags (/tags)
 8. UserProfile
 9. Users  (/users)
-
-## Features left:-
-1. Image upload
-2. Save question and answer
-3. Upvote
-4. Auth using goggle and github
-5. Follow each other
-6. Badges
-7. Reputation
-8. Accepted
