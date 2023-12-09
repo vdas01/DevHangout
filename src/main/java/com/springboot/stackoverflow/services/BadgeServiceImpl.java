@@ -34,4 +34,9 @@ public class BadgeServiceImpl implements BadgeService{
             userRepository.save(user);
         }
     }
+
+    @Override
+    public List<Badge> getBadgeList() {
+        return badgeRepository.findAll();
+    }
 }

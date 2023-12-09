@@ -1,5 +1,11 @@
 package com.springboot.stackoverflow.services;
 
+import com.google.auth.Credentials;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 import com.springboot.stackoverflow.entity.Question;
 import com.springboot.stackoverflow.entity.Role;
 import com.springboot.stackoverflow.entity.User;
@@ -15,7 +21,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -67,6 +76,9 @@ public class UserServiceImpl implements UserService {
             roleRepository.save(theRole);
             user.addRole(theRole);
         }
+
+
+
 
         userRepository.save(user);
 
@@ -170,19 +182,53 @@ public class UserServiceImpl implements UserService {
         Optional<User> retrievedUser = userRepository.findById(userId);
         if(retrievedUser.isPresent()) {
             User user = retrievedUser.get();
-            if (!file.isEmpty()) {
-                System.out.println("not empty");
-                user.setPhoto(file.getOriginalFilename());
-                File file1 = new ClassPathResource("static/css/image").getFile();
+            if(!file.isEmpty()){
+                String fileName = file.getOriginalFilename();
+                java.io.File tempFile = java.io.File.createTempFile("temp", null);
+                file.transferTo(tempFile.toPath()); // transfer data to io.File
 
-                Path path = Paths.get(file1.getAbsolutePath() + File.separator + file.getOriginalFilename());//create a path
-                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-                userRepository.save(user);
+                // Accessing serviceAccount file for firebase Authentication
+                try (FileInputStream serviceAccount = new FileInputStream("./serviceAccountKey.json")) {
+                    //Creates a BlobId and BlobInfo for the file in firebase Storage.
+                    //BlobId is unique identifier of Blob object in firebase
+                    BlobId blobId = BlobId.of("stack-overflow-clone-857f4.appspot.com", fileName);
+                    BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("media").build();
+
+                    //reading credentials from serviceAccount
+                    //uploading file content from temporary file to firebase
+                    Credentials credentials = GoogleCredentials.fromStream(serviceAccount);
+                    Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+                    storage.create(blobInfo, Files.readAllBytes(tempFile.toPath()));
+
+                    String DOWNLOAD_URL = "https://firebasestorage.googleapis.com/v0/b/drive-db-415a1/o/%s?alt=media";
+
+                    //saving metadata in file entity
+
+                    user.setPhotoName(file.getOriginalFilename());
+                    user.setPhotoLink(String.format(DOWNLOAD_URL, URLEncoder.encode(fileName, StandardCharsets.UTF_8)));
+                    user.setPhotoSize(file.getSize());  // Set the file size
+                    user.setPhotoType(file.getContentType());
+
+                    userRepository.save(user);
+
+                } catch (IOException e) {
+                    // Handle the exception (log, throw, or return an error response)
+                    throw new RuntimeException("Error uploading file to Firebase Storage", e);
+                } finally {
+                    // Delete the temporary file
+                    tempFile.delete();
+                }
+
             }
             else{
                 System.out.println("Empty");
             }
         }
+    }
+
+    @Override
+    public List<User> searchUser(String search) {
+        return userRepository.searchUser(search);
     }
 
 

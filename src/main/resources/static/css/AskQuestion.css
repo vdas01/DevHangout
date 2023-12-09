@@ -101,6 +101,17 @@ background-color:#FF8C00;
     padding-left: 34px;
 }
 
+.search_icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+     font-size: 24px;
+     border:none;
+     background-color:white;
+}
+
 .input_group{
     background-color: white;
     color: black;
@@ -126,14 +137,7 @@ background-color:#FF8C00;
 .search{
     position: relative;
 }
-.search_icon{
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 24px;
-    position: absolute;
-    top: 18px;
-    left: 10px;
-}
+
 
 .buttons{
     padding:1vh 2vw;

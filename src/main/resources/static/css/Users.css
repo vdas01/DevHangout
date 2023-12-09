@@ -66,10 +66,17 @@ background-color:#FF8C00;
     transform: translateY(-50%);
     cursor: pointer;
      font-size: 24px;
+     border:none;
+     background-color:white;
 }
+
 .items{
     display: flex;
     gap: 1vw;
+}
+
+.icons{
+    color: black;
 }
 
 .content{
@@ -326,6 +333,24 @@ margin-right:0.8vw;
 }
 
 /* --------sidebar---------- */
+
+
+.search-filter{
+    display: flex;
+    justify-content: space-between;
+    padding: 2vh 1vw;
+    align-items: center;
+}
+
+.search_box{
+  position: relative;
+}
+
+.filter_search_icon{
+    position: absolute;
+    left: 4px;
+    top: 10px;
+}
 
 .userGrid{display:grid;grid-template-columns: 33% 33% 33%;}
 .user_container{
