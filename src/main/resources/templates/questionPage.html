@@ -161,9 +161,9 @@
                         <div class = "question-content">
                             <form th:action = "@{/updateQuestion/{questionId}
                             (questionId = ${question.id})}" method="GET">
-                                <textarea th:utext="${question.content}" name="editedContent"
+                                <textarea th:text="${question.content}" name="editedContent"
                                           th:value = "${question.content}" rows="10"
-                                          style="width: 90%; margin-left: 5%;"></textarea>
+                                          style="width: 90%; margin-left: 5%;"></textarea> <br> <br>
                                 <img th:if="${question.photoName != null}" th:src="'data:' + ${question.photoType} + ';base64,'
                                  + ${question.photo}"
                                      height="200px" width="200px" class="show_img">
@@ -182,7 +182,7 @@
                 <div th:unless = "${isEdited != null}">
                     <div class = "content-body">
                         <div class = "question-content">
-                            <pre th:text = "${question.content}"></pre>
+                            <div th:utext = "${question.content}"></div>
                             <img th:if="${question.photo} != null" th:src="'data:' + ${question.photoType} + ';base64,'
                             + ${question.photo}" alt="Photo" height="400px" width="400px" class="show_img">
                             <br>
@@ -220,7 +220,7 @@
                             <span th:text = "*{comments.user.userName}+' : '"  ></span><br>
 
                             <th:block th:unless="${editComment != null and editComment eq comments.id}">
-                                <pre th:text = "*{comments.comment}"  ></pre><br>
+                                <div th:utext = "*{comments.comment}"  ></div><br>
                                 <th:block th:if="${#authentication.principal.username eq comments.email}">
                                     <a  th:href = "@{/editComment/{commentId} (commentId = ${comments.id})}"
                                        class = "answer-action">
@@ -304,8 +304,8 @@
                                         <i class="fa-solid fa-pen-clip"></i>
                                         <span class="author_view" th:text="${question.acceptedAnswer.author}"></span>
                                     </a>
-                                    <pre th:text = "${question.acceptedAnswer.content}">
-                                    </pre>
+                                    <div th:utext = "${question.acceptedAnswer.content}">
+                                    </div>
                                 </div><br><br>
                                 <img th:if="${question.acceptedAnswer.photo != null}" th:src="'data:' + ${question.acceptedAnswer.photoType} + ';base64,'
                                  + ${question.acceptedAnswer.photo}"
@@ -344,7 +344,7 @@
                                 <br><br>
                                 <div th:each = "comments : ${question.acceptedAnswer.comment}" class="comment">
                                     <span th:text = "*{comments.user.userName}"></span> :<br>
-                                    <pre th:text = "*{comments.comment}"  ></pre><br>
+                                    <div th:utext = "*{comments.comment}"  ></div><br>
 
                                     <th:block th:if="${#authentication.principal.username eq comments.user.email}">
                                         <a th:unless="${editAnswerComment != null and editAnswerComment eq comments.id}"
@@ -432,8 +432,8 @@
                                         <i class="fa-solid fa-pen-clip"></i>
                                         <span class="author_view" th:text="${answer.author}"></span>
                                     </a>
-                                    <pre th:text = "*{answer.content}">
-                                </pre>
+                                    <div th:utext = "*{answer.content}">
+                                </div>
                                 </div><br><br>
                                 <img th:if="${answer.photo != null}" th:src="'data:' + ${answer.photoType} + ';base64,'
                                  + ${answer.photo}"
@@ -471,7 +471,7 @@
                                         "comments : *{answer.comment}" class="comment">
                                     <span th:text = "*{comments.user.userName}+' : '"  ></span><br>
                                     <th:block th:unless="${editAnswerComment != null and editAnswerComment eq comments.id}">
-                                    <pre th:text = "*{comments.comment}"  ></pre><br>
+                                    <div th:utext = "*{comments.comment}"  ></div><br>
                                     <th:block th:if="${#authentication.principal.username eq comments.email}">
                                         <a th:href = "@{/editAnswerComment/{commentId}/{questionId}
                                             (commentId = ${comments.id},questionId = ${question.id})}"
