@@ -199,8 +199,24 @@ public class UserController {
     }
 
     @GetMapping("/searchUser")
-    public String searchUser(@RequestParam(value = "search" , required = false) String search,Model model){
-        model.addAttribute("users",userService.searchUser(search));
+    public String searchUser(@RequestParam(value = "search" , required = false) String search,Model model) throws IOException {
+        List<User> users = userService.searchUser(search);
+        for(User user:users){
+            if(user.getPhotoName() != null) {
+                String fileName = user.getPhotoName();
+                // Download file from Firebase Storage
+                Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("./serviceAccountKey.json"));
+                Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+                Blob blob = storage.get(BlobId.of("stack-overflow-clone-857f4.appspot.com", fileName));
+
+                String contentType = user.getPhotoType();
+                String base64Image = Base64.getEncoder().encodeToString(blob.getContent());
+
+                user.setPhotoType(contentType);
+                user.setPhoto(base64Image);
+            }
+        }
+        model.addAttribute("users",users);
         return "Users";
     }
 }
